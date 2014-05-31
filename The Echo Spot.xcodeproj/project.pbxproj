@@ -14,13 +14,13 @@
 		499FB5B71937DD5E00F4C882 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5B61937DD5E00F4C882 /* main.m */; };
 		499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5BA1937DD5E00F4C882 /* ESAppDelegate.m */; };
 		499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5BC1937DD5E00F4C882 /* Main.storyboard */; };
-		499FB5C11937DD5E00F4C882 /* ESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5C01937DD5E00F4C882 /* ESViewController.m */; };
 		499FB5C31937DD5E00F4C882 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5C21937DD5E00F4C882 /* Images.xcassets */; };
 		499FB5CA1937DD5E00F4C882 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5C91937DD5E00F4C882 /* XCTest.framework */; };
 		499FB5CB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5CC1937DD5E00F4C882 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
 		499FB5D41937DD5E00F4C882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5D21937DD5E00F4C882 /* InfoPlist.strings */; };
 		499FB5D61937DD5E00F4C882 /* The_Echo_SpotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5D51937DD5E00F4C882 /* The_Echo_SpotTests.m */; };
+		49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B9241F1939F21B00FB812A /* ESHomeTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +45,14 @@
 		499FB5B91937DD5E00F4C882 /* ESAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESAppDelegate.h; sourceTree = "<group>"; };
 		499FB5BA1937DD5E00F4C882 /* ESAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESAppDelegate.m; sourceTree = "<group>"; };
 		499FB5BD1937DD5E00F4C882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		499FB5BF1937DD5E00F4C882 /* ESViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESViewController.h; sourceTree = "<group>"; };
-		499FB5C01937DD5E00F4C882 /* ESViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESViewController.m; sourceTree = "<group>"; };
 		499FB5C21937DD5E00F4C882 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		499FB5C81937DD5E00F4C882 /* The Echo SpotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Echo SpotTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499FB5C91937DD5E00F4C882 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		499FB5D11937DD5E00F4C882 /* The Echo SpotTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "The Echo SpotTests-Info.plist"; sourceTree = "<group>"; };
 		499FB5D31937DD5E00F4C882 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		499FB5D51937DD5E00F4C882 /* The_Echo_SpotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = The_Echo_SpotTests.m; sourceTree = "<group>"; };
+		49B9241E1939F21B00FB812A /* ESHomeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESHomeTVC.h; sourceTree = "<group>"; };
+		49B9241F1939F21B00FB812A /* ESHomeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESHomeTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +115,8 @@
 				499FB5B91937DD5E00F4C882 /* ESAppDelegate.h */,
 				499FB5BA1937DD5E00F4C882 /* ESAppDelegate.m */,
 				499FB5BC1937DD5E00F4C882 /* Main.storyboard */,
-				499FB5BF1937DD5E00F4C882 /* ESViewController.h */,
-				499FB5C01937DD5E00F4C882 /* ESViewController.m */,
+				49B9241E1939F21B00FB812A /* ESHomeTVC.h */,
+				49B9241F1939F21B00FB812A /* ESHomeTVC.m */,
 				499FB5C21937DD5E00F4C882 /* Images.xcassets */,
 				499FB5B11937DD5E00F4C882 /* Supporting Files */,
 			);
@@ -253,9 +253,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				499FB5C11937DD5E00F4C882 /* ESViewController.m in Sources */,
 				499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */,
 				499FB5B71937DD5E00F4C882 /* main.m in Sources */,
+				49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +462,7 @@
 				499FB5DB1937DD5F00F4C882 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		499FB5DC1937DD5F00F4C882 /* Build configuration list for PBXNativeTarget "The Echo SpotTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +471,7 @@
 				499FB5DE1937DD5F00F4C882 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
