@@ -13,6 +13,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [[UIView appearance] setTintColor:[UIColor colorWithRed:0.149 green:0.906 blue:0.584 alpha:1]]; /*#26e795*/    
+    
+    
     return YES;
 }
 							
