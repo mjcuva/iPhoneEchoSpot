@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		499481B8193E5F20001EB8D7 /* ESHomeTVC-s.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499481B7193E5F20001EB8D7 /* ESHomeTVC-s.swift */; };
 		499FB5AB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */; };
 		499FB5AF1937DD5E00F4C882 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
@@ -38,8 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		499481B6193E5F1F001EB8D7 /* The Echo Spot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The Echo Spot-Bridging-Header.h"; sourceTree = "<group>"; };
-		499481B7193E5F20001EB8D7 /* ESHomeTVC-s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ESHomeTVC-s.swift"; sourceTree = "<group>"; };
 		499FB5A71937DD5E00F4C882 /* The Echo Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Echo Spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499FB5AA1937DD5E00F4C882 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,10 +132,8 @@
 				49BCB9C0193F9E100062D404 /* ESUser.m */,
 				49BCB9BC193F9DC80062D404 /* ESEcho.h */,
 				49BCB9BD193F9DC80062D404 /* ESEcho.m */,
-				499481B7193E5F20001EB8D7 /* ESHomeTVC-s.swift */,
 				499FB5C21937DD5E00F4C882 /* Images.xcassets */,
 				499FB5B11937DD5E00F4C882 /* Supporting Files */,
-				499481B6193E5F1F001EB8D7 /* The Echo Spot-Bridging-Header.h */,
 			);
 			path = "The Echo Spot";
 			sourceTree = "<group>";
@@ -277,7 +272,6 @@
 				49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */,
 				499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */,
 				499FB5B71937DD5E00F4C882 /* main.m in Sources */,
-				499481B8193E5F20001EB8D7 /* ESHomeTVC-s.swift in Sources */,
 				49BCB9C1193F9E100062D404 /* ESUser.m in Sources */,
 				49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */,
 			);
