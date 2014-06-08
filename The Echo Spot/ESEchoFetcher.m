@@ -17,7 +17,7 @@
     for(int i = 0; i < 10; i++){
         ESEcho *echo = [[ESEcho alloc] init];
         echo.title = [NSString stringWithFormat:@"Test %i", i];
-        echo.content = [NSString stringWithFormat: @"%i", i];
+        echo.content = [NSString stringWithFormat: @"This is echo number: %i", i];
         echo.author = [[ESUser alloc] init];
         
         [returnArray addObject:echo];
