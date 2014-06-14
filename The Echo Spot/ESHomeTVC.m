@@ -31,7 +31,17 @@
     
 #warning We should find a way to make transparency work
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.toolbar.translucent = NO;
     self.tabBarController.tabBar.translucent = NO;
+    
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
+    segmentedControl.tintColor = [UIColor clearColor];
+    segmentedControl.layer.cornerRadius = 5;
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+    
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [self setToolbarItems:@[flexibleSpace, button, flexibleSpace]];
     
     self.openEcho = nil;
 }
