@@ -15,7 +15,9 @@
 @property (strong, nonatomic) NSArray *echos;
 @property (strong, nonatomic) ESEcho *openEcho;
 
-#warning Kind of a dirty hack
+@property (nonatomic) CGFloat lastScrollViewOffset;
+
+// Dirty Hack
 @property (strong, nonatomic) NSIndexPath *openRow;
 @end
 
@@ -34,6 +36,7 @@
     self.navigationController.toolbar.translucent = NO;
     self.tabBarController.tabBar.translucent = NO;
     
+    // Kind of a gross hack
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
     segmentedControl.tintColor = [UIColor clearColor];
     segmentedControl.layer.cornerRadius = 5;
@@ -44,6 +47,11 @@
     [self setToolbarItems:@[flexibleSpace, button, flexibleSpace]];
     
     self.openEcho = nil;
+    
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+    view.backgroundColor=[UIColor whiteColor];
+    [self.view.window.rootViewController.view addSubview:view];
+    
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -111,12 +119,38 @@
     }
     
     if(startRow != nil && row.row != startRow.row){
-        [self.tableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];        
+        [self.tableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
     }else{
         [self.tableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if(self.openEcho != nil){
+        [self.tableView scrollToRowAtIndexPath:row atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 
     
 }
+
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    
+//    if(self.lastScrollViewOffset < scrollView.contentOffset.y && self.navigationController.navigationBar.hidden == NO && scrollView.contentOffset.y != 0){
+//        // Hide
+//        [self.navigationController setNavigationBarHidden:YES animated:YES];
+//        [self.navigationController setToolbarHidden:YES animated:YES];
+//    }else if(self.lastScrollViewOffset > scrollView.contentOffset.y && self.navigationController.navigationBar.hidden == YES){
+//        // Show
+//        [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        [self.navigationController setToolbarHidden:NO animated:YES];
+//    }
+//    
+//    if(scrollView.contentOffset.y < 0){
+//        self.lastScrollViewOffset = 0;
+//    }else{
+//        self.lastScrollViewOffset = scrollView.contentOffset.y;
+//    }
+//    NSLog(@"%f", self.lastScrollViewOffset);
+//    
+//}
 
 @end
