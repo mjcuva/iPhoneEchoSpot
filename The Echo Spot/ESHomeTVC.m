@@ -100,7 +100,7 @@
         self.openRow = row;
     }
     
-    if(startRow != nil && row != startRow){
+    if(startRow != nil && row.row != startRow.row){
         [self.tableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];        
     }else{
         [self.tableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];

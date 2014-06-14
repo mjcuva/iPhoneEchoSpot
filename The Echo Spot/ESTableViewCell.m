@@ -25,7 +25,7 @@
         self.titleLabel.text = self.echoTitle;
         [self.titleLabel sizeToFit];
         
-        self.detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.titleLabel.frame.size.height + 10, self.frame.size.width, self.frame.size.height - self.titleLabel.frame.size.height)];
+        self.detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 40, self.frame.size.width, self.frame.size.height - self.titleLabel.frame.size.height)];
         self.detailLabel.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
         self.detailLabel.textColor = [UIColor whiteColor];
         
