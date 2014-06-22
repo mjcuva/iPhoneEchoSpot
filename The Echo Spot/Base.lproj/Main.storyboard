@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
-        <!--HomeTVC - The Echo Spot-->
+        <!--HomeTVC-->
         <scene sceneID="36h-Bm-5FZ">
             <objects>
                 <tableViewController id="CNG-oS-bSb" customClass="ESHomeTVC" sceneMemberID="viewController">
@@ -17,8 +17,8 @@
                             <outlet property="delegate" destination="CNG-oS-bSb" id="Ejk-4d-kyg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="The Echo Spot" id="NTq-YK-ckv">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="lvm-Gg-pGv"/>
+                    <navigationItem key="navigationItem" id="NTq-YK-ckv">
+                        <barButtonItem key="rightBarButtonItem" image="newEcho" id="lvm-Gg-pGv"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RxY-Eb-vgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,6 +45,9 @@
             <point key="canvasLocation" x="1295" y="-1392"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="newEcho" width="22" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
