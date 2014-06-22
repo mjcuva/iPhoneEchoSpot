@@ -15,20 +15,51 @@
 		499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5BA1937DD5E00F4C882 /* ESAppDelegate.m */; };
 		499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5BC1937DD5E00F4C882 /* Main.storyboard */; };
 		499FB5C31937DD5E00F4C882 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5C21937DD5E00F4C882 /* Images.xcassets */; };
-		499FB5CA1937DD5E00F4C882 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5C91937DD5E00F4C882 /* XCTest.framework */; };
 		499FB5CB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5CC1937DD5E00F4C882 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
-		499FB5D41937DD5E00F4C882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5D21937DD5E00F4C882 /* InfoPlist.strings */; };
-		499FB5D61937DD5E00F4C882 /* The_Echo_SpotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5D51937DD5E00F4C882 /* The_Echo_SpotTests.m */; };
 		49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B9241F1939F21B00FB812A /* ESHomeTVC.m */; };
 		49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BCB9BD193F9DC80062D404 /* ESEcho.m */; };
 		49BCB9C1193F9E100062D404 /* ESUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BCB9C0193F9E100062D404 /* ESUser.m */; };
 		49BCB9C4193FA6A50062D404 /* ESEchoFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BCB9C3193FA6A50062D404 /* ESEchoFetcher.m */; };
+		49C6B10019511D97009C5B77 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582E2194D38D000BBD075 /* HockeySDK.framework */; };
 		49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C895BB194394AF00880796 /* ESTableViewCell.m */; };
+		49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D1194D35C000BBD075 /* CoreText.framework */; };
+		49E582D4194D35C900BBD075 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D3194D35C900BBD075 /* QuartzCore.framework */; };
+		49E582D6194D35D200BBD075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D5194D35D200BBD075 /* Security.framework */; };
+		49E582D8194D35DB00BBD075 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D7194D35DB00BBD075 /* SystemConfiguration.framework */; };
+		49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		499FB5CD1937DD5E00F4C882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
+			remoteInfo = "The Echo Spot";
+		};
+		49C6B0F819511D15009C5B77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
+			remoteInfo = "The Echo Spot";
+		};
+		49C6B0FA19511D51009C5B77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
+			remoteInfo = "The Echo Spot";
+		};
+		49C6B0FC19511D52009C5B77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
+			remoteInfo = "The Echo Spot";
+		};
+		49C6B0FE19511D53009C5B77 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
 			proxyType = 1;
@@ -51,10 +82,6 @@
 		499FB5BD1937DD5E00F4C882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		499FB5C21937DD5E00F4C882 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		499FB5C81937DD5E00F4C882 /* The Echo SpotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Echo SpotTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		499FB5C91937DD5E00F4C882 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		499FB5D11937DD5E00F4C882 /* The Echo SpotTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "The Echo SpotTests-Info.plist"; sourceTree = "<group>"; };
-		499FB5D31937DD5E00F4C882 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		499FB5D51937DD5E00F4C882 /* The_Echo_SpotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = The_Echo_SpotTests.m; sourceTree = "<group>"; };
 		49B9241E1939F21B00FB812A /* ESHomeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESHomeTVC.h; sourceTree = "<group>"; };
 		49B9241F1939F21B00FB812A /* ESHomeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESHomeTVC.m; sourceTree = "<group>"; };
 		49BCB9BC193F9DC80062D404 /* ESEcho.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEcho.h; sourceTree = "<group>"; };
@@ -65,6 +92,13 @@
 		49BCB9C3193FA6A50062D404 /* ESEchoFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEchoFetcher.m; sourceTree = "<group>"; };
 		49C895BA194394AF00880796 /* ESTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTableViewCell.h; sourceTree = "<group>"; };
 		49C895BB194394AF00880796 /* ESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTableViewCell.m; sourceTree = "<group>"; };
+		49E582D1194D35C000BBD075 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		49E582D3194D35C900BBD075 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		49E582D5194D35D200BBD075 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		49E582D7194D35DB00BBD075 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		49E582E2194D38D000BBD075 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		49E582E4194D38D000BBD075 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +106,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E582D8194D35DB00BBD075 /* SystemConfiguration.framework in Frameworks */,
+				49E582D6194D35D200BBD075 /* Security.framework in Frameworks */,
+				49E582D4194D35C900BBD075 /* QuartzCore.framework in Frameworks */,
+				49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */,
 				499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */,
 				499FB5AF1937DD5E00F4C882 /* UIKit.framework in Frameworks */,
+				49C6B10019511D97009C5B77 /* HockeySDK.framework in Frameworks */,
 				499FB5AB1937DD5E00F4C882 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +121,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				499FB5CA1937DD5E00F4C882 /* XCTest.framework in Frameworks */,
 				499FB5CC1937DD5E00F4C882 /* UIKit.framework in Frameworks */,
 				499FB5CB1937DD5E00F4C882 /* Foundation.framework in Frameworks */,
 			);
@@ -95,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				499FB5B01937DD5E00F4C882 /* The Echo Spot */,
-				499FB5CF1937DD5E00F4C882 /* The Echo SpotTests */,
 				499FB5A91937DD5E00F4C882 /* Frameworks */,
 				499FB5A81937DD5E00F4C882 /* Products */,
 			);
@@ -113,10 +150,14 @@
 		499FB5A91937DD5E00F4C882 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49E582E1194D38D000BBD075 /* HockeySDK.embeddedframework */,
+				49E582D7194D35DB00BBD075 /* SystemConfiguration.framework */,
+				49E582D5194D35D200BBD075 /* Security.framework */,
+				49E582D3194D35C900BBD075 /* QuartzCore.framework */,
+				49E582D1194D35C000BBD075 /* CoreText.framework */,
 				499FB5AA1937DD5E00F4C882 /* Foundation.framework */,
 				499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */,
 				499FB5AE1937DD5E00F4C882 /* UIKit.framework */,
-				499FB5C91937DD5E00F4C882 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,22 +195,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		499FB5CF1937DD5E00F4C882 /* The Echo SpotTests */ = {
+		49E582E1194D38D000BBD075 /* HockeySDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
-				499FB5D51937DD5E00F4C882 /* The_Echo_SpotTests.m */,
-				499FB5D01937DD5E00F4C882 /* Supporting Files */,
+				49E582E2194D38D000BBD075 /* HockeySDK.framework */,
+				49E582E3194D38D000BBD075 /* Resources */,
 			);
-			path = "The Echo SpotTests";
+			path = HockeySDK.embeddedframework;
 			sourceTree = "<group>";
 		};
-		499FB5D01937DD5E00F4C882 /* Supporting Files */ = {
+		49E582E3194D38D000BBD075 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				499FB5D11937DD5E00F4C882 /* The Echo SpotTests-Info.plist */,
-				499FB5D21937DD5E00F4C882 /* InfoPlist.strings */,
+				49E582E4194D38D000BBD075 /* HockeySDK.xcconfig */,
+				49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */,
 			);
-			name = "Supporting Files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +223,7 @@
 				499FB5A31937DD5E00F4C882 /* Sources */,
 				499FB5A41937DD5E00F4C882 /* Frameworks */,
 				499FB5A51937DD5E00F4C882 /* Resources */,
+				49E582D0194D354A00BBD075 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -204,6 +246,10 @@
 			);
 			dependencies = (
 				499FB5CE1937DD5E00F4C882 /* PBXTargetDependency */,
+				49C6B0F919511D15009C5B77 /* PBXTargetDependency */,
+				49C6B0FB19511D51009C5B77 /* PBXTargetDependency */,
+				49C6B0FD19511D52009C5B77 /* PBXTargetDependency */,
+				49C6B0FF19511D53009C5B77 /* PBXTargetDependency */,
 			);
 			name = "The Echo SpotTests";
 			productName = "The Echo SpotTests";
@@ -217,7 +263,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ES;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "The Echo Spot";
 				TargetAttributes = {
 					499FB5A61937DD5E00F4C882 = {
@@ -254,6 +300,7 @@
 			files = (
 				499FB5C31937DD5E00F4C882 /* Images.xcassets in Resources */,
 				499FB5B51937DD5E00F4C882 /* InfoPlist.strings in Resources */,
+				49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */,
 				499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,11 +309,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				499FB5D41937DD5E00F4C882 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49E582D0194D354A00BBD075 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		499FB5A31937DD5E00F4C882 /* Sources */ = {
@@ -287,7 +350,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				499FB5D61937DD5E00F4C882 /* The_Echo_SpotTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +360,26 @@
 			isa = PBXTargetDependency;
 			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
 			targetProxy = 499FB5CD1937DD5E00F4C882 /* PBXContainerItemProxy */;
+		};
+		49C6B0F919511D15009C5B77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
+			targetProxy = 49C6B0F819511D15009C5B77 /* PBXContainerItemProxy */;
+		};
+		49C6B0FB19511D51009C5B77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
+			targetProxy = 49C6B0FA19511D51009C5B77 /* PBXContainerItemProxy */;
+		};
+		49C6B0FD19511D52009C5B77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
+			targetProxy = 49C6B0FC19511D52009C5B77 /* PBXContainerItemProxy */;
+		};
+		49C6B0FF19511D53009C5B77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
+			targetProxy = 49C6B0FE19511D53009C5B77 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -316,14 +398,6 @@
 				499FB5BD1937DD5E00F4C882 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		499FB5D21937DD5E00F4C882 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				499FB5D31937DD5E00F4C882 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -361,6 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -393,6 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -407,6 +483,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "The Echo Spot/The Echo Spot-Prefix.pch";
 				INFOPLIST_FILE = "The Echo Spot/The Echo Spot-Info.plist";
@@ -414,7 +494,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "The Echo Spot/The Echo Spot-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -429,6 +509,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "The Echo Spot/The Echo Spot-Prefix.pch";
 				INFOPLIST_FILE = "The Echo Spot/The Echo Spot-Info.plist";
@@ -436,7 +520,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "The Echo Spot/The Echo Spot-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -447,7 +531,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/The Echo Spot.app/The Echo Spot";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
@@ -469,7 +552,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/The Echo Spot.app/The Echo Spot";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
