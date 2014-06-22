@@ -7,19 +7,28 @@
 //
 
 #import "ESAppDelegate.h"
+#import <HockeySDK/HockeySDK.h>
 
 @implementation ESAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"228358785274394fec3175c9903a1f2c"];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator
+     authenticateInstallation];
+
+    
     // Override point for customization after application launch.
     
     [[UIView appearance] setTintColor:[UIColor colorWithRed:0.149 green:0.906 blue:0.584 alpha:1]]; /*#26e795*/
-    [[UISegmentedControl appearance] setBackgroundColor:[UIColor colorWithRed:43/255.0f green:43/255.0f blue:45/255.0f alpha:1.0f]];
+    [[UISegmentedControl appearance] setBackgroundColor:[UIColor whiteColor]];
     [[UISegmentedControl appearance] setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]],
-                                                               NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+                                                               NSForegroundColorAttributeName:[UIColor blackColor] } forState:UIControlStateNormal];
     
-    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateSelected];
 
     
     return YES;
