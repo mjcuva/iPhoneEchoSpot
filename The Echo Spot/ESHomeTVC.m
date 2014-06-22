@@ -23,6 +23,14 @@
 
 @implementation ESHomeTVC
 
+#define CONTROL_HEIGHT 44
+
+// Percent width
+#define CONTROL_WIDTH .85 * self.view.frame.size.width
+
+// padding from top of control to top of view
+#define CONTROL_PADDING 10
+
 - (void)viewDidLoad{
     self.echos = [ESEchoFetcher loadRecentEchos];
     if(self.echos.count % 2 == 1){
@@ -38,20 +46,35 @@
     
     // Kind of a gross hack
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
-    segmentedControl.tintColor = [UIColor clearColor];
+    segmentedControl.selectedSegmentIndex = 0;
     segmentedControl.layer.cornerRadius = 5;
-    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+    segmentedControl.frame = CGRectMake((self.view.frame.size.width - CONTROL_WIDTH) / 2, -CONTROL_HEIGHT - CONTROL_PADDING, CONTROL_WIDTH, CONTROL_HEIGHT);
+
+    [self.tableView setContentInset:UIEdgeInsetsMake(segmentedControl.frame.size.height + CONTROL_PADDING * 2, 0, 0, 0)];
     
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    [self setToolbarItems:@[flexibleSpace, button, flexibleSpace]];
+    [self.tableView addSubview:segmentedControl];
     
     self.openEcho = nil;
     
-    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
-    view.backgroundColor=[UIColor whiteColor];
-    [self.view.window.rootViewController.view addSubview:view];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+//    self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top);
+//    NSLog(@"%@", self.tableView.contentOffset.y);
+    [self performSelector:@selector(hideControl) withObject:nil afterDelay:0];
+}
+
+- (void)hideControl{
+//    self.tableView.contentOffset = CGPointMake(0, 0);
+//    [UIView animateWithDuration:.2 delay:0 options:(UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAutoreverse ) animations:^{
+//        self.tableView.contentOffset = CGPointMake(0, -20);
+//    } completion:^(BOOL success){
+//        [UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+//            self.tableView.contentOffset = CGPointMake(0, 0);
+//        } completion:^(BOOL success){}];
+//    }];
+    self.tableView.contentOffset = CGPointMake(0, 0);
+
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -125,10 +148,20 @@
     }
     
     if(self.openEcho != nil){
-        [self.tableView scrollToRowAtIndexPath:row atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        NSLog(@"Cell 1: %f", cell.frame.size.height);
+        [self scrollToIndexPath:row withCell: cell];
     }
+}
 
-    
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
+    NSLog(@"Cell 2: %f", cell.frame.size.height);
+    NSLog(@"Cell: %@", NSStringFromCGRect(cell.frame));
+    NSLog(@"%f", self.tableView.contentSize.height - cell.frame.origin.y);
+    if(self.tableView.contentSize.height - cell.frame.origin.y > self.tableView.frame.size.height){
+        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
+    }else{
+        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
+    }
 }
 
 
