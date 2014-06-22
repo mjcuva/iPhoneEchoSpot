@@ -23,7 +23,7 @@
 
 @implementation ESHomeTVC
 
-#define CONTROL_HEIGHT 44
+#define CONTROL_HEIGHT 30
 
 // Percent width
 #define CONTROL_WIDTH .85 * self.view.frame.size.width
@@ -31,7 +31,14 @@
 // padding from top of control to top of view
 #define CONTROL_PADDING 10
 
+#define VIEW_ZERO (-CONTROL_HEIGHT - CONTROL_PADDING * 2)
+
 - (void)viewDidLoad{
+    
+    UIImage *image = [UIImage imageNamed:@"Logo.png"];
+    NSLog(@"%@", [image description]);
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
+    
     self.echos = [ESEchoFetcher loadRecentEchos];
     if(self.echos.count % 2 == 1){
         self.view.backgroundColor = [UIColor colorWithRed:43/255.0f green:43/255.0f blue:45/255.0f alpha:1.0f];
@@ -160,7 +167,19 @@
     if(self.tableView.contentSize.height - cell.frame.origin.y > self.tableView.frame.size.height){
         [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
     }else{
-        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
+//        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if(scrollView.contentOffset.y < -(CONTROL_HEIGHT / 2)){
+        [UIView animateWithDuration:.3 animations:^{
+            [scrollView setContentOffset: CGPointMake(0, VIEW_ZERO)];
+        }];
+    }else if(scrollView.contentOffset.y > -(CONTROL_HEIGHT / 2) && scrollView.contentOffset.y < 0){
+        [UIView animateWithDuration:.3 animations:^{
+            [scrollView setContentOffset:CGPointZero animated:YES];
+        }];
     }
 }
 
