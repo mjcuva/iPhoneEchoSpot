@@ -19,6 +19,7 @@
 
 // Dirty Hack
 @property (strong, nonatomic) NSIndexPath *openRow;
+@property NSInteger openCellHeight;
 @end
 
 @implementation ESHomeTVC
@@ -32,6 +33,8 @@
 #define CONTROL_PADDING 10
 
 #define VIEW_ZERO (-CONTROL_HEIGHT - CONTROL_PADDING * 2)
+
+#pragma mark - Set Up Views
 
 - (void)viewDidLoad{
     
@@ -84,17 +87,21 @@
 
 }
 
+#pragma mark - UITableViewDelegate
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.echos.count;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.echos[indexPath.row] == self.openEcho){
-        return 200;
+        return MAX(200, self.openCellHeight);
     }else{
         return 88;
     }
 }
+
+#pragma mark - UITableViewDataSource
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"EchoCell";
@@ -125,12 +132,15 @@
     
     if(self.echos[indexPath.row] == self.openEcho){
         cell.echoContent = echo.content;
+//        self.openCellHeight = [cell desiredHeight];
     }else{
         cell.echoContent = @"";
     }
     
     return cell;
 }
+
+#pragma mark - Expand Echos
 
 - (void)openEcho:(UITapGestureRecognizer *)sender{
     CGPoint point = [sender locationInView:self.tableView];
@@ -146,6 +156,7 @@
         self.openEcho = self.echos[row.item];
         cell.echoContent = self.openEcho.content;
         self.openRow = row;
+        self.openCellHeight = [cell desiredHeight];
     }
     
     if(startRow != nil && row.row != startRow.row){
@@ -161,9 +172,6 @@
 }
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
-    NSLog(@"Cell 2: %f", cell.frame.size.height);
-    NSLog(@"Cell: %@", NSStringFromCGRect(cell.frame));
-    NSLog(@"%f", self.tableView.contentSize.height - cell.frame.origin.y);
     if(self.tableView.contentSize.height - cell.frame.origin.y > self.tableView.frame.size.height){
         [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
     }else{
