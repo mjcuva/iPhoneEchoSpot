@@ -23,7 +23,9 @@
     
     // Override point for customization after application launch.
     
-    [[UIView appearance] setTintColor:[UIColor colorWithRed:0.149 green:0.906 blue:0.584 alpha:1]]; /*#26e795*/
+//    [[UIView appearance] setTintColor:[UIColor colorWithRed:0.149 green:0.906 blue:0.584 alpha:1]]; /*#26e795*/
+    [[UIView appearance] setTintColor:[UIColor colorWithRed:0/255.0f green:231/255.0f blue:161/255.0f alpha:1.0f]];
+    
     [[UISegmentedControl appearance] setBackgroundColor:[UIColor whiteColor]];
     [[UISegmentedControl appearance] setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]],
                                                                NSForegroundColorAttributeName:[UIColor blackColor] } forState:UIControlStateNormal];
