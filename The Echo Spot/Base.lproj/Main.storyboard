@@ -18,6 +18,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="NTq-YK-ckv">
+                        <barButtonItem key="leftBarButtonItem" image="Profile" id="ZvC-0B-wp2"/>
                         <barButtonItem key="rightBarButtonItem" image="newEcho" id="lvm-Gg-pGv"/>
                     </navigationItem>
                 </tableViewController>
@@ -46,7 +47,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="newEcho" width="22" height="22"/>
+        <image name="Profile" width="12" height="20"/>
+        <image name="newEcho" width="17" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
