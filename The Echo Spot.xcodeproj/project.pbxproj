@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4997351119576FBC0058A714 /* testechos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4997351019576FBC0058A714 /* testechos.json */; };
 		499FB5AB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */; };
 		499FB5AF1937DD5E00F4C882 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
@@ -28,6 +29,7 @@
 		49E582D6194D35D200BBD075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D5194D35D200BBD075 /* Security.framework */; };
 		49E582D8194D35DB00BBD075 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D7194D35DB00BBD075 /* SystemConfiguration.framework */; };
 		49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */; };
+		49F10D6F195F632000F5F8D0 /* AutosizingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4997351019576FBC0058A714 /* testechos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testechos.json; sourceTree = "<group>"; };
 		499FB5A71937DD5E00F4C882 /* The Echo Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Echo Spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499FB5AA1937DD5E00F4C882 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -99,6 +102,8 @@
 		49E582E2194D38D000BBD075 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		49E582E4194D38D000BBD075 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutosizingLabel.h; sourceTree = "<group>"; };
+		49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutosizingLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +183,11 @@
 				49BCB9C0193F9E100062D404 /* ESUser.m */,
 				49BCB9BC193F9DC80062D404 /* ESEcho.h */,
 				49BCB9BD193F9DC80062D404 /* ESEcho.m */,
+				49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */,
+				49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */,
 				499FB5C21937DD5E00F4C882 /* Images.xcassets */,
 				499FB5B11937DD5E00F4C882 /* Supporting Files */,
+				4997351019576FBC0058A714 /* testechos.json */,
 			);
 			path = "The Echo Spot";
 			sourceTree = "<group>";
@@ -300,6 +308,7 @@
 			files = (
 				499FB5C31937DD5E00F4C882 /* Images.xcassets in Resources */,
 				499FB5B51937DD5E00F4C882 /* InfoPlist.strings in Resources */,
+				4997351119576FBC0058A714 /* testechos.json in Resources */,
 				49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */,
 				499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */,
 			);
@@ -337,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */,
+				49F10D6F195F632000F5F8D0 /* AutosizingLabel.m in Sources */,
 				49BCB9C4193FA6A50062D404 /* ESEchoFetcher.m in Sources */,
 				49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */,
 				499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */,
@@ -486,6 +496,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "The Echo Spot/The Echo Spot-Prefix.pch";
@@ -512,6 +523,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "The Echo Spot/The Echo Spot-Prefix.pch";
