@@ -96,7 +96,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.echos[indexPath.row] == self.openEcho){
-        return MAX(200, self.openCellHeight);
+        return self.openCellHeight;
     }else{
         return 88;
     }
