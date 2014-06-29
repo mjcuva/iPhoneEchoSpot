@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 491A9B79196095CC00817F22 /* ESNewEchoVC.m */; };
 		4997351119576FBC0058A714 /* testechos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4997351019576FBC0058A714 /* testechos.json */; };
 		499FB5AB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */; };
@@ -71,6 +72,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		491A9B78196095CC00817F22 /* ESNewEchoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESNewEchoVC.h; sourceTree = "<group>"; };
+		491A9B79196095CC00817F22 /* ESNewEchoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESNewEchoVC.m; sourceTree = "<group>"; };
+		491A9B7B196096ED00817F22 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		4997351019576FBC0058A714 /* testechos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testechos.json; sourceTree = "<group>"; };
 		499FB5A71937DD5E00F4C882 /* The Echo Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Echo Spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499FB5AA1937DD5E00F4C882 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,8 +187,11 @@
 				49BCB9C0193F9E100062D404 /* ESUser.m */,
 				49BCB9BC193F9DC80062D404 /* ESEcho.h */,
 				49BCB9BD193F9DC80062D404 /* ESEcho.m */,
+				491A9B78196095CC00817F22 /* ESNewEchoVC.h */,
+				491A9B79196095CC00817F22 /* ESNewEchoVC.m */,
 				49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */,
 				49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */,
+				491A9B7B196096ED00817F22 /* constants.h */,
 				499FB5C21937DD5E00F4C882 /* Images.xcassets */,
 				499FB5B11937DD5E00F4C882 /* Supporting Files */,
 				4997351019576FBC0058A714 /* testechos.json */,
@@ -353,6 +360,7 @@
 				499FB5B71937DD5E00F4C882 /* main.m in Sources */,
 				49BCB9C1193F9E100062D404 /* ESUser.m in Sources */,
 				49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */,
+				491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
