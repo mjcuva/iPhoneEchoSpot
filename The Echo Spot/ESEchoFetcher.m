@@ -12,9 +12,9 @@
 
 + (NSArray *)loadRecentEchos{
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"testechos" ofType:@"json"];
     NSError *err;
-    NSData *json = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:&err];
+    NSURL *jsonUrl = [NSURL URLWithString:@"http://theechospot.com/echos.json"];
+    NSData *json = [NSData dataWithContentsOfURL: jsonUrl options:NSDataReadingMappedIfSafe error:&err];
     if(err) {
         NSLog(@"%@", [err description]);
     }
@@ -22,7 +22,6 @@
     if(err){
         NSLog(@"%@", [err description]);
     }
-    NSLog(@"%@", [jsonObject[@"echos"] description]);
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
@@ -32,8 +31,6 @@
         newEcho.content = echo[@"content"];
         [returnArray addObject:newEcho];
     }
-    
-    NSLog(@"%@", [returnArray description]);
     
     return returnArray;
 }
