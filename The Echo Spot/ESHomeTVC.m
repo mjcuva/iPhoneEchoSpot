@@ -10,6 +10,7 @@
 #import "ESEcho.h"
 #import "ESEchoFetcher.h"
 #import "ESTableViewCell.h"
+#import "constants.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
@@ -44,9 +45,9 @@
     
     self.echos = [ESEchoFetcher loadRecentEchos];
     if(self.echos.count % 2 == 1){
-        self.view.backgroundColor = [UIColor colorWithRed:43/255.0f green:43/255.0f blue:45/255.0f alpha:1.0f];
+        self.view.backgroundColor = DARK_GRAY_COLOR;
     }else{
-        self.view.backgroundColor = [UIColor colorWithRed:61/255.0f green:62/255.0f blue:63/255.0f alpha:1.0f];
+        self.view.backgroundColor = LIGHT_GRAY_COLOR;
     }
     
 #warning We should find a way to make transparency work
