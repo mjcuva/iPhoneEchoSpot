@@ -10,8 +10,6 @@
 
 @implementation AutosizingLabel
 
-#define MIN_HEIGHT 10
-
 - (void)calculateSize{
     NSDictionary *attributes = @{NSFontAttributeName: self.font};
     
