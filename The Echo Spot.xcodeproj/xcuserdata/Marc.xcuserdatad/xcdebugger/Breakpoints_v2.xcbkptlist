@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "The Echo Spot/ESTableViewCell.m"
-            timestampString = "425683329.706928"
+            timestampString = "425765889.352328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "-setEchoContent:"
             landmarkType = "5">
          </BreakpointContent>
