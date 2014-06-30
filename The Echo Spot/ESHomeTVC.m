@@ -40,7 +40,6 @@
 - (void)viewDidLoad{
     
     UIImage *image = [UIImage imageNamed:@"Logo.png"];
-    NSLog(@"%@", [image description]);
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
     self.echos = [ESEchoFetcher loadRecentEchos];
@@ -167,7 +166,6 @@
     }
     
     if(self.openEcho != nil){
-        NSLog(@"Cell 1: %f", cell.frame.size.height);
         [self scrollToIndexPath:row withCell: cell];
     }
 }
