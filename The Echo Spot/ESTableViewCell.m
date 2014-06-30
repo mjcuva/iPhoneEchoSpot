@@ -8,6 +8,7 @@
 
 #import "ESTableViewCell.h"
 #import "AutosizingLabel.h"
+#import "constants.h"
 
 @interface ESTableViewCell()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -15,6 +16,9 @@
 @property (strong, nonatomic) UIImageView *upvote;
 @property (strong, nonatomic) UIImageView *downvote;
 @property (strong, nonatomic) UIImageView *comment;
+@property (strong, nonatomic) UILabel *upvoteCount;
+@property (strong, nonatomic) UILabel *downvoteCount;
+@property (strong, nonatomic) UILabel *commentCount;
 @end
 
 @implementation ESTableViewCell
@@ -23,7 +27,9 @@
 #define DETAIL_PADDING 10
 #define END_PADDING 40
 
-#define BUTTON_OFFSET 15
+#define BUTTON_LEFT_MARGIN 20
+#define BUTTON_OFFSET 10
+#define BUTTON_SEPERATION 35
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -36,7 +42,6 @@
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-//        [self.titleLabel sizeToFit];
         
         self.detailLabel = [[AutosizingLabel alloc] initWithFrame:CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, 0)];
         self.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
@@ -46,33 +51,46 @@
         self.downvote = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"downvote.png"]];
         self.comment = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment.png"]];
         
+        self.upvoteCount = [[UILabel alloc] init];
+        self.upvoteCount.text = @"0";
+        self.upvoteCount.textColor = GREEN_COLOR;
+        [self.upvoteCount sizeToFit];
+        
+        self.downvoteCount = [[UILabel alloc] init];
+        self.downvoteCount.text = @"0";
+        self.downvoteCount.textColor = [UIColor colorWithRed:240/255.0f green:119/255.0f blue:116/255.0f alpha:1.0f];
+        [self.downvoteCount sizeToFit];
+        
+        self.commentCount = [[UILabel alloc] init];
+        self.commentCount.text = @"0";
+        self.commentCount.textColor = [UIColor whiteColor];
+        [self.commentCount sizeToFit];
+        
         [self updateControlFrames];
         
-        
-//        [self.upvote setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
-//        [self.downvote setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
-//        [self.comment setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
         
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.detailLabel];
         [self.contentView addSubview:self.upvote];
         [self.contentView addSubview:self.downvote];
         [self.contentView addSubview:self.comment];
-        
-        
+        [self.contentView addSubview:self.upvoteCount];
+        [self.contentView addSubview:self.downvoteCount];
+        [self.contentView addSubview:self.commentCount];
     }
+    
     return self;
 }
 
 - (void)updateControlFrames{
+
+    self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
+    self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
+    self.comment.frame = CGRectMake(self.upvote.frame.size.width + self.downvote.frame.size.width + (BUTTON_LEFT_MARGIN + BUTTON_SEPERATION * 2), [self desiredHeight] - self.comment.frame.size.height - BUTTON_OFFSET, self.comment.frame.size.width, self.comment.frame.size.height);
     
-    NSLog(@"Y: %f", [self desiredHeight] - self.upvote.frame.size.height - 30);
-    NSLog(@"Desired Height %i", [self desiredHeight]);
-    NSLog(@"Height %f", self.frame.size.height);
-    
-    self.upvote.frame = CGRectMake(5, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
-    self.downvote.frame = CGRectMake(self.upvote.frame.size.width + 10, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
-    self.comment.frame = CGRectMake(self.upvote.frame.size.width + self.downvote.frame.size.width + 15, [self desiredHeight] - self.comment.frame.size.height - BUTTON_OFFSET, self.comment.frame.size.width, self.comment.frame.size.height);
+    self.upvoteCount.frame = CGRectMake(self.upvote.frame.origin.x + self.upvote.frame.size.width + 10, self.upvote.frame.origin.y, self.upvoteCount.frame.size.width, self.upvoteCount.frame.size.height);
+    self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 10, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
+    self.commentCount.frame = CGRectMake(self.comment.frame.origin.x + self.comment.frame.size.width + 10, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
 }
 
 - (void)setEchoTitle:(NSString *)echoTitle{
