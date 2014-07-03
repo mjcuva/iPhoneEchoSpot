@@ -173,8 +173,6 @@
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
     if(self.tableView.contentSize.height - cell.frame.origin.y > self.tableView.frame.size.height){
         [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
-    }else{
-//        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
     }
 }
 
