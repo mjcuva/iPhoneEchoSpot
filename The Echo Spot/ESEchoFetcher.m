@@ -17,6 +17,8 @@
     NSData *json = [NSData dataWithContentsOfURL: jsonUrl options:NSDataReadingMappedIfSafe error:&err];
     if(err) {
         NSLog(@"%@", [err description]);
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"testechos" ofType:@"json"];
+        json = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:NULL];
     }
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:&err];
     if(err){
