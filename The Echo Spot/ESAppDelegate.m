@@ -22,6 +22,12 @@
 
     
     // Override point for customization after application launch.
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObject:@"greendark"
+                                                            forKey:@"theme"];
+    [defaults registerDefaults:appDefaults];
+    [defaults synchronize];
         
     return YES;
 }
