@@ -18,22 +18,11 @@
     
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"228358785274394fec3175c9903a1f2c"];
     [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator
-     authenticateInstallation];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
     
     // Override point for customization after application launch.
-    
-//    [[UIView appearance] setTintColor:[UIColor colorWithRed:0.149 green:0.906 blue:0.584 alpha:1]]; /*#26e795*/
-    [[UIView appearance] setTintColor:GREEN_COLOR];
-    
-    [[UISegmentedControl appearance] setBackgroundColor:[UIColor whiteColor]];
-    [[UISegmentedControl appearance] setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]],
-                                                               NSForegroundColorAttributeName:[UIColor blackColor] } forState:UIControlStateNormal];
-    
-    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateSelected];
-
-    
+        
     return YES;
 }
 							
@@ -51,6 +40,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 

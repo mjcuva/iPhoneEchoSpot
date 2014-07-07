@@ -11,12 +11,15 @@
 #import "ESEchoFetcher.h"
 #import "ESTableViewCell.h"
 #import "constants.h"
+#import "ThemeManager.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
 @property (strong, nonatomic) ESEcho *openEcho;
 
 @property (nonatomic) CGFloat lastScrollViewOffset;
+
+@property (strong, nonatomic) UISegmentedControl *segmentedControl;
 
 // Dirty Hack
 @property (strong, nonatomic) NSIndexPath *openRow;
@@ -37,35 +40,63 @@
 
 #pragma mark - Set Up Views
 
+
 - (void)viewDidLoad{
     
-    UIImage *image = [UIImage imageNamed:@"Logo.png"];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationItem.titleView.tintColor = [UIColor whiteColor];
+    
+    UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
     self.echos = [ESEchoFetcher loadRecentEchos];
-    if(self.echos.count % 2 == 1){
-        self.view.backgroundColor = DARK_GRAY_COLOR;
-    }else{
-        self.view.backgroundColor = LIGHT_GRAY_COLOR;
-    }
     
 #warning We should find a way to make transparency work
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.toolbar.translucent = NO;
-    self.tabBarController.tabBar.translucent = NO;
     
     // Kind of a gross hack
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
-    segmentedControl.selectedSegmentIndex = 0;
-    segmentedControl.layer.cornerRadius = 5;
-    segmentedControl.frame = CGRectMake((self.view.frame.size.width - CONTROL_WIDTH) / 2, -CONTROL_HEIGHT - CONTROL_PADDING, CONTROL_WIDTH, CONTROL_HEIGHT);
+    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
+    self.segmentedControl.selectedSegmentIndex = 0;
+    self.segmentedControl.layer.cornerRadius = 5;
+    self.segmentedControl.frame = CGRectMake((self.view.frame.size.width - CONTROL_WIDTH) / 2, -CONTROL_HEIGHT - CONTROL_PADDING, CONTROL_WIDTH, CONTROL_HEIGHT);
 
-    [self.tableView setContentInset:UIEdgeInsetsMake(segmentedControl.frame.size.height + CONTROL_PADDING * 2, 0, 0, 0)];
+    [self.tableView setContentInset:UIEdgeInsetsMake(self.segmentedControl.frame.size.height + CONTROL_PADDING * 2, 0, 0, 0)];
     
-    [self.tableView addSubview:segmentedControl];
+    [self.tableView addSubview:self.segmentedControl];
     
     self.openEcho = nil;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLayout) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+}
+
+- (void)updateLayout{
+    [[ThemeManager sharedManager] configureTheme];
+    self.navigationController.navigationBar.barTintColor = [[ThemeManager sharedManager] navBarColor];
+    self.tableView.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
+    if([[ThemeManager sharedManager] navBarColor] == [UIColor whiteColor]){
+        self.tableView.separatorColor = [UIColor clearColor];
+        self.navigationController.navigationBar.tintColor = [[ThemeManager sharedManager] themeColor];
+        UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
+        self.navigationController.navigationBar.translucent = YES;
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+        self.tableView.tintColor = [UIColor whiteColor];
+        self.segmentedControl.tintColor = [[ThemeManager sharedManager] themeColor];
+        [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]], NSForegroundColorAttributeName:[UIColor blackColor] } forState:UIControlStateNormal];
+    }else{
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
+        self.navigationController.navigationBar.translucent = YES;
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        self.tableView.separatorColor = [UIColor blackColor];
+        self.tableView.tintColor = [[ThemeManager sharedManager] themeColor];
+        self.segmentedControl.tintColor = [[ThemeManager sharedManager] themeColor];
+        [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]], NSForegroundColorAttributeName:[[ThemeManager sharedManager] themeColor] } forState:UIControlStateNormal];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -118,12 +149,11 @@
         [cell addGestureRecognizer:toggleEcho];
     }
     
-    
     if(indexPath.row % 2 == 0)
     {
-        cell.backgroundColor = [UIColor colorWithRed:43/255.0f green:43/255.0f blue:45/255.0f alpha:1.0f];
+        cell.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
     }else{
-        cell.backgroundColor = [UIColor colorWithRed:61/255.0f green:62/255.0f blue:63/255.0f alpha:1.0f];
+        cell.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
     }
     
     

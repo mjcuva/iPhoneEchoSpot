@@ -9,6 +9,7 @@
 #import "ESTableViewCell.h"
 #import "AutosizingLabel.h"
 #import "constants.h"
+#import "ThemeManager.h"
 
 @interface ESTableViewCell()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -37,7 +38,7 @@
     if (self) {
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, TOP_PADDING, self.frame.size.width - 20, 44)];
-        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.textColor = [[ThemeManager sharedManager] fontColor];
         self.titleLabel.text = self.echoTitle;
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -45,11 +46,14 @@
         
         self.detailLabel = [[AutosizingLabel alloc] initWithFrame:CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, 0)];
         self.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-        self.detailLabel.textColor = [UIColor whiteColor];
+        self.detailLabel.textColor = [[ThemeManager sharedManager] fontColor];
         
-        self.upvote = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"upvote.png"]];
-        self.downvote = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"downvote.png"]];
-        self.comment = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment.png"]];
+        UIImage *upvoteImage = [[UIImage imageNamed:@"upvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *downvoteImage = [[UIImage imageNamed:@"downvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *commentImage = [[UIImage imageNamed:@"comment.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.upvote = [[UIImageView alloc] initWithImage:upvoteImage];
+        self.downvote = [[UIImageView alloc] initWithImage:downvoteImage];
+        self.comment = [[UIImageView alloc] initWithImage:commentImage];
         
         self.upvoteCount = [[UILabel alloc] init];
         self.upvoteCount.text = @"0";
@@ -63,7 +67,7 @@
         
         self.commentCount = [[UILabel alloc] init];
         self.commentCount.text = @"0";
-        self.commentCount.textColor = [UIColor whiteColor];
+        self.commentCount.textColor = [[ThemeManager sharedManager] fontColor];
         [self.commentCount sizeToFit];
         
         [self updateControlFrames];
@@ -91,18 +95,22 @@
     self.upvoteCount.frame = CGRectMake(self.upvote.frame.origin.x + self.upvote.frame.size.width + 10, self.upvote.frame.origin.y, self.upvoteCount.frame.size.width, self.upvoteCount.frame.size.height);
     self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 10, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
     self.commentCount.frame = CGRectMake(self.comment.frame.origin.x + self.comment.frame.size.width + 10, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
+    
+    self.commentCount.textColor = [[ThemeManager sharedManager] fontColor];
 }
 
 - (void)setEchoTitle:(NSString *)echoTitle{
     _echoTitle = echoTitle;
     self.titleLabel.text = echoTitle;
     [self updateControlFrames];
+    self.titleLabel.textColor = [[ThemeManager sharedManager] fontColor];
 }
 
 - (void)setEchoContent:(NSString *)echoContent{
     _echoContent = echoContent;
     self.detailLabel.text = echoContent;
     [self updateControlFrames];
+    self.detailLabel.textColor = [[ThemeManager sharedManager] fontColor];
 }
 
 - (NSInteger)desiredHeight{
