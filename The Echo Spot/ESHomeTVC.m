@@ -72,7 +72,7 @@
 - (void)updateLayout{
     [[ThemeManager sharedManager] configureTheme];
     self.navigationController.navigationBar.barTintColor = [[ThemeManager sharedManager] navBarColor];
-    self.tableView.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
+    self.tableView.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
     self.segmentedControl.backgroundColor = [UIColor whiteColor];
     if([[ThemeManager sharedManager] navBarColor] == [UIColor whiteColor]){
         self.tableView.separatorColor = [UIColor clearColor];
