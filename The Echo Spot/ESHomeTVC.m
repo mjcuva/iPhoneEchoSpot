@@ -53,6 +53,8 @@
     
 #warning We should find a way to make transparency work
     
+    self.navigationController.navigationBar.translucent = NO;
+    
     // Kind of a gross hack
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
     self.segmentedControl.selectedSegmentIndex = 0;
@@ -79,7 +81,6 @@
         self.navigationController.navigationBar.tintColor = [[ThemeManager sharedManager] themeColor];
         UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
-        self.navigationController.navigationBar.translucent = YES;
         self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         self.tableView.tintColor = [UIColor whiteColor];
         self.segmentedControl.tintColor = [[ThemeManager sharedManager] themeColor];
@@ -88,7 +89,6 @@
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
-        self.navigationController.navigationBar.translucent = YES;
         self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
         self.tableView.separatorColor = [UIColor blackColor];
         self.tableView.tintColor = [[ThemeManager sharedManager] themeColor];
