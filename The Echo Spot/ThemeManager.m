@@ -34,7 +34,7 @@
     if([theme isEqualToString:@"greenwhite"]){
         self.themeColor = GREEN_COLOR;
         self.lightBackgroundColor = [UIColor whiteColor];
-        self.darkBackgroundColor = [UIColor whiteColor];
+        self.darkBackgroundColor = [UIColor colorWithWhite:.93 alpha:1];
         self.fontColor = [UIColor blackColor];
     }else if ([theme isEqualToString:@"redwhite"]){
         self.themeColor = SALMON_COLOR;

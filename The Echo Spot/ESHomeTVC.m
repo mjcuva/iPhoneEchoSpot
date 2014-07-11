@@ -90,7 +90,7 @@
         UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
         self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        self.tableView.separatorColor = [UIColor blackColor];
+        self.tableView.separatorColor = [UIColor colorWithWhite:.93 alpha:1];
         self.tableView.tintColor = [[ThemeManager sharedManager] themeColor];
         self.segmentedControl.tintColor = [[ThemeManager sharedManager] themeColor];
         [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]], NSForegroundColorAttributeName:[[ThemeManager sharedManager] themeColor] } forState:UIControlStateNormal];
