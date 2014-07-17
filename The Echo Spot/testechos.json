@@ -1,16 +1,208 @@
 {
     "echos": [
-              {"title": "Boynton Online Appointment Services", "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!"},
-              {"title": "How did Vice Provost Brown Young obtain a student's personal email?", "content": "So some students formed a collective called 'Whose Diversity?' and have been causing a stir on on campus about the lack of diversity on campus. MPR, The Star Tribune and the Pioneer Press has been covering that some students have been threatened with conduct code violations for speaking out. I'm actually more interested in another aspect of this scandal that effects us more... The Vice Provost of the Office for Student Affairs, Danita M Brown Young, directly emailed one of the student's personal email address. Does that strike anybody else as super sketchy? I'm curious, as students, can the administration access any of our emails or personal records without a warrant? What about for Echospot? When we check the anonymous box on an Echo are we really anonymous? http://whosediversity.weebly.com/endorsements.html"},
-              {"title": "Admins; Do you even categorize, bro?", "content" : "I saw your adds stapled up on the Westbank and thought I would add some content (or get informed) about the bike path issues or conversation. Alas, no category exists for that other than 'Misc' Why don't you develop some more diverse categories on here to attract more [intelligent] discussion? Maybe a campus commuting, U of MN biking, or some such category would attract more comments than just a garbage bin style 'MISC' category."},
-              {"title": "Dean Tom Fisher", "content": "I am the dean of the college of design and am happy to answer any questions you might have about design, creativity, and innovation. I can answer questions about our college and about the design community in the Twin Cities, as well as about current architecture in the U.S. I will start answering questions from 2:30 to 4:00 pm."},
-              {"title": "#whatdoyoudo when a guy can't take a hint?", "content": "So I am talking to this cute guy from class and we studied a few times together. I asked him whether he was free to grab coffee during the weekend and he said he already had other plans. I know a confident girl shouldn't feel rejected but I feel like I was. Or was he just not getting the hint?"},
-              {"title": "Is CLA graduation ceremony around 4 hours?", "content" : "I am trying to figure out how long my commencement ceremony should take so I can tell my family, which includes small children, who may not make it through such a long ceremony. Does anyone know how long the commencement ceremony usually takes for a typical CLA graduation?"},
-              {"title": "Boynton Online Appointment Services", "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!"},
-              {"title": "How did Vice Provost Brown Young obtain a student's personal email?", "content": "So some students formed a collective called 'Whose Diversity?' and have been causing a stir on on campus about the lack of diversity on campus. MPR, The Star Tribune and the Pioneer Press has been covering that some students have been threatened with conduct code violations for speaking out. I'm actually more interested in another aspect of this scandal that effects us more... The Vice Provost of the Office for Student Affairs, Danita M Brown Young, directly emailed one of the student's personal email address. Does that strike anybody else as super sketchy? I'm curious, as students, can the administration access any of our emails or personal records without a warrant? What about for Echospot? When we check the anonymous box on an Echo are we really anonymous? http://whosediversity.weebly.com/endorsements.html"},
-              {"title": "Admins; Do you even categorize, bro?", "content" : "I saw your adds stapled up on the Westbank and thought I would add some content (or get informed) about the bike path issues or conversation. Alas, no category exists for that other than 'Misc' Why don't you develop some more diverse categories on here to attract more [intelligent] discussion? Maybe a campus commuting, U of MN biking, or some such category would attract more comments than just a garbage bin style 'MISC' category."},
-              {"title": "Dean Tom Fisher", "content": "I am the dean of the college of design and am happy to answer any questions you might have about design, creativity, and innovation. I can answer questions about our college and about the design community in the Twin Cities, as well as about current architecture in the U.S. I will start answering questions from 2:30 to 4:00 pm."},
-              {"title": "#whatdoyoudo when a guy can't take a hint?", "content": "So I am talking to this cute guy from class and we studied a few times together. I asked him whether he was free to grab coffee during the weekend and he said he already had other plans. I know a confident girl shouldn't feel rejected but I feel like I was. Or was he just not getting the hint?"},
-              {"title": "Is CLA graduation ceremony around 4 hours?", "content" : "I am trying to figure out how long my commencement ceremony should take so I can tell my family, which includes small children, who may not make it through such a long ceremony. Does anyone know how long the commencement ceremony usually takes for a typical CLA graduation?"}
+              {"title": "Boynton Online Appointment Services",
+                "id": 1,
+                "imageURL": "nil",
+                "votes_up": 10,
+                "votes_down": 2,
+                "activity": 3,
+                "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+                "created": 1400024862,
+                "category": {
+                    "name": "misc",
+                    "id": 1
+                },
+                "user": {
+                    "id": 1,
+                    "userName": "cuvax001"
+                }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              },
+              {"title": "Boynton Online Appointment Services",
+              "id": 1,
+              "imageURL": "nil",
+              "votes_up": 10,
+              "votes_down": 2,
+              "activity": 3,
+              "content": "Why doesn't Boynton offer online appointment scheduling services (or am I just blindly unaware of this feature)? Given the number of students at the U, it seems that this might be a worthwhile consideration. Boynton currently only offers appointment scheduling in-person or over the phone. An online offering would not only make scheduling easier and more convenient, but undoubtedly allow students to take better (and more timely) advantage of healthcare services!",
+              "created": 1400024862,
+              "category": {
+              "name": "misc",
+              "id": 1
+              },
+              "user": {
+              "id": 1,
+              "userName": "cuvax001"
+              }
+              }
               ]
 }
