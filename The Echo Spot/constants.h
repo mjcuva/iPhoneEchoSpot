@@ -14,3 +14,6 @@
 #define DARK_GRAY_COLOR [UIColor colorWithRed:43/255.0f green:43/255.0f blue:45/255.0f alpha:1.0f]
 
 #define SALMON_COLOR [UIColor colorWithRed:245/255.0f green:141/255.0f blue:134/255.0f alpha:1.0f]
+
+
+#define RED_ORANGE [UIColor colorWithRed:.93359375 green:.37109375 blue:.234375 alpha:1.0f]
