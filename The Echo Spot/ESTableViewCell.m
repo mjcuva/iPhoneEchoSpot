@@ -81,7 +81,6 @@
         self.timeLabel.text = [self.created timeAgoSimple];
         [self.timeLabel sizeToFit];
         self.timeLabel.font = [UIFont systemFontOfSize:12];
-        self.timeLabel.frame = CGRectMake(self.frame.size.width - TIME_LABEL_OFFSET, TOP_PADDING + 3, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
         
         self.userLabel = [[UILabel alloc] init];
         self.userLabel.text = self.username;
@@ -117,6 +116,8 @@
     self.upvoteCount.frame = CGRectMake(self.upvote.frame.origin.x + self.upvote.frame.size.width + 10, self.upvote.frame.origin.y, self.upvoteCount.frame.size.width, self.upvoteCount.frame.size.height);
     self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 10, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
     self.commentCount.frame = CGRectMake(self.comment.frame.origin.x + self.comment.frame.size.width + 10, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
+    
+    self.timeLabel.frame = CGRectMake(self.frame.size.width - self.timeLabel.frame.size.width - 10, TOP_PADDING + 3, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
     
     self.userLabel.frame = CGRectMake(self.frame.size.width - self.userLabel.frame.size.width - 10, self.commentCount.frame.origin.y, self.userLabel.frame.size.width, self.userLabel.frame.size.height);
     
