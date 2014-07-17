@@ -10,4 +10,12 @@
 
 @implementation ESUser
 
+- (id)initWithName:(NSString *)name andID:(NSInteger)userID{
+    if(self = [super init]){
+        self.userID = userID;
+        self.username = name;
+    }
+    return self;
+}
+
 @end

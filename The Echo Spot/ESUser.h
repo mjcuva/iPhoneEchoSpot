@@ -11,7 +11,10 @@
 @interface ESUser : NSObject
 
 @property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *email;
+@property (nonatomic) NSInteger userID;
 @property (strong, nonatomic) NSSet *echos;
+
+
+- (id)initWithName: (NSString *)name andID: (NSInteger) userID;
 
 @end
