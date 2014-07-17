@@ -8,6 +8,7 @@
 
 #import "ESNewEchoVC.h"
 #import "constants.h"
+#import "ThemeManager.h"
 
 @interface ESNewEchoVC ()
 
@@ -18,7 +19,11 @@
 - (void)viewDidLoad{
     self.navigationItem.title = @"Create Echo";
     self.navigationController.navigationBar.translucent = NO;
-    self.view.backgroundColor = DARK_GRAY_COLOR;
+    self.view.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
+    self.navigationController.navigationBar.barTintColor = [[ThemeManager sharedManager] navBarColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 - (IBAction)cancel:(UIBarButtonItem *)sender {
