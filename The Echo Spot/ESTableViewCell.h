@@ -11,6 +11,8 @@
 @interface ESTableViewCell : UITableViewCell
 @property (strong, nonatomic) NSString *echoTitle;
 @property (strong, nonatomic) NSString *echoContent;
+@property (strong, nonatomic) NSDate *created;
+@property (strong, nonatomic) NSString *username;
 
 - (NSInteger)desiredHeight;
 

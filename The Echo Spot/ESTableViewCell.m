@@ -10,6 +10,7 @@
 #import "AutosizingLabel.h"
 #import "constants.h"
 #import "ThemeManager.h"
+#import "NSDate+TimeAgo.h"
 
 @interface ESTableViewCell()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -20,11 +21,13 @@
 @property (strong, nonatomic) UILabel *upvoteCount;
 @property (strong, nonatomic) UILabel *downvoteCount;
 @property (strong, nonatomic) UILabel *commentCount;
+@property (strong, nonatomic) UILabel *timeLabel;
+@property (strong, nonatomic) UILabel *userLabel;
 @end
 
 @implementation ESTableViewCell
 
-#define TOP_PADDING 5
+#define TOP_PADDING 10
 #define DETAIL_PADDING 10
 #define END_PADDING 40
 
@@ -32,12 +35,14 @@
 #define BUTTON_OFFSET 10
 #define BUTTON_SEPERATION 35
 
+#define TIME_LABEL_OFFSET 35
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, TOP_PADDING, self.frame.size.width - 20, 44)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, TOP_PADDING, self.frame.size.width - 50, 44)];
         self.titleLabel.textColor = [[ThemeManager sharedManager] fontColor];
         self.titleLabel.text = self.echoTitle;
         self.titleLabel.numberOfLines = 0;
@@ -70,6 +75,19 @@
         self.commentCount.textColor = [[ThemeManager sharedManager] fontColor];
         [self.commentCount sizeToFit];
         
+        
+        
+        self.timeLabel = [[UILabel alloc] init];
+        self.timeLabel.text = [self.created timeAgoSimple];
+        [self.timeLabel sizeToFit];
+        self.timeLabel.font = [UIFont systemFontOfSize:12];
+        self.timeLabel.frame = CGRectMake(self.frame.size.width - TIME_LABEL_OFFSET, TOP_PADDING + 3, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
+        
+        self.userLabel = [[UILabel alloc] init];
+        self.userLabel.text = self.username;
+        self.userLabel.font = [UIFont systemFontOfSize:13];
+        [self.userLabel sizeToFit];
+        
         [self updateControlFrames];
         
         
@@ -81,12 +99,16 @@
         [self.contentView addSubview:self.upvoteCount];
         [self.contentView addSubview:self.downvoteCount];
         [self.contentView addSubview:self.commentCount];
+        [self.contentView addSubview:self.timeLabel];
+        [self.contentView addSubview:self.userLabel];
     }
     
     return self;
 }
 
 - (void)updateControlFrames{
+    
+    self.detailLabel.frame = CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
 
     self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
     self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
@@ -96,7 +118,11 @@
     self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 10, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
     self.commentCount.frame = CGRectMake(self.comment.frame.origin.x + self.comment.frame.size.width + 10, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
     
-    self.commentCount.textColor = [[ThemeManager sharedManager] fontColor];
+    self.userLabel.frame = CGRectMake(self.frame.size.width - self.userLabel.frame.size.width - 10, self.commentCount.frame.origin.y, self.userLabel.frame.size.width, self.userLabel.frame.size.height);
+    
+    self.commentCount.textColor = [[ThemeManager sharedManager] detailFontColor];
+    self.userLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
+    self.timeLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
 }
 
 - (void)setEchoTitle:(NSString *)echoTitle{
@@ -104,6 +130,7 @@
     self.titleLabel.text = echoTitle;
     [self updateControlFrames];
     self.titleLabel.textColor = [[ThemeManager sharedManager] fontColor];
+    [self.titleLabel sizeToFit];
 }
 
 - (void)setEchoContent:(NSString *)echoContent{
@@ -111,6 +138,21 @@
     self.detailLabel.text = echoContent;
     [self updateControlFrames];
     self.detailLabel.textColor = [[ThemeManager sharedManager] fontColor];
+}
+
+- (void)setCreated:(NSDate *)created{
+    _created = created;
+    self.timeLabel.text = [_created timeAgoSimple];
+    [self updateControlFrames];
+    self.timeLabel.textColor = [UIColor blackColor];
+    [self.timeLabel sizeToFit];
+}
+
+- (void)setUsername:(NSString *)username{
+    _username = username;
+    self.userLabel.text = _username;
+    [self.userLabel sizeToFit];
+    [self updateControlFrames];
 }
 
 - (NSInteger)desiredHeight{

@@ -97,23 +97,12 @@
     }
     
     [self.tableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-//    self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top);
-//    NSLog(@"%@", self.tableView.contentOffset.y);
+    
     [self performSelector:@selector(hideControl) withObject:nil afterDelay:0];
 }
 
 - (void)hideControl{
-//    self.tableView.contentOffset = CGPointMake(0, 0);
-//    [UIView animateWithDuration:.2 delay:0 options:(UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAutoreverse ) animations:^{
-//        self.tableView.contentOffset = CGPointMake(0, -20);
-//    } completion:^(BOOL success){
-//        [UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-//            self.tableView.contentOffset = CGPointMake(0, 0);
-//        } completion:^(BOOL success){}];
-//    }];
+
     self.tableView.contentOffset = CGPointMake(0, 0);
 
 }
@@ -166,6 +155,9 @@
     }else{
         cell.echoContent = @"";
     }
+    
+    cell.created = echo.created;
+    cell.username = echo.author.username;
     
     return cell;
 }
