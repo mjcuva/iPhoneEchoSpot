@@ -41,7 +41,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 80)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     
     double contentHeight = 0;
     
@@ -108,7 +108,7 @@
     
     contentHeight += self.privacyControl.frame.size.height + 10;
     
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight);
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight + 20);
     NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
     NSLog(@"%f", self.view.frame.size.height);
     
@@ -121,6 +121,8 @@
     [self.scrollView addSubview:self.typeControl];
     [self.scrollView addSubview:self.privacyLabel];
     [self.scrollView addSubview:self.privacyControl];
+    
+    self.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
 }
 
