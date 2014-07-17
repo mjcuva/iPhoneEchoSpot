@@ -10,4 +10,8 @@
 
 @implementation ESEcho
 
+- (NSString *)description{
+    return [NSString stringWithFormat:@"{title: %@, content: %@, Author Name: %@}", self.title, self.content, self.author.username];
+}
+
 @end
