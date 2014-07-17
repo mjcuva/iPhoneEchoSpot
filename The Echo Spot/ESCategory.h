@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ESCategory : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic) NSInteger catID;
 
+- (id) initWithName: (NSString *)name andCatID: (NSInteger)catID;
 @end

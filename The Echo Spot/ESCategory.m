@@ -10,4 +10,12 @@
 
 @implementation ESCategory
 
+- (id) initWithName: (NSString *)name andCatID: (NSInteger)catID{
+    if(self = [super init]){
+        self.name = name;
+        self.catID = catID;
+    }
+    return self;
+}
+
 @end
