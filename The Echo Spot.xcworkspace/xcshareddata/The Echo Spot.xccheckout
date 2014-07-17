@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DE4CBDAC-0B94-4C2D-A5F3-C748CF6F3E1D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>The Echo Spot</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</key>
+		<string>https://github.com/mjcuva/iPhoneEchoSpot.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>The Echo Spot.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mjcuva/iPhoneEchoSpot.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>The Echo Spot</string>
+		</dict>
+	</array>
+</dict>
+</plist>
