@@ -19,6 +19,7 @@
 		499FB5C31937DD5E00F4C882 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5C21937DD5E00F4C882 /* Images.xcassets */; };
 		499FB5CB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5CC1937DD5E00F4C882 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
+		49B8BE5219735497003D6AA8 /* ESCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B8BE5119735497003D6AA8 /* ESCategory.m */; };
 		49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B9241F1939F21B00FB812A /* ESHomeTVC.m */; };
 		49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BCB9BD193F9DC80062D404 /* ESEcho.m */; };
 		49BCB9C1193F9E100062D404 /* ESUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BCB9C0193F9E100062D404 /* ESUser.m */; };
@@ -91,6 +92,8 @@
 		499FB5BD1937DD5E00F4C882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		499FB5C21937DD5E00F4C882 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		499FB5C81937DD5E00F4C882 /* The Echo SpotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Echo SpotTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49B8BE5019735497003D6AA8 /* ESCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCategory.h; sourceTree = "<group>"; };
+		49B8BE5119735497003D6AA8 /* ESCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCategory.m; sourceTree = "<group>"; };
 		49B9241E1939F21B00FB812A /* ESHomeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESHomeTVC.h; sourceTree = "<group>"; };
 		49B9241F1939F21B00FB812A /* ESHomeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESHomeTVC.m; sourceTree = "<group>"; };
 		49BCB9BC193F9DC80062D404 /* ESEcho.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEcho.h; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				49BCB9C0193F9E100062D404 /* ESUser.m */,
 				49BCB9BC193F9DC80062D404 /* ESEcho.h */,
 				49BCB9BD193F9DC80062D404 /* ESEcho.m */,
+				49B8BE5019735497003D6AA8 /* ESCategory.h */,
+				49B8BE5119735497003D6AA8 /* ESCategory.m */,
 				491A9B78196095CC00817F22 /* ESNewEchoVC.h */,
 				491A9B79196095CC00817F22 /* ESNewEchoVC.m */,
 				49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */,
@@ -367,6 +372,7 @@
 				49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */,
 				499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */,
 				499FB5B71937DD5E00F4C882 /* main.m in Sources */,
+				49B8BE5219735497003D6AA8 /* ESCategory.m in Sources */,
 				49BCB9C1193F9E100062D404 /* ESUser.m in Sources */,
 				49EC303D1969EBD900D8C702 /* ThemeManager.m in Sources */,
 				49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */,
