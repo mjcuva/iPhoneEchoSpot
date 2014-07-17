@@ -14,6 +14,7 @@
 @property (strong, nonatomic, readwrite) UIColor *lightBackgroundColor;
 @property (strong, nonatomic, readwrite) UIColor *darkBackgroundColor;
 @property (strong, nonatomic, readwrite) UIColor *fontColor;
+@property (strong, nonatomic, readwrite) UIColor *detailFontColor;
 @end
 
 @implementation ThemeManager
@@ -36,11 +37,13 @@
         self.lightBackgroundColor = [UIColor whiteColor];
         self.darkBackgroundColor = [UIColor colorWithWhite:.96 alpha:1];
         self.fontColor = [UIColor blackColor];
+        self.detailFontColor = [UIColor colorWithWhite:.3 alpha:1];
     }else if ([theme isEqualToString:@"redwhite"]){
         self.themeColor = RED_ORANGE;
         self.lightBackgroundColor = [UIColor whiteColor];
         self.darkBackgroundColor = [UIColor colorWithWhite:.96 alpha:1];
         self.fontColor = [UIColor blackColor];
+        self.detailFontColor = [UIColor colorWithWhite:.5 alpha:1];
     }else if([theme isEqualToString:@"greendark"]){
         self.themeColor = GREEN_COLOR;
         self.lightBackgroundColor = LIGHT_GRAY_COLOR;

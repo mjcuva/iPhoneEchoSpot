@@ -17,6 +17,7 @@
 @property (readonly) UIColor *darkBackgroundColor;
 @property (nonatomic, readonly) UIColor *fontColor;
 @property (nonatomic, readonly) UIColor *navBarColor;
+@property (nonatomic, readonly) UIColor *detailFontColor;
 
 - (void)configureTheme;
 
