@@ -176,12 +176,16 @@
             self.displayImage.image = nil;
         }else if(buttonIndex == 1){
             [self.imageSourcePicker showFromToolbar:self.navigationController.toolbar];
-            [self.displayImage removeFromSuperview];
         }
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    if([self.displayImage isDescendantOfView:self.scrollView]){
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scrollView.contentSize.height - self.displayImage.frame.size.height + self.uploadImage.frame.size.height + 20);
+    }
+    
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     double imgWidth = chosenImage.size.width;
     double ratio = self.view.frame.size.width / imgWidth;
