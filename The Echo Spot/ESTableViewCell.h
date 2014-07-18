@@ -16,4 +16,6 @@
 
 - (NSInteger)desiredHeight;
 
+- (BOOL)checkOpenEchosTap: (CGPoint) point;
+
 @end

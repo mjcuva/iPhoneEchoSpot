@@ -159,6 +159,8 @@
     cell.created = echo.created;
     cell.username = echo.author.username;
     
+    cell.userInteractionEnabled = YES;
+    
     return cell;
 }
 
@@ -166,29 +168,35 @@
 
 - (void)openEcho:(UITapGestureRecognizer *)sender{
     CGPoint point = [sender locationInView:self.tableView];
+    
     NSIndexPath *row = [self.tableView indexPathForRowAtPoint:point];
     NSIndexPath *startRow = self.openRow;
     ESTableViewCell *cell = (ESTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
     
-    if(self.echos[row.item] == self.openEcho){
-        self.openEcho = nil;
-        cell.echoContent = @"";
-        self.openRow = nil;
+    if([cell checkOpenEchosTap:point] && self.echos[row.item] == self.openEcho){
+        [self performSegueWithIdentifier:@"showComments" sender:self];
     }else{
-        self.openEcho = self.echos[row.item];
-        cell.echoContent = self.openEcho.content;
-        self.openRow = row;
-        self.openCellHeight = [cell desiredHeight];
-    }
     
-    if(startRow != nil && row.row != startRow.row){
-        [self.tableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }else{
-        [self.tableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-    if(self.openEcho != nil){
-        [self scrollToIndexPath:row withCell: cell];
+        if(self.echos[row.item] == self.openEcho){
+            self.openEcho = nil;
+            cell.echoContent = @"";
+            self.openRow = nil;
+        }else{
+            self.openEcho = self.echos[row.item];
+            cell.echoContent = self.openEcho.content;
+            self.openRow = row;
+            self.openCellHeight = [cell desiredHeight];
+        }
+        
+        if(startRow != nil && row.row != startRow.row){
+            [self.tableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [self.tableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        if(self.openEcho != nil){
+            [self scrollToIndexPath:row withCell: cell];
+        }
     }
 }
 

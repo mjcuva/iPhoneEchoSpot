@@ -23,6 +23,8 @@
 @property (strong, nonatomic) UILabel *commentCount;
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UILabel *userLabel;
+
+@property (strong, nonatomic) UIButton *openComments;
 @end
 
 @implementation ESTableViewCell
@@ -74,8 +76,6 @@
         self.commentCount.text = @"0";
         self.commentCount.textColor = [[ThemeManager sharedManager] fontColor];
         [self.commentCount sizeToFit];
-        
-        
         
         self.timeLabel = [[UILabel alloc] init];
         self.timeLabel.text = [self.created timeAgoSimple];
@@ -161,6 +161,10 @@
         return 88;
     }
     return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING;
+}
+
+- (BOOL)checkOpenEchosTap:(CGPoint)point{
+    return CGRectContainsPoint(CGRectMake(self.comment.frame.origin.x - 15, self.comment.frame.origin.y - 15, self.comment.frame.size.width + self.commentCount.frame.size.width + 30, self.comment.frame.size.height + self.commentCount.frame.size.height + 30), point);
 }
 
 @end
