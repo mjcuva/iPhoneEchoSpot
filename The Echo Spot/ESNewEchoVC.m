@@ -10,7 +10,7 @@
 #import "constants.h"
 #import "ThemeManager.h"
 
-@interface ESNewEchoVC ()
+@interface ESNewEchoVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 // Title
@@ -28,6 +28,15 @@
 // Privacy
 @property (strong, nonatomic) UILabel *privacyLabel;
 @property (strong, nonatomic) UISegmentedControl *privacyControl;
+
+// Image
+@property (strong, nonatomic) UIButton *uploadImage;
+@property (strong, nonatomic) UIActionSheet *imageSourcePicker;
+
+@property (strong, nonatomic) UIImageView *displayImage;
+
+@property (strong, nonatomic) UIActionSheet *removeImage;
+
 @end
 
 @implementation ESNewEchoVC
@@ -108,9 +117,20 @@
     
     contentHeight += self.privacyControl.frame.size.height + 10;
     
+    // Image
+    
+    self.uploadImage = [[UIButton alloc] initWithFrame:CGRectMake(30, self.privacyControl.frame.size.height + self.privacyControl.frame.origin.y + 30, self.view.frame.size.width - 60, 50)];
+    self.uploadImage.tintColor = [[ThemeManager sharedManager] themeColor];
+    [self.uploadImage setTitle:@"Add Image" forState:UIControlStateNormal];
+    self.uploadImage.titleLabel.textColor = [UIColor whiteColor];
+    [self.uploadImage addTarget:self action:@selector(addImage) forControlEvents:UIControlEventTouchUpInside];
+    self.uploadImage.backgroundColor = [[ThemeManager sharedManager] themeColor];
+    
+    self.displayImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.uploadImage.frame.origin.y, self.view.frame.size.width, 100)];
+    
+    contentHeight += self.uploadImage.frame.size.height + 30;
+    
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight + 20);
-    NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
-    NSLog(@"%f", self.view.frame.size.height);
     
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.titleLabel];
@@ -121,9 +141,66 @@
     [self.scrollView addSubview:self.typeControl];
     [self.scrollView addSubview:self.privacyLabel];
     [self.scrollView addSubview:self.privacyControl];
+    [self.scrollView addSubview:self.uploadImage];
     
     self.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
+}
+
+- (void)addImage{
+    self.imageSourcePicker = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Existing", nil];
+    self.imageSourcePicker.tag = 0;
+    [self.imageSourcePicker showFromToolbar:self.navigationController.toolbar];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(actionSheet.tag == 0){
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        if(buttonIndex == 0){
+            // Take Photo
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.allowsEditing = NO;
+            [self presentViewController:picker animated:YES completion:nil];
+        }else if(buttonIndex == 1){
+            // Select Photo
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:picker animated:YES completion:nil];
+        }else{
+            // Canceled
+        }
+    }else if(actionSheet.tag == 1){
+        if(buttonIndex == 0){
+            self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scrollView.contentSize.height - self.displayImage.frame.size.height + self.uploadImage.frame.size.height + 20);
+            [self.displayImage removeFromSuperview];
+            self.displayImage.image = nil;
+        }else if(buttonIndex == 1){
+            [self.imageSourcePicker showFromToolbar:self.navigationController.toolbar];
+            [self.displayImage removeFromSuperview];
+        }
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    double imgWidth = chosenImage.size.width;
+    double ratio = self.view.frame.size.width / imgWidth;
+    self.displayImage.image = chosenImage;
+    self.displayImage.frame = CGRectMake(0, self.displayImage.frame.origin.y, self.view.frame.size.width, chosenImage.size.height * ratio);
+    self.displayImage.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideImage)];
+    [self.displayImage addGestureRecognizer:tap];
+    
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scrollView.contentSize.height + self.displayImage.frame.size.height - self.uploadImage.frame.size.height - 20);
+    [self.scrollView addSubview:self.displayImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)hideImage{
+    self.removeImage = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove Image" otherButtonTitles:@"Change Image", nil];
+    self.removeImage.tag = 1;
+    [self.removeImage showFromToolbar:self.navigationController.toolbar];
 }
 
 - (IBAction)cancel:(UIBarButtonItem *)sender {
