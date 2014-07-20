@@ -32,10 +32,10 @@
             </objects>
             <point key="canvasLocation" x="1809" y="-1392"/>
         </scene>
-        <!--View Controller-->
+        <!--CommentVC - Comments-->
         <scene sceneID="zhy-Oh-BDn">
             <objects>
-                <viewController id="0G5-a7-4OF" sceneMemberID="viewController">
+                <viewController id="0G5-a7-4OF" customClass="ESCommentVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mcu-eh-5x5"/>
                         <viewControllerLayoutGuide type="bottom" id="D31-fz-apX"/>
@@ -45,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ws1-kc-9Mg"/>
+                    <navigationItem key="navigationItem" title="Comments" id="Ws1-kc-9Mg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khB-DY-kzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,6 +12,7 @@
 #import "ESTableViewCell.h"
 #import "constants.h"
 #import "ThemeManager.h"
+#import "ESCommentVC.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
@@ -158,6 +159,9 @@
     
     cell.created = echo.created;
     cell.username = echo.author.username;
+    cell.upvotes = echo.votesUp;
+    cell.downvotes = echo.votesDown;
+    cell.activity = echo.activity;
     
     cell.userInteractionEnabled = YES;
     
@@ -173,7 +177,7 @@
     NSIndexPath *startRow = self.openRow;
     ESTableViewCell *cell = (ESTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
     
-    if([cell checkOpenEchosTap:point] && self.echos[row.item] == self.openEcho){
+    if([cell checkOpenEchosTap:[self.view convertPoint:point toView:cell]] && self.echos[row.item] == self.openEcho){
         [self performSegueWithIdentifier:@"showComments" sender:self];
     }else{
     
@@ -218,6 +222,13 @@
     }
 }
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.destinationViewController isKindOfClass:[ESCommentVC class]]){
+        ESCommentVC *destination = (ESCommentVC *)segue.destinationViewController;
+        destination.echo = self.openEcho;
+    }
+}
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    

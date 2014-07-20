@@ -13,4 +13,6 @@
 
 + (NSArray *)loadRecentEchos;
 
++ (NSArray *)loadCommentsForEcho: (NSInteger)echoID;
+
 @end

@@ -34,6 +34,11 @@
 		49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */; };
 		49EC303A1969E37600D8C702 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49EC30391969E37600D8C702 /* Settings.bundle */; };
 		49EC303D1969EBD900D8C702 /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC303C1969EBD900D8C702 /* ThemeManager.m */; };
+		49EC7211197AF7DA0037C4FC /* ESCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7210197AF7DA0037C4FC /* ESCommentVC.m */; };
+		49EC7214197B0ACE0037C4FC /* ESEchoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7213197B0ACE0037C4FC /* ESEchoView.m */; };
+		49EC7217197C4EC90037C4FC /* ESComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7216197C4EC90037C4FC /* ESComment.m */; };
+		49EC721A197C51B70037C4FC /* ESDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7219197C51B70037C4FC /* ESDiscussion.m */; };
+		49EC721C197C543C0037C4FC /* testcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = 49EC721B197C543C0037C4FC /* testcomments.json */; };
 		49F10D6F195F632000F5F8D0 /* AutosizingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */; };
 		922BA8B29CD6470EB901B79C /* libPods-The Echo Spot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26836B9D1AD34AC69FDA2E83 /* libPods-The Echo Spot.a */; };
 /* End PBXBuildFile section */
@@ -118,6 +123,15 @@
 		49EC30391969E37600D8C702 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		49EC303B1969EBD900D8C702 /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
 		49EC303C1969EBD900D8C702 /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
+		49EC720F197AF7DA0037C4FC /* ESCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCommentVC.h; sourceTree = "<group>"; };
+		49EC7210197AF7DA0037C4FC /* ESCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCommentVC.m; sourceTree = "<group>"; };
+		49EC7212197B0ACE0037C4FC /* ESEchoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEchoView.h; sourceTree = "<group>"; };
+		49EC7213197B0ACE0037C4FC /* ESEchoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEchoView.m; sourceTree = "<group>"; };
+		49EC7215197C4EC90037C4FC /* ESComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESComment.h; sourceTree = "<group>"; };
+		49EC7216197C4EC90037C4FC /* ESComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESComment.m; sourceTree = "<group>"; };
+		49EC7218197C51B70037C4FC /* ESDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDiscussion.h; sourceTree = "<group>"; };
+		49EC7219197C51B70037C4FC /* ESDiscussion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDiscussion.m; sourceTree = "<group>"; };
+		49EC721B197C543C0037C4FC /* testcomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testcomments.json; sourceTree = "<group>"; };
 		49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutosizingLabel.h; sourceTree = "<group>"; };
 		49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutosizingLabel.m; sourceTree = "<group>"; };
 		E54A74DF00D8445AA1855235 /* Pods-The Echo Spot.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Echo Spot.xcconfig"; path = "Pods/Pods-The Echo Spot.xcconfig"; sourceTree = "<group>"; };
@@ -198,8 +212,12 @@
 				499FB5BC1937DD5E00F4C882 /* Main.storyboard */,
 				49C895BA194394AF00880796 /* ESTableViewCell.h */,
 				49C895BB194394AF00880796 /* ESTableViewCell.m */,
+				49EC7212197B0ACE0037C4FC /* ESEchoView.h */,
+				49EC7213197B0ACE0037C4FC /* ESEchoView.m */,
 				49B9241E1939F21B00FB812A /* ESHomeTVC.h */,
 				49B9241F1939F21B00FB812A /* ESHomeTVC.m */,
+				49EC720F197AF7DA0037C4FC /* ESCommentVC.h */,
+				49EC7210197AF7DA0037C4FC /* ESCommentVC.m */,
 				49BCB9C2193FA6A50062D404 /* ESEchoFetcher.h */,
 				49BCB9C3193FA6A50062D404 /* ESEchoFetcher.m */,
 				49BCB9BF193F9E100062D404 /* ESUser.h */,
@@ -208,6 +226,10 @@
 				49BCB9BD193F9DC80062D404 /* ESEcho.m */,
 				49B8BE5019735497003D6AA8 /* ESCategory.h */,
 				49B8BE5119735497003D6AA8 /* ESCategory.m */,
+				49EC7215197C4EC90037C4FC /* ESComment.h */,
+				49EC7216197C4EC90037C4FC /* ESComment.m */,
+				49EC7218197C51B70037C4FC /* ESDiscussion.h */,
+				49EC7219197C51B70037C4FC /* ESDiscussion.m */,
 				491A9B78196095CC00817F22 /* ESNewEchoVC.h */,
 				491A9B79196095CC00817F22 /* ESNewEchoVC.m */,
 				49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */,
@@ -217,6 +239,7 @@
 				49EC30391969E37600D8C702 /* Settings.bundle */,
 				499FB5B11937DD5E00F4C882 /* Supporting Files */,
 				4997351019576FBC0058A714 /* testechos.json */,
+				49EC721B197C543C0037C4FC /* testcomments.json */,
 			);
 			path = "The Echo Spot";
 			sourceTree = "<group>";
@@ -344,6 +367,7 @@
 				49EC303A1969E37600D8C702 /* Settings.bundle in Resources */,
 				49B8BE54197750E6003D6AA8 /* Podfile in Resources */,
 				499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */,
+				49EC721C197C543C0037C4FC /* testcomments.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +432,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49EC7214197B0ACE0037C4FC /* ESEchoView.m in Sources */,
+				49EC7211197AF7DA0037C4FC /* ESCommentVC.m in Sources */,
 				49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */,
+				49EC7217197C4EC90037C4FC /* ESComment.m in Sources */,
 				49F10D6F195F632000F5F8D0 /* AutosizingLabel.m in Sources */,
 				49BCB9C4193FA6A50062D404 /* ESEchoFetcher.m in Sources */,
 				49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */,
@@ -418,6 +445,7 @@
 				49BCB9C1193F9E100062D404 /* ESUser.m in Sources */,
 				49EC303D1969EBD900D8C702 /* ThemeManager.m in Sources */,
 				49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */,
+				49EC721A197C51B70037C4FC /* ESDiscussion.m in Sources */,
 				491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
