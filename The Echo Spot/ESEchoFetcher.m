@@ -66,7 +66,7 @@
         ESComment *newComment = [[ESComment alloc] init];
         newComment.comment_text = comment[@"comment_text"];
         newComment.commentID = [comment[@"id"] intValue];
-        newComment.author = [[ESUser alloc] initWithName:comment[@"user"][@"username"] andID:[comment[@"user"][@"id"] intValue]];
+        newComment.author = [[ESUser alloc] initWithName:comment[@"user"][@"userName"] andID:[comment[@"user"][@"id"] intValue]];
         newComment.votesDown = [comment[@"votes_down"] intValue];
         newComment.votesUp = [comment[@"votes_up"] intValue];
         newComment.created = [NSDate dateWithTimeIntervalSince1970:[comment[@"created"] intValue]];
@@ -75,7 +75,7 @@
             ESDiscussion *newDiscussion = [[ESDiscussion alloc] init];
             newDiscussion.discussionID = [discussion[@"id"] intValue];
             newDiscussion.discussion_text = discussion[@"discussion_text"];
-            newDiscussion.author = [[ESUser alloc] initWithName:discussion[@"user"][@"username"] andID:[discussion[@"user"][@"id"] intValue]];
+            newDiscussion.author = [[ESUser alloc] initWithName:discussion[@"user"][@"userName"] andID:[discussion[@"user"][@"id"] intValue]];
             newDiscussion.created = [NSDate dateWithTimeIntervalSince1970:[discussion[@"created"] intValue]];
             [discussions addObject:newDiscussion];
         }

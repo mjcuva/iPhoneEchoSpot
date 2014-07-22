@@ -11,6 +11,8 @@
 #import "ThemeManager.h"
 #import "constants.h"
 #import "ESEchoFetcher.h"
+#import "ESComment.h"
+#import "ESTableViewCell.h"
 
 @interface ESCommentVC () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) ESEchoView *parentEchoView;
@@ -34,7 +36,7 @@
     
     self.view.tintColor = [[ThemeManager sharedManager] themeColor];
     
-    self.commentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    self.commentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 60) style:UITableViewStylePlain];
     self.commentsTableView.dataSource = self;
     self.commentsTableView.delegate = self;
     
@@ -72,11 +74,14 @@
     [self.view addSubview:self.commentsTableView];
     
     self.commentsTableView.tableHeaderView = headerView;
+    self.commentsTableView.separatorColor = [[ThemeManager sharedManager] themeColor];
     
     dispatch_queue_t loadCommentsQueue = dispatch_queue_create("load comments", NULL);
     dispatch_async(loadCommentsQueue, ^{
         self.comments = [ESEchoFetcher loadCommentsForEcho:self.echo.echoID];
-        [self.commentsTableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.commentsTableView reloadData];
+        });
     });
     
     
@@ -89,11 +94,47 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    ESTableViewCell *cell = [[ESTableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
+    cell.echoContent = ((ESComment *)self.comments[indexPath.item]).comment_text;
+    return [cell desiredHeight];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[UITableViewCell alloc] init];
+    static NSString *identifier = @"CommentCell";
+    ESComment *comment = self.comments[indexPath.item];
+    
+    ESTableViewCell *cell = [self.commentsTableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if(cell == nil){
+        cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
+        
+        UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openComment:)];
+        
+        [cell addGestureRecognizer:toggleEcho];
+    }
+    
+    if(indexPath.row % 2 == 0){
+        cell.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
+    }else{
+        cell.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
+    }
+    
+    cell.echoContent = comment.comment_text;
+    
+    cell.created = comment.created;
+    cell.username = comment.author.username;
+    cell.upvotes = comment.votesUp;
+    cell.downvotes = comment.votesDown;
+    cell.activity = [comment.discussions count];
+    
+    cell.userInteractionEnabled = YES;
+    
+    return cell;
+}
+
+- (void)openComment: (UITapGestureRecognizer *)sender{
+    
 }
 
 - (void)keyboardWillShow: (NSNotification *)notification{
