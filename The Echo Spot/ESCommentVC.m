@@ -36,7 +36,7 @@
     
     self.view.tintColor = [[ThemeManager sharedManager] themeColor];
     
-    self.commentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 60) style:UITableViewStylePlain];
+    self.commentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
     self.commentsTableView.dataSource = self;
     self.commentsTableView.delegate = self;
     
