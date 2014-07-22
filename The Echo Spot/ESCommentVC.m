@@ -73,7 +73,12 @@
     
     self.commentsTableView.tableHeaderView = headerView;
     
-    self.comments = [ESEchoFetcher loadCommentsForEcho:self.echo.echoID];
+    dispatch_queue_t loadCommentsQueue = dispatch_queue_create("load comments", NULL);
+    dispatch_async(loadCommentsQueue, ^{
+        self.comments = [ESEchoFetcher loadCommentsForEcho:self.echo.echoID];
+        [self.commentsTableView reloadData];
+    });
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -123,6 +128,9 @@
 
     
     [UIView commitAnimations];
+    
+    self.commentsTableView.contentOffset = CGPointZero;
+    self.commentsTableView.scrollEnabled = NO;
 }
 
 - (void)keyboardWillHide: (NSNotification *)notification{
@@ -138,6 +146,8 @@
     
     
     [UIView commitAnimations];
+    
+    self.commentsTableView.scrollEnabled = YES;
     
     self.commentReply.contentOffset = CGPointZero;
     
