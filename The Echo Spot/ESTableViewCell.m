@@ -74,4 +74,9 @@
     return [self.echoView checkOpenEchosTap:point];
 }
 
+- (void)setIsComment:(BOOL)isComment{
+    _isComment = YES;
+    [self.echoView displayComment];
+}
+
 @end

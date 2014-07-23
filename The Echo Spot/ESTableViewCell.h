@@ -17,7 +17,7 @@
 @property (nonatomic) NSInteger upvotes;
 @property (nonatomic) NSInteger downvotes;
 @property (nonatomic) NSInteger activity;
-
+@property (nonatomic) BOOL isComment;
 - (NSInteger)desiredHeight;
 
 - (BOOL)checkOpenEchosTap: (CGPoint) point;
