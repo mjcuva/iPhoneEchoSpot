@@ -25,6 +25,9 @@
 @property (strong, nonatomic) UILabel *userLabel;
 
 @property (strong, nonatomic) UIButton *openComments;
+
+@property (nonatomic) BOOL discussion;
+@property (nonatomic) BOOL isComment;
 @end
 
 @implementation ESEchoView
@@ -50,8 +53,9 @@
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
         
-        self.detailLabel = [[AutosizingLabel alloc] initWithFrame:CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, 0)];
+        self.detailLabel = [[AutosizingLabel alloc] initWithFrame:CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 50, 0)];
         self.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        self.detailLabel.lineBreakMode = NSLineBreakByCharWrapping;
         self.detailLabel.textColor = [[ThemeManager sharedManager] fontColor];
         
         UIImage *upvoteImage = [[UIImage imageNamed:@"upvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -107,7 +111,14 @@
     
     self.frame = CGRectMake(0, 0, self.frame.size.width, [self desiredHeight]);
     
-    self.detailLabel.frame = CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
+    if(self.discussion){
+        self.detailLabel.frame = CGRectMake(15, TOP_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
+    }else if(self.isComment){
+//        self.detailLabel.backgroundColor = [UIColor blackColor];
+        self.detailLabel.frame = CGRectMake(15, TOP_PADDING, self.frame.size.width - 45, self.detailLabel.frame.size.height);
+    }else{
+        self.detailLabel.frame = CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
+    }
     
     self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
     self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
@@ -117,7 +128,11 @@
     self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 5, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
     self.commentCount.frame = CGRectMake(self.comment.frame.origin.x + self.comment.frame.size.width + 5, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
     
-    self.timeLabel.frame = CGRectMake(self.frame.size.width - self.timeLabel.frame.size.width - 10, TOP_PADDING + 3, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
+    if(self.discussion){
+        self.timeLabel.frame = CGRectMake(15, self.commentCount.frame.origin.y, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
+    }else{
+        self.timeLabel.frame = CGRectMake(self.frame.size.width - self.timeLabel.frame.size.width - 10, TOP_PADDING + 3, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
+    }
     
     self.userLabel.frame = CGRectMake(self.frame.size.width - self.userLabel.frame.size.width - 10, self.commentCount.frame.origin.y, self.userLabel.frame.size.width, self.userLabel.frame.size.height);
     
@@ -178,11 +193,29 @@
     if([self.echoContent isEqualToString:@""]){
         return 88;
     }
-    return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING;
+    if(self.discussion){
+        return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING;
+    }else{
+        return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING;
+    }
 }
 
 - (BOOL)checkOpenEchosTap:(CGPoint)point{
         return CGRectContainsPoint(CGRectMake(self.comment.frame.origin.x - 15, self.comment.frame.origin.y - 15, self.comment.frame.size.width + self.commentCount.frame.size.width + 30, self.comment.frame.size.height + self.commentCount.frame.size.height + 30), point);
+}
+
+- (void)displayDiscussion{
+    self.upvoteCount.hidden = YES;
+    self.downvoteCount.hidden = YES;
+    self.commentCount.hidden = YES;
+    self.upvote.hidden = YES;
+    self.downvote.hidden = YES;
+    self.comment.hidden = YES;
+    self.discussion = YES;
+}
+
+- (void)displayComment{
+    self.isComment = YES;
 }
 
 @end

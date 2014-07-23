@@ -21,4 +21,7 @@
 - (NSInteger)desiredHeight;
 
 - (BOOL)checkOpenEchosTap:(CGPoint)point;
+
+- (void)displayDiscussion;
+- (void)displayComment;
 @end
