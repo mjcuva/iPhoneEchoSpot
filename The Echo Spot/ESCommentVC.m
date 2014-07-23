@@ -13,6 +13,7 @@
 #import "ESEchoFetcher.h"
 #import "ESComment.h"
 #import "ESTableViewCell.h"
+#import "ESDiscussion.h"
 
 @interface ESCommentVC () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) ESEchoView *parentEchoView;
@@ -26,6 +27,11 @@
 @property (strong, nonatomic) UITableView *commentsTableView;
 
 @property (strong, nonatomic) NSArray *comments;
+
+@property (strong, nonatomic) NSIndexPath *openRow;
+@property (strong, nonatomic) ESEcho *openComment;
+
+@property (strong, nonatomic) UIView *discussionViews;
 @end
 
 @implementation ESCommentVC
@@ -60,7 +66,7 @@
     self.commentReply.font = [UIFont systemFontOfSize:16];
     
     
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, self.commentReply.frame.size.height + self.commentReply.frame.origin.y + 15, self.view.frame.size.height, 1)];
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, self.commentReply.frame.size.height + self.commentReply.frame.origin.y + 15, self.view.frame.size.width, 1)];
     separator.backgroundColor = [[ThemeManager sharedManager] themeColor];
     separator.alpha = .7;
     
@@ -96,7 +102,29 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     ESTableViewCell *cell = [[ESTableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
     cell.echoContent = ((ESComment *)self.comments[indexPath.item]).comment_text;
-    return [cell desiredHeight];
+    if(self.openComment == self.comments[indexPath.row]){
+        ESComment *comment = self.comments[indexPath.row];
+        self.discussionViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
+        double height = 0;
+        for(ESDiscussion *discussion in comment.discussions){
+            UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width * 1/8, height, self.view.frame.size.width * 7/8, 1)];
+            separator.backgroundColor = [[ThemeManager sharedManager] themeColor];
+            separator.alpha = .7;
+            ESEchoView *discoView = [[ESEchoView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width * 7/8, 0)];
+            [discoView displayDiscussion];
+            discoView.echoContent = discussion.discussion_text;
+            discoView.created = discussion.created;
+            discoView.username = discussion.author.username;
+            discoView.frame = CGRectMake(self.view.frame.size.width * 1/8, height, discoView.frame.size.width, [discoView desiredHeight]);
+            height += discoView.frame.size.height;
+            [self.discussionViews addSubview:discoView];
+            [self.discussionViews addSubview:separator];
+        }
+        self.discussionViews.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
+        return height + [cell desiredHeight];
+    }else{
+        return [cell desiredHeight];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -107,6 +135,7 @@
     
     if(cell == nil){
         cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.isComment = YES;
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
         
         UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openComment:)];
@@ -128,6 +157,11 @@
     cell.downvotes = comment.votesDown;
     cell.activity = [comment.discussions count];
     
+    if(self.openComment == self.comments[indexPath.item]){
+        self.discussionViews.frame = CGRectMake(self.discussionViews.frame.origin.x, [cell desiredHeight], self.discussionViews.frame.size.width, self.discussionViews.frame.size.height);
+        [cell addSubview:self.discussionViews];
+    }
+    
     cell.userInteractionEnabled = YES;
     
     return cell;
@@ -135,6 +169,41 @@
 
 - (void)openComment: (UITapGestureRecognizer *)sender{
     
+    CGPoint point = [sender locationInView:self.commentsTableView];
+    NSIndexPath *row = [self.commentsTableView indexPathForRowAtPoint:point];
+    NSIndexPath *startRow = self.openRow;
+    
+    ESTableViewCell *cell = (ESTableViewCell *)[self.commentsTableView cellForRowAtIndexPath:row];
+    
+    if(self.comments[row.item] == self.openComment){
+        self.openComment = nil;
+        self.openRow = nil;
+        [self.discussionViews removeFromSuperview];
+        self.discussionViews = nil;
+    }else{
+        if(self.discussionViews){
+            [self.discussionViews removeFromSuperview];
+            self.discussionViews = nil;
+        }
+        self.openComment = self.comments[row.item];
+        self.openRow = row;
+    }
+    
+    if(startRow != nil && row.row != startRow.row){
+        [self.commentsTableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        [self.commentsTableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if(self.openComment != nil){
+        [self scrollToIndexPath:row withCell: cell];
+    }
+}
+
+- (void)scrollToIndexPath: (NSIndexPath *)indexPath withCell: (ESTableViewCell *)cell{
+    if(self.commentsTableView.contentSize.height - cell.frame.origin.y + self.commentsTableView.tableHeaderView.frame.size.height > self.commentsTableView.frame.size.height + self.commentsTableView.tableHeaderView.frame.size.height){
+        [self.commentsTableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height + self.commentsTableView.tableHeaderView.frame.size.height) animated:YES];
+    }
 }
 
 - (void)keyboardWillShow: (NSNotification *)notification{
