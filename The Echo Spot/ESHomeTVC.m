@@ -147,12 +147,10 @@
     }
     
     
-# warning Might be issue with resizing height
     cell.echoTitle = echo.title;
     
     if(self.echos[indexPath.row] == self.openEcho){
         cell.echoContent = echo.content;
-//        self.openCellHeight = [cell desiredHeight];
     }else{
         cell.echoContent = @"";
     }
