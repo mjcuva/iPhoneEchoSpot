@@ -17,7 +17,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="NTq-YK-ckv">
-                        <barButtonItem key="leftBarButtonItem" image="Profile" id="ZvC-0B-wp2"/>
+                        <barButtonItem key="leftBarButtonItem" image="Profile" id="ZvC-0B-wp2">
+                            <connections>
+                                <segue destination="4aJ-8H-ieM" kind="modal" id="hKh-mo-Uf7"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="newEcho" id="lvm-Gg-pGv">
                             <connections>
                                 <segue destination="lLc-q7-eq5" kind="modal" id="kWN-es-lgs"/>
@@ -50,6 +54,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khB-DY-kzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2500" y="-992"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ONq-42-h1l">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="4aJ-8H-ieM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zzY-2N-CBw">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PJZ-OP-5Uu" kind="relationship" relationship="rootViewController" id="AwQ-1o-g1p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RFp-0N-xjl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="-2221"/>
+        </scene>
+        <!--ProfileVC - Profile-->
+        <scene sceneID="vWh-5e-fyj">
+            <objects>
+                <viewController id="PJZ-OP-5Uu" customClass="ESProfileVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dtv-nW-Blg"/>
+                        <viewControllerLayoutGuide type="bottom" id="DOA-ee-zaL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3o2-BM-kS8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="x3q-WG-vfc">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="0VM-yU-45J">
+                            <connections>
+                                <action selector="closeview:" destination="PJZ-OP-5Uu" id="N0k-Zr-rVC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uJF-Z6-Ej5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1908" y="-2221"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NXa-fe-SHf">
