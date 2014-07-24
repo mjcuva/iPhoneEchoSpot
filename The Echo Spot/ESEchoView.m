@@ -193,7 +193,7 @@
     if([self.echoContent isEqualToString:@""]){
         return 88;
     }
-    if(self.discussion){
+    if(self.discussion || self.isComment){
         return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING;
     }else{
         return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING;

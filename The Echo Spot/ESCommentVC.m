@@ -15,7 +15,7 @@
 #import "ESTableViewCell.h"
 #import "ESDiscussion.h"
 
-@interface ESCommentVC () <UITableViewDataSource, UITableViewDelegate>
+@interface ESCommentVC () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 @property (strong, nonatomic) ESEchoView *parentEchoView;
 @property (strong, nonatomic) UITextView *commentReply;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -32,6 +32,12 @@
 @property (strong, nonatomic) ESEcho *openComment;
 
 @property (strong, nonatomic) UIView *discussionViews;
+
+@property (strong, nonatomic) UITextView *activeTextView;
+
+@property (strong, nonatomic) UITextView *addDiscussion;
+
+@property (nonatomic) CGRect originalReplyFrame;
 @end
 
 @implementation ESCommentVC
@@ -64,6 +70,10 @@
     self.commentReply.backgroundColor = INPUT_BACKGROUND;
     self.commentReply.textContainerInset = UIEdgeInsetsMake(10, 10, 5, 10);
     self.commentReply.font = [UIFont systemFontOfSize:16];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setTextView:)];
+    self.commentReply.userInteractionEnabled = YES;
+    self.commentReply.tag = 1;
+    [self.commentReply addGestureRecognizer:tap];
     
     
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, self.commentReply.frame.size.height + self.commentReply.frame.origin.y + 15, self.view.frame.size.width, 1)];
@@ -105,7 +115,16 @@
     if(self.openComment == self.comments[indexPath.row]){
         ESComment *comment = self.comments[indexPath.row];
         self.discussionViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
-        double height = 0;
+        double height = 60;
+        self.addDiscussion = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width * 1/8, 0, self.view.frame.size.width *7/8, 50)];
+        self.addDiscussion.backgroundColor = INPUT_BACKGROUND;
+        self.addDiscussion.alpha = 1;
+        self.addDiscussion.opaque = YES;
+        self.addDiscussion.textContainerInset = UIEdgeInsetsMake(10, 10, 5, 10);
+        self.addDiscussion.font = [UIFont systemFontOfSize:16];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setTextView:)];
+        self.addDiscussion.userInteractionEnabled = YES;
+        [self.addDiscussion addGestureRecognizer:tap];
         for(ESDiscussion *discussion in comment.discussions){
             UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width * 1/8, height, self.view.frame.size.width * 7/8, 1)];
             separator.backgroundColor = [[ThemeManager sharedManager] themeColor];
@@ -120,6 +139,7 @@
             [self.discussionViews addSubview:discoView];
             [self.discussionViews addSubview:separator];
         }
+        [self.discussionViews addSubview:self.addDiscussion];
         self.discussionViews.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         return height + [cell desiredHeight];
     }else{
@@ -226,6 +246,14 @@
     
     [cancelButton addTarget:self action:@selector(closeReply) forControlEvents:UIControlEventTouchUpInside];
     
+    if(self.activeTextView.tag == 1){
+        self.commentsTableView.contentOffset = CGPointZero;   
+    }else{
+        self.commentsTableView.contentOffset = CGPointMake(0, [self.activeTextView convertPoint:self.activeTextView.bounds.origin toView:self.commentsTableView].y);
+    }
+//    self.commentsTableView.scrollEnabled = NO;
+    
+    self.originalReplyFrame = self.activeTextView.frame;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
@@ -233,14 +261,13 @@
     [UIView setAnimationBeginsFromCurrentState:YES];
     
     // work
-    self.commentReply.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height - 44);
+    self.activeTextView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height - 44);
     self.topReplyView.frame = CGRectMake(self.topReplyView.frame.origin.x, self.view.frame.size.height - kbSize.height - 44, self.topReplyView.frame.size.width, 44);
 
     
     [UIView commitAnimations];
     
-    self.commentsTableView.contentOffset = CGPointZero;
-    self.commentsTableView.scrollEnabled = NO;
+
 }
 
 - (void)keyboardWillHide: (NSNotification *)notification{
@@ -251,7 +278,7 @@
     [UIView setAnimationBeginsFromCurrentState:YES];
     
     // work
-    self.commentReply.frame = CGRectMake(25, self.parentEchoView.frame.origin.x + self.parentEchoView.frame.size.height + 10, self.view.frame.size.width - 25, 50);
+    self.activeTextView.frame = self.originalReplyFrame;
     self.topReplyView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 44);
     
     
@@ -263,8 +290,13 @@
     
 }
 
+- (void)setTextView: (UITapGestureRecognizer *)sender{
+    self.activeTextView = (UITextView *)sender.view;
+    [self.activeTextView becomeFirstResponder];
+}
+
 - (void)closeReply{
-    [self.commentReply endEditing:YES];
+    [self.activeTextView endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning
