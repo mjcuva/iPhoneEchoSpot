@@ -58,9 +58,9 @@
         self.detailLabel.lineBreakMode = NSLineBreakByCharWrapping;
         self.detailLabel.textColor = [[ThemeManager sharedManager] fontColor];
         
-        UIImage *upvoteImage = [[UIImage imageNamed:@"upvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIImage *downvoteImage = [[UIImage imageNamed:@"downvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIImage *commentImage = [[UIImage imageNamed:@"comment.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *upvoteImage = [[UIImage imageNamed:@"upvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage *downvoteImage = [[UIImage imageNamed:@"downvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage *commentImage = [[UIImage imageNamed:@"comment.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.upvote = [[UIImageView alloc] initWithImage:upvoteImage];
         self.downvote = [[UIImageView alloc] initWithImage:downvoteImage];
         self.comment = [[UIImageView alloc] initWithImage:commentImage];
