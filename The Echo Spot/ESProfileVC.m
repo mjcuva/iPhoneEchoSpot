@@ -23,6 +23,7 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
+
 - (IBAction)closeview:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
