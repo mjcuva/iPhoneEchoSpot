@@ -251,7 +251,7 @@
     }else{
         self.commentsTableView.contentOffset = CGPointMake(0, [self.activeTextView convertPoint:self.activeTextView.bounds.origin toView:self.commentsTableView].y);
     }
-//    self.commentsTableView.scrollEnabled = NO;
+    self.commentsTableView.scrollEnabled = NO;
     
     self.originalReplyFrame = self.activeTextView.frame;
     

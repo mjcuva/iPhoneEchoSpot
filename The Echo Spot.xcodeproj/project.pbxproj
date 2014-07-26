@@ -27,6 +27,7 @@
 		49BCB9C4193FA6A50062D404 /* ESEchoFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BCB9C3193FA6A50062D404 /* ESEchoFetcher.m */; };
 		49C180E51980A78800DF4173 /* ESProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180E41980A78800DF4173 /* ESProfileVC.m */; };
 		49C180EC1982FEE400DF4173 /* ESProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180EB1982FEE400DF4173 /* ESProfileView.m */; };
+		49C180EF1984287900DF4173 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180EE1984287900DF4173 /* UIImage+StackBlur.m */; };
 		49C6B10019511D97009C5B77 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582E2194D38D000BBD075 /* HockeySDK.framework */; };
 		49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C895BB194394AF00880796 /* ESTableViewCell.m */; };
 		49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D1194D35C000BBD075 /* CoreText.framework */; };
@@ -117,6 +118,8 @@
 		49C180E41980A78800DF4173 /* ESProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESProfileVC.m; sourceTree = "<group>"; };
 		49C180EA1982FEE400DF4173 /* ESProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESProfileView.h; sourceTree = "<group>"; };
 		49C180EB1982FEE400DF4173 /* ESProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESProfileView.m; sourceTree = "<group>"; };
+		49C180ED1984287900DF4173 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StackBlur.h"; sourceTree = "<group>"; };
+		49C180EE1984287900DF4173 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		49C895BA194394AF00880796 /* ESTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTableViewCell.h; sourceTree = "<group>"; };
 		49C895BB194394AF00880796 /* ESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTableViewCell.m; sourceTree = "<group>"; };
 		49E582D1194D35C000BBD075 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -264,6 +267,8 @@
 				49EC7213197B0ACE0037C4FC /* ESEchoView.m */,
 				49C180EA1982FEE400DF4173 /* ESProfileView.h */,
 				49C180EB1982FEE400DF4173 /* ESProfileView.m */,
+				49C180ED1984287900DF4173 /* UIImage+StackBlur.h */,
+				49C180EE1984287900DF4173 /* UIImage+StackBlur.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */,
 				499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */,
 				499FB5B71937DD5E00F4C882 /* main.m in Sources */,
+				49C180EF1984287900DF4173 /* UIImage+StackBlur.m in Sources */,
 				49B8BE5219735497003D6AA8 /* ESCategory.m in Sources */,
 				49C180EC1982FEE400DF4173 /* ESProfileView.m in Sources */,
 				49C180E51980A78800DF4173 /* ESProfileVC.m in Sources */,
