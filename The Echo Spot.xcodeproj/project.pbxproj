@@ -17,8 +17,6 @@
 		499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 499FB5BA1937DD5E00F4C882 /* ESAppDelegate.m */; };
 		499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5BC1937DD5E00F4C882 /* Main.storyboard */; };
 		499FB5C31937DD5E00F4C882 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499FB5C21937DD5E00F4C882 /* Images.xcassets */; };
-		499FB5CB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
-		499FB5CC1937DD5E00F4C882 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
 		49B8BE5219735497003D6AA8 /* ESCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B8BE5119735497003D6AA8 /* ESCategory.m */; };
 		49B8BE54197750E6003D6AA8 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 49B8BE53197750E6003D6AA8 /* Podfile */; };
 		49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B9241F1939F21B00FB812A /* ESHomeTVC.m */; };
@@ -28,6 +26,12 @@
 		49C180E51980A78800DF4173 /* ESProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180E41980A78800DF4173 /* ESProfileVC.m */; };
 		49C180EC1982FEE400DF4173 /* ESProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180EB1982FEE400DF4173 /* ESProfileView.m */; };
 		49C180EF1984287900DF4173 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180EE1984287900DF4173 /* UIImage+StackBlur.m */; };
+		49C180F61985945C00DF4173 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C180F51985945C00DF4173 /* XCTest.framework */; };
+		49C180F71985945C00DF4173 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
+		49C180F81985945C00DF4173 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AE1937DD5E00F4C882 /* UIKit.framework */; };
+		49C180FE1985945C00DF4173 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49C180FC1985945C00DF4173 /* InfoPlist.strings */; };
+		49C181001985945C00DF4173 /* The_Echo_Spot_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180FF1985945C00DF4173 /* The_Echo_Spot_Tests.m */; };
+		49C1810B1985957400DF4173 /* ESEchoFetcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */; };
 		49C6B10019511D97009C5B77 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582E2194D38D000BBD075 /* HockeySDK.framework */; };
 		49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C895BB194394AF00880796 /* ESTableViewCell.m */; };
 		49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D1194D35C000BBD075 /* CoreText.framework */; };
@@ -47,35 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		499FB5CD1937DD5E00F4C882 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
-			remoteInfo = "The Echo Spot";
-		};
-		49C6B0F819511D15009C5B77 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
-			remoteInfo = "The Echo Spot";
-		};
-		49C6B0FA19511D51009C5B77 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
-			remoteInfo = "The Echo Spot";
-		};
-		49C6B0FC19511D52009C5B77 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 499FB5A61937DD5E00F4C882;
-			remoteInfo = "The Echo Spot";
-		};
-		49C6B0FE19511D53009C5B77 /* PBXContainerItemProxy */ = {
+		49C181021985945C00DF4173 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 499FB59F1937DD5E00F4C882 /* Project object */;
 			proxyType = 1;
@@ -102,7 +78,6 @@
 		499FB5BA1937DD5E00F4C882 /* ESAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESAppDelegate.m; sourceTree = "<group>"; };
 		499FB5BD1937DD5E00F4C882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		499FB5C21937DD5E00F4C882 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		499FB5C81937DD5E00F4C882 /* The Echo SpotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Echo SpotTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49B8BE5019735497003D6AA8 /* ESCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCategory.h; sourceTree = "<group>"; };
 		49B8BE5119735497003D6AA8 /* ESCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCategory.m; sourceTree = "<group>"; };
 		49B8BE53197750E6003D6AA8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -120,6 +95,13 @@
 		49C180EB1982FEE400DF4173 /* ESProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESProfileView.m; sourceTree = "<group>"; };
 		49C180ED1984287900DF4173 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StackBlur.h"; sourceTree = "<group>"; };
 		49C180EE1984287900DF4173 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
+		49C180F41985945C00DF4173 /* The Echo Spot Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Echo Spot Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C180F51985945C00DF4173 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		49C180FB1985945C00DF4173 /* The Echo Spot Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "The Echo Spot Tests-Info.plist"; sourceTree = "<group>"; };
+		49C180FD1985945C00DF4173 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		49C180FF1985945C00DF4173 /* The_Echo_Spot_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = The_Echo_Spot_Tests.m; sourceTree = "<group>"; };
+		49C181011985945C00DF4173 /* The Echo Spot Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The Echo Spot Tests-Prefix.pch"; sourceTree = "<group>"; };
+		49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEchoFetcherTests.m; sourceTree = "<group>"; };
 		49C895BA194394AF00880796 /* ESTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTableViewCell.h; sourceTree = "<group>"; };
 		49C895BB194394AF00880796 /* ESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTableViewCell.m; sourceTree = "<group>"; };
 		49E582D1194D35C000BBD075 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -163,12 +145,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		499FB5C51937DD5E00F4C882 /* Frameworks */ = {
+		49C180F11985945C00DF4173 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				499FB5CC1937DD5E00F4C882 /* UIKit.framework in Frameworks */,
-				499FB5CB1937DD5E00F4C882 /* Foundation.framework in Frameworks */,
+				49C180F61985945C00DF4173 /* XCTest.framework in Frameworks */,
+				49C180F81985945C00DF4173 /* UIKit.framework in Frameworks */,
+				49C180F71985945C00DF4173 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				499FB5B01937DD5E00F4C882 /* The Echo Spot */,
+				49C180F91985945C00DF4173 /* The Echo Spot Tests */,
 				499FB5A91937DD5E00F4C882 /* Frameworks */,
 				499FB5A81937DD5E00F4C882 /* Products */,
 				4997351019576FBC0058A714 /* testechos.json */,
@@ -192,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				499FB5A71937DD5E00F4C882 /* The Echo Spot.app */,
-				499FB5C81937DD5E00F4C882 /* The Echo SpotTests.xctest */,
+				49C180F41985945C00DF4173 /* The Echo Spot Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,6 +193,7 @@
 				499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */,
 				499FB5AE1937DD5E00F4C882 /* UIKit.framework */,
 				26836B9D1AD34AC69FDA2E83 /* libPods-The Echo Spot.a */,
+				49C180F51985945C00DF4173 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -302,6 +287,26 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		49C180F91985945C00DF4173 /* The Echo Spot Tests */ = {
+			isa = PBXGroup;
+			children = (
+				49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */,
+				49C180FF1985945C00DF4173 /* The_Echo_Spot_Tests.m */,
+				49C180FA1985945C00DF4173 /* Supporting Files */,
+			);
+			path = "The Echo Spot Tests";
+			sourceTree = "<group>";
+		};
+		49C180FA1985945C00DF4173 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49C180FB1985945C00DF4173 /* The Echo Spot Tests-Info.plist */,
+				49C180FC1985945C00DF4173 /* InfoPlist.strings */,
+				49C181011985945C00DF4173 /* The Echo Spot Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		49E582E1194D38D000BBD075 /* HockeySDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,26 +348,22 @@
 			productReference = 499FB5A71937DD5E00F4C882 /* The Echo Spot.app */;
 			productType = "com.apple.product-type.application";
 		};
-		499FB5C71937DD5E00F4C882 /* The Echo SpotTests */ = {
+		49C180F31985945C00DF4173 /* The Echo Spot Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 499FB5DC1937DD5F00F4C882 /* Build configuration list for PBXNativeTarget "The Echo SpotTests" */;
+			buildConfigurationList = 49C181041985945C00DF4173 /* Build configuration list for PBXNativeTarget "The Echo Spot Tests" */;
 			buildPhases = (
-				499FB5C41937DD5E00F4C882 /* Sources */,
-				499FB5C51937DD5E00F4C882 /* Frameworks */,
-				499FB5C61937DD5E00F4C882 /* Resources */,
+				49C180F01985945C00DF4173 /* Sources */,
+				49C180F11985945C00DF4173 /* Frameworks */,
+				49C180F21985945C00DF4173 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				499FB5CE1937DD5E00F4C882 /* PBXTargetDependency */,
-				49C6B0F919511D15009C5B77 /* PBXTargetDependency */,
-				49C6B0FB19511D51009C5B77 /* PBXTargetDependency */,
-				49C6B0FD19511D52009C5B77 /* PBXTargetDependency */,
-				49C6B0FF19511D53009C5B77 /* PBXTargetDependency */,
+				49C181031985945C00DF4173 /* PBXTargetDependency */,
 			);
-			name = "The Echo SpotTests";
-			productName = "The Echo SpotTests";
-			productReference = 499FB5C81937DD5E00F4C882 /* The Echo SpotTests.xctest */;
+			name = "The Echo Spot Tests";
+			productName = "The Echo Spot Tests";
+			productReference = 49C180F41985945C00DF4173 /* The Echo Spot Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -378,7 +379,7 @@
 					499FB5A61937DD5E00F4C882 = {
 						DevelopmentTeam = S9PLJWKQVD;
 					};
-					499FB5C71937DD5E00F4C882 = {
+					49C180F31985945C00DF4173 = {
 						TestTargetID = 499FB5A61937DD5E00F4C882;
 					};
 				};
@@ -397,7 +398,7 @@
 			projectRoot = "";
 			targets = (
 				499FB5A61937DD5E00F4C882 /* The Echo Spot */,
-				499FB5C71937DD5E00F4C882 /* The Echo SpotTests */,
+				49C180F31985945C00DF4173 /* The Echo Spot Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -418,10 +419,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		499FB5C61937DD5E00F4C882 /* Resources */ = {
+		49C180F21985945C00DF4173 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C180FE1985945C00DF4173 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,40 +502,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		499FB5C41937DD5E00F4C882 /* Sources */ = {
+		49C180F01985945C00DF4173 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C1810B1985957400DF4173 /* ESEchoFetcherTests.m in Sources */,
+				49C181001985945C00DF4173 /* The_Echo_Spot_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		499FB5CE1937DD5E00F4C882 /* PBXTargetDependency */ = {
+		49C181031985945C00DF4173 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
-			targetProxy = 499FB5CD1937DD5E00F4C882 /* PBXContainerItemProxy */;
-		};
-		49C6B0F919511D15009C5B77 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
-			targetProxy = 49C6B0F819511D15009C5B77 /* PBXContainerItemProxy */;
-		};
-		49C6B0FB19511D51009C5B77 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
-			targetProxy = 49C6B0FA19511D51009C5B77 /* PBXContainerItemProxy */;
-		};
-		49C6B0FD19511D52009C5B77 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
-			targetProxy = 49C6B0FC19511D52009C5B77 /* PBXContainerItemProxy */;
-		};
-		49C6B0FF19511D53009C5B77 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 499FB5A61937DD5E00F4C882 /* The Echo Spot */;
-			targetProxy = 49C6B0FE19511D53009C5B77 /* PBXContainerItemProxy */;
+			targetProxy = 49C181021985945C00DF4173 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -552,6 +536,14 @@
 				499FB5BD1937DD5E00F4C882 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49C180FC1985945C00DF4173 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49C180FD1985945C00DF4173 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -684,38 +676,40 @@
 			};
 			name = Release;
 		};
-		499FB5DD1937DD5F00F4C882 /* Debug */ = {
+		49C181051985945C00DF4173 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/The Echo Spot.app/The Echo Spot";
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "The Echo Spot/The Echo Spot-Prefix.pch";
+				GCC_PREFIX_HEADER = "The Echo Spot Tests/The Echo Spot Tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "The Echo SpotTests/The Echo SpotTests-Info.plist";
+				INFOPLIST_FILE = "The Echo Spot Tests/The Echo Spot Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		499FB5DE1937DD5F00F4C882 /* Release */ = {
+		49C181061985945C00DF4173 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/The Echo Spot.app/The Echo Spot";
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "The Echo Spot/The Echo Spot-Prefix.pch";
-				INFOPLIST_FILE = "The Echo SpotTests/The Echo SpotTests-Info.plist";
+				GCC_PREFIX_HEADER = "The Echo Spot Tests/The Echo Spot Tests-Prefix.pch";
+				INFOPLIST_FILE = "The Echo Spot Tests/The Echo Spot Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -743,14 +737,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		499FB5DC1937DD5F00F4C882 /* Build configuration list for PBXNativeTarget "The Echo SpotTests" */ = {
+		49C181041985945C00DF4173 /* Build configuration list for PBXNativeTarget "The Echo Spot Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				499FB5DD1937DD5F00F4C882 /* Debug */,
-				499FB5DE1937DD5F00F4C882 /* Release */,
+				49C181051985945C00DF4173 /* Debug */,
+				49C181061985945C00DF4173 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

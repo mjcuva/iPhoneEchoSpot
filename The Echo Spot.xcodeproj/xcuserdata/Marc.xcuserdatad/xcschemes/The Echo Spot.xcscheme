@@ -38,6 +38,16 @@
                ReferencedContainer = "container:The Echo Spot.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "49C180F31985945C00DF4173"
+               BuildableName = "The Echo Spot Tests.xctest"
+               BlueprintName = "The Echo Spot Tests"
+               ReferencedContainer = "container:The Echo Spot.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
