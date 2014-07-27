@@ -18,4 +18,8 @@
     return self;
 }
 
++ (ESUser *)anonymousUser{
+    return [[ESUser alloc] initWithName:@"Anonymous" andID:0];
+}
+
 @end

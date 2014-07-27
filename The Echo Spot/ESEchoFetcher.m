@@ -10,23 +10,20 @@
 #import "ESCategory.h"
 #import "ESComment.h"
 #import "ESDiscussion.h"
+#import "constants.h"
 
 @implementation ESEchoFetcher
 
-+ (NSDictionary *)getDataForURL: (NSString *)url orResource: (NSString *)resource{
++ (NSArray *)getDataForURL: (NSString *)url orResource: (NSString *)resource{
     NSError *err;
     NSURL *jsonUrl = [NSURL URLWithString:url];
     NSData *json = [NSData dataWithContentsOfURL: jsonUrl options:NSDataReadingMappedIfSafe error:&err];
     if(err) {
-        NSLog(@"%@", [err description]);
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:resource ofType:@"json"];
-        json = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:NULL];
+        NSLog(@"Error Loading URL: %@", [err description]);
+        return nil;
     }
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:resource ofType:@"json"];
-    json = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:NULL];
-    
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:&err];
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:&err];
     if(err){
         NSLog(@"%@", [err description]);
     }
@@ -35,22 +32,42 @@
 
 + (NSArray *)loadRecentEchos{
     
-    NSDictionary *jsonObject = [self getDataForURL:@"http://theechospot.com/echos.json" orResource:@"testechos"];
+    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@",  BASE_URL, ECHOS_URL] orResource:@"testechos"];
+    
+    if(jsonObject == nil){
+        return nil;
+    }
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
-    for( NSDictionary *echo in jsonObject[@"echos"]){
+    for( NSDictionary *echo in jsonObject){
         ESEcho *newEcho = [[ESEcho alloc] init];
         newEcho.title = echo[@"title"];
         newEcho.echoID = [echo[@"id"] intValue];
         newEcho.imageURL = [NSURL URLWithString:echo[@"imageURL"]];
-        newEcho.votesUp = [echo[@"votes_up"] intValue];
-        newEcho.votesDown = [echo[@"votes_down"] intValue];
+        
+        if([echo[@"votes_up"] isKindOfClass:[NSNull class]]){
+            newEcho.votesUp = 0;
+        }else{
+            newEcho.votesUp = [echo[@"votes_up"] intValue];
+        }
+        
+        if([echo[@"votes_down"] isKindOfClass:[NSNull class]]){
+            newEcho.votesDown = 0;
+        }else{
+             newEcho.votesDown = [echo[@"votes_down"] intValue];   
+        }
+        
         newEcho.activity = [echo[@"activity"] intValue];
         newEcho.content = echo[@"content"];
-        newEcho.created = [NSDate dateWithTimeIntervalSince1970:[echo[@"created"] intValue]];
+        newEcho.created = [NSDate dateWithTimeIntervalSince1970:[echo[@"created_at"] doubleValue]];
         newEcho.category = [[ESCategory alloc] initWithName:echo[@"category"][@"name"] andCatID:[echo[@"category"][@"id"] intValue]];
-        newEcho.author = [[ESUser alloc] initWithName:echo[@"user"][@"userName"] andID:[echo[@"user"][@"id"] intValue]];
+        
+        if([echo[@"anonymous"] boolValue] == 1){
+            newEcho.author = [ESUser anonymousUser];
+        }else{
+            newEcho.author = [[ESUser alloc] initWithName:echo[@"user"][@"username"] andID:[echo[@"user"][@"id"] intValue]];
+        }
         [returnArray addObject:newEcho];
     }
     
@@ -58,25 +75,44 @@
 }
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID{
-    NSDictionary *jsonObject = [self getDataForURL:@"http://theechospot.com/echos.json" orResource:@"testcomments"];
+    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@%li", BASE_URL, COMMENTS_URL, (long)echoID] orResource:@"testcomments"];
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
-    for (NSDictionary *comment in jsonObject[@"comments"]) {
+    for (NSDictionary *comment in jsonObject) {
         ESComment *newComment = [[ESComment alloc] init];
-        newComment.comment_text = comment[@"comment_text"];
+        newComment.comment_text = comment[@"content"];
         newComment.commentID = [comment[@"id"] intValue];
-        newComment.author = [[ESUser alloc] initWithName:comment[@"user"][@"userName"] andID:[comment[@"user"][@"id"] intValue]];
-        newComment.votesDown = [comment[@"votes_down"] intValue];
-        newComment.votesUp = [comment[@"votes_up"] intValue];
-        newComment.created = [NSDate dateWithTimeIntervalSince1970:[comment[@"created"] intValue]];
+        if([comment[@"anonymous"] boolValue] == 1){
+            newComment.author = [ESUser anonymousUser];
+        }else{
+            newComment.author = [[ESUser alloc] initWithName:comment[@"user"][@"username"] andID:[comment[@"user"][@"id"] intValue]];    
+        }
+
+        if([comment[@"votes_down"] isKindOfClass:[NSNull class]]){
+            newComment.votesDown = 0;
+        }else{
+            newComment.votesDown = [comment[@"votes_down"] intValue];
+        }
+        
+        if([comment[@"votes_up"] isKindOfClass:[NSNull class]]){
+            newComment.votesUp = 0;
+        }else{
+            newComment.votesUp = [comment[@"votes_up"] intValue];
+        }
+        
+        newComment.created = [NSDate dateWithTimeIntervalSince1970:[comment[@"created_at"] intValue]];
         NSMutableArray *discussions = [[NSMutableArray alloc] init];
         for(NSDictionary *discussion in comment[@"discussions"]){
             ESDiscussion *newDiscussion = [[ESDiscussion alloc] init];
             newDiscussion.discussionID = [discussion[@"id"] intValue];
             newDiscussion.discussion_text = discussion[@"discussion_text"];
-            newDiscussion.author = [[ESUser alloc] initWithName:discussion[@"user"][@"userName"] andID:[discussion[@"user"][@"id"] intValue]];
-            newDiscussion.created = [NSDate dateWithTimeIntervalSince1970:[discussion[@"created"] intValue]];
+            if([discussion[@"anonymous"] boolValue] == 1){
+                newDiscussion.author = [ESUser anonymousUser];
+            }else{
+                newDiscussion.author = [[ESUser alloc] initWithName:discussion[@"user"][@"username"] andID:[discussion[@"user"][@"id"] intValue]];
+            }
+            newDiscussion.created = [NSDate dateWithTimeIntervalSince1970:[discussion[@"created_at"] intValue]];
             [discussions addObject:newDiscussion];
         }
         newComment.discussions = discussions;

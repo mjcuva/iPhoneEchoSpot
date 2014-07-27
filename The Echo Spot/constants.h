@@ -19,3 +19,8 @@
 #define RED_ORANGE [UIColor colorWithRed:.93359375 green:.37109375 blue:.234375 alpha:1.0f]
 
 #define INPUT_BACKGROUND [UIColor colorWithRed:244/255.0f green:238/255.0f blue:240/255.0f alpha:1.0f]
+
+
+#define BASE_URL @"http://evening-chamber-3257.herokuapp.com/api/1/"
+#define ECHOS_URL @"echo/votes/1"
+#define COMMENTS_URL @"comment/"

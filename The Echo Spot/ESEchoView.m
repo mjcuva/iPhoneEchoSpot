@@ -146,7 +146,6 @@
     self.titleLabel.text = echoTitle;
     [self updateControlFrames];
     self.titleLabel.textColor = [[ThemeManager sharedManager] fontColor];
-    [self.titleLabel sizeToFit];
 }
 
 - (void)setEchoContent:(NSString *)echoContent{

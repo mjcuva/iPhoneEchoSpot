@@ -17,4 +17,6 @@
 
 - (id)initWithName: (NSString *)name andID: (NSInteger) userID;
 
++ (ESUser *)anonymousUser;
+
 @end

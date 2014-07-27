@@ -52,6 +52,10 @@
     
     self.echos = [ESEchoFetcher loadRecentEchos];
     
+    if(self.echos == nil){
+        
+    }
+    
 #warning We should find a way to make transparency work
     
     self.navigationController.navigationBar.translucent = NO;
