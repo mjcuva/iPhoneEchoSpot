@@ -32,6 +32,7 @@
 		49C180FE1985945C00DF4173 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49C180FC1985945C00DF4173 /* InfoPlist.strings */; };
 		49C181001985945C00DF4173 /* The_Echo_Spot_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C180FF1985945C00DF4173 /* The_Echo_Spot_Tests.m */; };
 		49C1810B1985957400DF4173 /* ESEchoFetcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */; };
+		49C1810E198603DC00DF4173 /* ESAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1810D198603DC00DF4173 /* ESAuthenticator.m */; };
 		49C6B10019511D97009C5B77 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582E2194D38D000BBD075 /* HockeySDK.framework */; };
 		49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C895BB194394AF00880796 /* ESTableViewCell.m */; };
 		49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D1194D35C000BBD075 /* CoreText.framework */; };
@@ -102,6 +103,8 @@
 		49C180FF1985945C00DF4173 /* The_Echo_Spot_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = The_Echo_Spot_Tests.m; sourceTree = "<group>"; };
 		49C181011985945C00DF4173 /* The Echo Spot Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The Echo Spot Tests-Prefix.pch"; sourceTree = "<group>"; };
 		49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEchoFetcherTests.m; sourceTree = "<group>"; };
+		49C1810C198603DC00DF4173 /* ESAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESAuthenticator.h; sourceTree = "<group>"; };
+		49C1810D198603DC00DF4173 /* ESAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESAuthenticator.m; sourceTree = "<group>"; };
 		49C895BA194394AF00880796 /* ESTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTableViewCell.h; sourceTree = "<group>"; };
 		49C895BB194394AF00880796 /* ESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTableViewCell.m; sourceTree = "<group>"; };
 		49E582D1194D35C000BBD075 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -263,6 +266,8 @@
 			children = (
 				49BCB9C2193FA6A50062D404 /* ESEchoFetcher.h */,
 				49BCB9C3193FA6A50062D404 /* ESEchoFetcher.m */,
+				49C1810C198603DC00DF4173 /* ESAuthenticator.h */,
+				49C1810D198603DC00DF4173 /* ESAuthenticator.m */,
 				49BCB9BF193F9E100062D404 /* ESUser.h */,
 				49BCB9C0193F9E100062D404 /* ESUser.m */,
 				49BCB9BC193F9DC80062D404 /* ESEcho.h */,
@@ -497,6 +502,7 @@
 				49BCB9C1193F9E100062D404 /* ESUser.m in Sources */,
 				49EC303D1969EBD900D8C702 /* ThemeManager.m in Sources */,
 				49B924201939F21B00FB812A /* ESHomeTVC.m in Sources */,
+				49C1810E198603DC00DF4173 /* ESAuthenticator.m in Sources */,
 				49EC721A197C51B70037C4FC /* ESDiscussion.m in Sources */,
 				491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */,
 			);
@@ -744,6 +750,7 @@
 				49C181061985945C00DF4173 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
