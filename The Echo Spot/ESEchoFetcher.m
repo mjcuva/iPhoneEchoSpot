@@ -14,7 +14,7 @@
 
 @implementation ESEchoFetcher
 
-+ (NSArray *)getDataForURL: (NSString *)url orResource: (NSString *)resource{
++ (NSArray *)getDataForURL: (NSString *)url{
     NSError *err;
     NSURL *jsonUrl = [NSURL URLWithString:url];
     NSData *json = [NSData dataWithContentsOfURL: jsonUrl options:NSDataReadingMappedIfSafe error:&err];
@@ -32,7 +32,7 @@
 
 + (NSArray *)loadRecentEchos{
     
-    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@",  BASE_URL, ECHOS_URL] orResource:@"testechos"];
+    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@",  BASE_URL, ECHOS_URL]];
     
     if(jsonObject == nil){
         return nil;
@@ -75,7 +75,7 @@
 }
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID{
-    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@%li", BASE_URL, COMMENTS_URL, (long)echoID] orResource:@"testcomments"];
+    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@%li", BASE_URL, COMMENTS_URL, (long)echoID]];
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
