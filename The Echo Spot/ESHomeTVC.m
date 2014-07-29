@@ -37,7 +37,7 @@
 // padding from top of control to top of view
 #define CONTROL_PADDING 10
 
-#define VIEW_ZERO (-CONTROL_HEIGHT - CONTROL_PADDING * 2)
+#define VIEW_ZERO CONTROL_HEIGHT + CONTROL_PADDING * 2
 
 #pragma mark - Set Up Views
 
@@ -50,13 +50,7 @@
     UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
-    self.echos = [ESEchoFetcher loadRecentEchos];
-    
-    if(self.echos == nil){
-        
-    }
-    
-#warning We should find a way to make transparency work
+    [self loadData];
     
     self.navigationController.navigationBar.translucent = NO;
     
@@ -64,11 +58,12 @@
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
     self.segmentedControl.selectedSegmentIndex = 0;
     self.segmentedControl.layer.cornerRadius = 5;
-    self.segmentedControl.frame = CGRectMake((self.view.frame.size.width - CONTROL_WIDTH) / 2, -CONTROL_HEIGHT - CONTROL_PADDING, CONTROL_WIDTH, CONTROL_HEIGHT);
+    self.segmentedControl.frame = CGRectMake((self.view.frame.size.width - CONTROL_WIDTH) / 2, CONTROL_PADDING, CONTROL_WIDTH, CONTROL_HEIGHT);
 
-    [self.tableView setContentInset:UIEdgeInsetsMake(self.segmentedControl.frame.size.height + CONTROL_PADDING * 2, 0, 0, 0)];
-    
-    [self.tableView addSubview:self.segmentedControl];
+
+    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, CONTROL_HEIGHT + CONTROL_PADDING * 2)];
+    [wrapperView addSubview:self.segmentedControl];
+    self.tableView.tableHeaderView = wrapperView;
     
     self.openEcho = nil;
     
@@ -108,7 +103,7 @@
 
 - (void)hideControl{
 
-    self.tableView.contentOffset = CGPointMake(0, 0);
+    self.tableView.contentOffset = CGPointMake(0, CONTROL_PADDING * 2 + CONTROL_HEIGHT);
 
 }
 
@@ -207,19 +202,19 @@
 }
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
-    if(self.tableView.contentSize.height - cell.frame.origin.y > self.tableView.frame.size.height){
-        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height) animated:YES];
+    if(self.tableView.contentSize.height - VIEW_ZERO - cell.frame.origin.y > self.tableView.frame.size.height){
+        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height + VIEW_ZERO) animated:YES];
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if(scrollView.contentOffset.y < -(CONTROL_HEIGHT / 2)){
+    if(scrollView.contentOffset.y < (CONTROL_HEIGHT / 2) + CONTROL_PADDING){
         [UIView animateWithDuration:.3 animations:^{
-            [scrollView setContentOffset: CGPointMake(0, VIEW_ZERO)];
+            [scrollView setContentOffset: CGPointMake(0, 0)];
         }];
-    }else if(scrollView.contentOffset.y > -(CONTROL_HEIGHT / 2) && scrollView.contentOffset.y < 0){
+    }else if(scrollView.contentOffset.y > (CONTROL_HEIGHT / 2) + CONTROL_PADDING && scrollView.contentOffset.y < CONTROL_PADDING * 2 + CONTROL_HEIGHT){
         [UIView animateWithDuration:.3 animations:^{
-            [scrollView setContentOffset:CGPointZero animated:YES];
+            [scrollView setContentOffset:CGPointMake(0, VIEW_ZERO) animated:YES];
         }];
     }
 }
@@ -232,25 +227,19 @@
     }
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    
-//    if(self.lastScrollViewOffset < scrollView.contentOffset.y && self.navigationController.navigationBar.hidden == NO && scrollView.contentOffset.y != 0){
-//        // Hide
-//        [self.navigationController setNavigationBarHidden:YES animated:YES];
-//        [self.navigationController setToolbarHidden:YES animated:YES];
-//    }else if(self.lastScrollViewOffset > scrollView.contentOffset.y && self.navigationController.navigationBar.hidden == YES){
-//        // Show
-//        [self.navigationController setNavigationBarHidden:NO animated:YES];
-//        [self.navigationController setToolbarHidden:NO animated:YES];
-//    }
-//    
-//    if(scrollView.contentOffset.y < 0){
-//        self.lastScrollViewOffset = 0;
-//    }else{
-//        self.lastScrollViewOffset = scrollView.contentOffset.y;
-//    }
-//    NSLog(@"%f", self.lastScrollViewOffset);
-//    
-//}
+- (IBAction)refresh:(UIRefreshControl *)sender {
+    [self loadData];
+    [self.refreshControl endRefreshing];
+}
+
+- (void)loadData{
+    dispatch_queue_t loadEchosQueue = dispatch_queue_create("load echos", NULL);
+    dispatch_async(loadEchosQueue, ^{
+        self.echos = [ESEchoFetcher loadRecentEchos];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData]; 
+        });
+    });
+}
 
 @end

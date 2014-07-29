@@ -28,6 +28,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Ng6-fS-GgX">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="CNG-oS-bSb" eventType="valueChanged" id="1Z0-Vg-bBj"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <segue destination="0G5-a7-4OF" kind="push" identifier="showComments" id="8Cy-KY-Ubt"/>
                     </connections>
