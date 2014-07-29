@@ -10,4 +10,28 @@
 
 @implementation ESAuthenticator
 
++ (id)sharedAuthenticator{
+    static ESAuthenticator *sharedAuthenticator = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedAuthenticator = [[self alloc] init];
+    });
+    return sharedAuthenticator;
+}
+
+- (BOOL)isLoggedIn{
+    // Check token
+    return YES;
+}
+
+- (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password{
+    // Login returning success
+    return YES;
+}
+
+- (BOOL)logout{
+    // Logout returning success
+    return YES;
+}
+
 @end
