@@ -14,6 +14,12 @@
 
 @implementation ESEchoFetcher
 
+typedef enum {
+    sortTrending,
+    sortVotes,
+    sortRecent
+} sortType;
+
 + (NSArray *)getDataForURL: (NSString *)url{
     NSError *err;
     NSURL *jsonUrl = [NSURL URLWithString:url];
@@ -30,9 +36,9 @@
     return jsonObject;
 }
 
-+ (NSArray *)loadRecentEchos{
++ (NSArray *)loadEchosOnPage:(int)page{
     
-    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@",  BASE_URL, ECHOS_URL]];
+    NSArray *jsonObject = [self getDataForURL:[self echoURLWithUser:0 index:page sortType:sortTrending]];
     
     if(jsonObject == nil){
         return nil;
@@ -75,7 +81,7 @@
 }
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID{
-    NSArray *jsonObject = [self getDataForURL:[NSString stringWithFormat:@"%@%@%li", BASE_URL, COMMENTS_URL, (long)echoID]];
+    NSArray *jsonObject = [self getDataForURL:[self commentURLWithUser:0 echoID:(int)echoID sortType:sortTrending]];
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
@@ -106,7 +112,7 @@
         for(NSDictionary *discussion in comment[@"discussions"]){
             ESDiscussion *newDiscussion = [[ESDiscussion alloc] init];
             newDiscussion.discussionID = [discussion[@"id"] intValue];
-            newDiscussion.discussion_text = discussion[@"discussion_text"];
+            newDiscussion.discussion_text = discussion[@"content"];
             if([discussion[@"anonymous"] boolValue] == 1){
                 newDiscussion.author = [ESUser anonymousUser];
             }else{
@@ -122,6 +128,20 @@
     }
     
     return returnArray;
+}
+
++ (NSString *)nameForSortType: (sortType)type{
+    return @"votes_up";
+}
+
++ (NSString *)echoURLWithUser: (int)userID index: (int)index sortType: (sortType)sortType{
+    NSString *sort = [self nameForSortType:sortType];
+    return [NSString stringWithFormat:@"%@echo/%i/%i/%@", BASE_URL, userID, index, sort];
+}
+
++ (NSString *)commentURLWithUser: (int)userID echoID: (int)echoID sortType: (sortType)sortType{
+    NSString *sort = [self nameForSortType:sortType];
+    return [NSString stringWithFormat:@"%@comment/%i/%i/%@", BASE_URL, echoID, userID, sort];
 }
 
 @end

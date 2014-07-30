@@ -22,5 +22,3 @@
 
 
 #define BASE_URL @"http://evening-chamber-3257.herokuapp.com/api/1/"
-#define ECHOS_URL @"echo/votes/1"
-#define COMMENTS_URL @"comment/"

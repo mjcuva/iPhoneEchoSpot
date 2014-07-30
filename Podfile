@@ -3,9 +3,5 @@
 
 target "The Echo Spot" do
     pod 'NSDate+TimeAgo'
+    pod 'SVPullToRefresh'
 end
-
-target "The Echo SpotTests" do
-
-end
-

@@ -11,7 +11,7 @@
 
 @interface ESEchoFetcher : NSObject
 
-+ (NSArray *)loadRecentEchos;
++ (NSArray *)loadEchosOnPage:(int)page;
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID;
 

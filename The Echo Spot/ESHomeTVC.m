@@ -13,6 +13,7 @@
 #import "constants.h"
 #import "ThemeManager.h"
 #import "ESCommentVC.h"
+#import "UIScrollView+SVInfiniteScrolling.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
@@ -25,6 +26,7 @@
 // Dirty Hack
 @property (strong, nonatomic) NSIndexPath *openRow;
 @property NSInteger openCellHeight;
+@property int currentPage;
 @end
 
 @implementation ESHomeTVC
@@ -50,7 +52,7 @@
     UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
-    [self loadData];
+    [self loadDataWithCompletion:nil];
     
     self.navigationController.navigationBar.translucent = NO;
     
@@ -69,6 +71,35 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLayout) name:UIApplicationDidBecomeActiveNotification object:nil];
     
+    self.currentPage = 0;
+    
+    __weak ESHomeTVC *weakself = self;
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        // append data to data source, insert new cells at the end of table view
+        [weakself loadNextPage];
+        // call [tableView.infiniteScrollingView stopAnimating] when done
+    }];
+    
+}
+
+- (void)loadNextPage{
+    __weak ESHomeTVC *weakSelf = self;
+    
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+         [weakSelf.tableView beginUpdates];
+         weakSelf.currentPage = self.currentPage + 1;
+         weakSelf.echos = [weakSelf.echos arrayByAddingObjectsFromArray:[ESEchoFetcher loadEchosOnPage:self.currentPage]];
+         NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:10];
+         for(int i = (int)weakSelf.echos.count - 20; i < weakSelf.echos.count; i++){
+             [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+         }
+         [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+         [weakSelf.tableView endUpdates];
+         [weakSelf.tableView.infiniteScrollingView stopAnimating];
+     });
 }
 
 - (void)updateLayout{
@@ -228,18 +259,26 @@
 }
 
 - (IBAction)refresh:(UIRefreshControl *)sender {
-    [self loadData];
-    [self.refreshControl endRefreshing];
+    [self loadDataWithCompletion:^{
+        [self.refreshControl endRefreshing];
+    }];
 }
 
-- (void)loadData{
+- (void)loadDataWithCompletion: (void (^)(void))completion{
     dispatch_queue_t loadEchosQueue = dispatch_queue_create("load echos", NULL);
     dispatch_async(loadEchosQueue, ^{
-        self.echos = [ESEchoFetcher loadRecentEchos];
+        self.echos = [ESEchoFetcher loadEchosOnPage:0];
+        self.currentPage = 0;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData]; 
+            [self.tableView reloadData];
+            if(completion)
+                completion();
         });
     });
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
 }
 
 @end

@@ -246,6 +246,7 @@
     
     [cancelButton addTarget:self action:@selector(closeReply) forControlEvents:UIControlEventTouchUpInside];
     
+    // TODO: Move textview, don't scroll
     if(self.activeTextView.tag == 1){
         self.commentsTableView.contentOffset = CGPointZero;   
     }else{

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-The Echo Spot-SVPullToRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-The Echo Spot.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>65AA5AFDE6094FC1B8411996</key>
+		<key>27E552D1C9C64F8CAD434866</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B88BBC004A4441EAA30F8DBF</key>
+		<key>D32E48EE119047ABA6118CDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCE426C1247345B7B544E78F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
