@@ -112,6 +112,7 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     ESTableViewCell *cell = [[ESTableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
     cell.echoContent = ((ESComment *)self.comments[indexPath.item]).comment_text;
+    cell.isComment = YES;
     if(self.openComment == self.comments[indexPath.row]){
         ESComment *comment = self.comments[indexPath.row];
         self.discussionViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
