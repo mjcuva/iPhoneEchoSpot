@@ -10,6 +10,7 @@
 #import "ThemeManager.h"
 #import "UIImage+StackBlur.h"
 #import "constants.h"
+#import "ESAuthenticator.h"
 
 @interface ESAuthVC () <UITextFieldDelegate>
 @property (strong, nonatomic) UIView *formView;
@@ -105,6 +106,7 @@
     [signInButton setTitle:@"Sign In" forState:UIControlStateNormal];
     signInButton.backgroundColor = [[ThemeManager sharedManager] themeColor];
     signInButton.titleLabel.textColor = [UIColor whiteColor];
+    [signInButton addTarget:self action:@selector(logIn) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.loginForm addSubview:username];
@@ -201,6 +203,11 @@
         [self.formView addSubview:self.signupForm];
     }
 }
+
+- (void)logIn{
+    [[ESAuthenticator sharedAuthenticator] loginWithUsername:@"test" andPassword:@"test"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+} 
 
 @end
 

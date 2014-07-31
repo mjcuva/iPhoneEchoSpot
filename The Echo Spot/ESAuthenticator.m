@@ -10,6 +10,8 @@
 
 @implementation ESAuthenticator
 
+static BOOL loggedIn = NO;
+
 + (id)sharedAuthenticator{
     static ESAuthenticator *sharedAuthenticator = nil;
     static dispatch_once_t onceToken;
@@ -21,16 +23,19 @@
 
 - (BOOL)isLoggedIn{
     // Check token
-    return NO;
+    return loggedIn;
 }
 
 - (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password{
     // Login returning success
+    // actually log in
+    loggedIn = YES;
     return YES;
 }
 
 - (BOOL)logout{
     // Logout returning success
+    loggedIn = NO;
     return YES;
 }
 
