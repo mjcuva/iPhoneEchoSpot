@@ -226,15 +226,13 @@
             [self.tableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         
-        if(self.openEcho != nil){
             [self scrollToIndexPath:row withCell: cell];
-        }
     }
 }
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
     if(self.tableView.contentSize.height - VIEW_ZERO - cell.frame.origin.y > self.tableView.frame.size.height){
-        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height + VIEW_ZERO) animated:YES];
+        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * 88 + VIEW_ZERO) animated:YES];
     }
 }
 
