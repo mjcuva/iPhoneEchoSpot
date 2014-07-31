@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 491A9B79196095CC00817F22 /* ESNewEchoVC.m */; };
+		495F33C11989C739000F2ED2 /* ESAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F33C01989C739000F2ED2 /* ESAuthVC.m */; };
 		4997351119576FBC0058A714 /* testechos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4997351019576FBC0058A714 /* testechos.json */; };
 		499FB5AB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */; };
@@ -66,6 +67,8 @@
 		491A9B78196095CC00817F22 /* ESNewEchoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESNewEchoVC.h; sourceTree = "<group>"; };
 		491A9B79196095CC00817F22 /* ESNewEchoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESNewEchoVC.m; sourceTree = "<group>"; };
 		491A9B7B196096ED00817F22 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		495F33BF1989C739000F2ED2 /* ESAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESAuthVC.h; sourceTree = "<group>"; };
+		495F33C01989C739000F2ED2 /* ESAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESAuthVC.m; sourceTree = "<group>"; };
 		4997351019576FBC0058A714 /* testechos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testechos.json; path = "The Echo Spot/testechos.json"; sourceTree = "<group>"; };
 		499FB5A71937DD5E00F4C882 /* The Echo Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Echo Spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499FB5AA1937DD5E00F4C882 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -240,6 +243,8 @@
 				491A9B79196095CC00817F22 /* ESNewEchoVC.m */,
 				49C180E31980A78800DF4173 /* ESProfileVC.h */,
 				49C180E41980A78800DF4173 /* ESProfileVC.m */,
+				495F33BF1989C739000F2ED2 /* ESAuthVC.h */,
+				495F33C01989C739000F2ED2 /* ESAuthVC.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 				49BCB9C4193FA6A50062D404 /* ESEchoFetcher.m in Sources */,
 				49BCB9BE193F9DC80062D404 /* ESEcho.m in Sources */,
 				499FB5BB1937DD5E00F4C882 /* ESAppDelegate.m in Sources */,
+				495F33C11989C739000F2ED2 /* ESAuthVC.m in Sources */,
 				499FB5B71937DD5E00F4C882 /* main.m in Sources */,
 				49C180EF1984287900DF4173 /* UIImage+StackBlur.m in Sources */,
 				49B8BE5219735497003D6AA8 /* ESCategory.m in Sources */,

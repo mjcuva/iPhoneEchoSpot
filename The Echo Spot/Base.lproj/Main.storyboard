@@ -16,18 +16,20 @@
                             <outlet property="delegate" destination="CNG-oS-bSb" id="Ejk-4d-kyg"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="NTq-YK-ckv">
-                        <barButtonItem key="leftBarButtonItem" image="Profile" id="ZvC-0B-wp2">
+                        <barButtonItem key="leftBarButtonItem" image="Profile" id="NZL-5z-5eZ">
                             <connections>
-                                <segue destination="4aJ-8H-ieM" kind="modal" id="hKh-mo-Uf7"/>
+                                <action selector="openProfile:" destination="CNG-oS-bSb" id="RxG-uF-ZRT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="newEcho" id="lvm-Gg-pGv">
                             <connections>
-                                <segue destination="lLc-q7-eq5" kind="modal" id="kWN-es-lgs"/>
+                                <action selector="createEcho:" destination="CNG-oS-bSb" id="930-Nu-iiB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Ng6-fS-GgX">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -35,12 +37,55 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="0G5-a7-4OF" kind="push" identifier="showComments" id="8Cy-KY-Ubt"/>
+                        <segue destination="0G5-a7-4OF" kind="push" identifier="showComments" id="bqh-tF-pGt"/>
+                        <segue destination="lLc-q7-eq5" kind="modal" identifier="showNewEcho" id="saa-xI-aaF"/>
+                        <segue destination="4aJ-8H-ieM" kind="modal" identifier="showProfile" id="prL-0M-wSp"/>
+                        <segue destination="NGQ-3o-2HH" kind="modal" identifier="showAuth" id="sGG-rb-te4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RxY-Eb-vgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1809" y="-1392"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gtp-5r-o1z">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="NGQ-3o-2HH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AbM-UT-YPA">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ouH-xh-Lz7" kind="relationship" relationship="rootViewController" id="HMN-i2-nlc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S4b-df-Ssc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1530" y="-655"/>
+        </scene>
+        <!--AuthVC-->
+        <scene sceneID="Hvd-Oh-N0O">
+            <objects>
+                <viewController id="ouH-xh-Lz7" customClass="ESAuthVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="934-4j-GeO"/>
+                        <viewControllerLayoutGuide type="bottom" id="tts-tL-VJM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aKX-f5-0Ku">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xxR-UY-Y38">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="1BQ-UB-IMU">
+                            <connections>
+                                <action selector="cancel" destination="ouH-xh-Lz7" id="qIS-U3-BYp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yAY-qr-QAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2060" y="-655"/>
         </scene>
         <!--CommentVC - Comments-->
         <scene sceneID="zhy-Oh-BDn">

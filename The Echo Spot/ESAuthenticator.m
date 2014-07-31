@@ -21,7 +21,7 @@
 
 - (BOOL)isLoggedIn{
     // Check token
-    return YES;
+    return NO;
 }
 
 - (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password{

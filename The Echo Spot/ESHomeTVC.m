@@ -14,6 +14,7 @@
 #import "ThemeManager.h"
 #import "ESCommentVC.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
+#import "ESAuthenticator.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
@@ -52,7 +53,15 @@
     UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
-    [self loadDataWithCompletion:nil];
+    [self loadDataWithCompletion:^{
+        __weak ESHomeTVC *weakself = self;
+        
+        [self.tableView addInfiniteScrollingWithActionHandler:^{
+            // append data to data source, insert new cells at the end of table view
+            [weakself loadNextPage];
+            // call [tableView.infiniteScrollingView stopAnimating] when done
+        }];
+    }];
     
     self.navigationController.navigationBar.translucent = NO;
     
@@ -72,15 +81,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLayout) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     self.currentPage = 0;
-    
-    __weak ESHomeTVC *weakself = self;
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        // append data to data source, insert new cells at the end of table view
-        [weakself loadNextPage];
-        // call [tableView.infiniteScrollingView stopAnimating] when done
-    }];
-    
 }
 
 - (void)loadNextPage{
@@ -255,6 +255,22 @@
     if([segue.destinationViewController isKindOfClass:[ESCommentVC class]]){
         ESCommentVC *destination = (ESCommentVC *)segue.destinationViewController;
         destination.echo = self.openEcho;
+    }
+}
+
+- (IBAction)openProfile:(UIBarButtonItem *)sender {
+    if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+        [self performSegueWithIdentifier:@"showProfile" sender:self];
+    }else{
+        [self performSegueWithIdentifier:@"showAuth" sender:self];
+    }
+}
+
+- (IBAction)createEcho:(UIBarButtonItem *)sender {
+    if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+        [self performSegueWithIdentifier:@"showNewEcho" sender:self];
+    }else{
+        [self performSegueWithIdentifier:@"showAuth" sender:self];
     }
 }
 
