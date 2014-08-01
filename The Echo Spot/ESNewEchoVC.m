@@ -10,7 +10,7 @@
 #import "constants.h"
 #import "ThemeManager.h"
 
-@interface ESNewEchoVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ESNewEchoVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 // Title
@@ -24,6 +24,10 @@
 // Type
 @property (strong, nonatomic) UILabel *typeLabel;
 @property (strong, nonatomic) UISegmentedControl *typeControl;
+
+// Category
+@property (strong, nonatomic) UILabel *categoryLabel;
+@property (strong, nonatomic) UIPickerView *categoryPicker;
 
 // Privacy
 @property (strong, nonatomic) UILabel *privacyLabel;
@@ -89,22 +93,23 @@
     
     // Type
     
-    self.typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.contentInput.frame.origin.y + self.contentInput.frame.size.height + 10, self.view.frame.size.height, 50)];
-    self.typeLabel.text = @"Type";
-    self.typeLabel.font = [UIFont boldSystemFontOfSize:30];
-    self.typeLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
+    self.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.contentInput.frame.origin.y + self.contentInput.frame.size.height + 10, self.view.frame.size.height, 50)];
+    self.categoryLabel.text = @"Category";
+    self.categoryLabel.font = [UIFont boldSystemFontOfSize:30];
+    self.categoryLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
     
-    contentHeight += self.typeLabel.frame.size.height + 10;
+    contentHeight += self.categoryLabel.frame.size.height + 10;
     
-    self.typeControl = [[UISegmentedControl alloc] initWithItems:@[@"Idea", @"Question", @"Issue"]];
-    self.typeControl.tintColor = [[ThemeManager sharedManager] themeColor];                    
-    self.typeControl.frame = CGRectMake(10, self.typeLabel.frame.size.height + self.typeLabel.frame.origin.y + 10, self.view.frame.size.width - 20, 40);
+    self.categoryPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(10, self.categoryLabel.frame.size.height + self.categoryLabel.frame.origin.y + 10, self.view.frame.size.width - 20, 40)];
+    self.categoryPicker.tintColor = [[ThemeManager sharedManager] themeColor];           
+    self.categoryPicker.delegate = self;
+    self.categoryPicker.dataSource = self;
     
-    contentHeight += self.typeControl.frame.size.height + 10;
+    contentHeight += self.categoryPicker.frame.size.height + 10;
     
     // Privacy
     
-    self.privacyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.typeControl.frame.origin.y + self.typeControl.frame.size.height + 20, self.view.frame.size.width, 50)];
+    self.privacyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.categoryPicker.frame.origin.y + self.categoryPicker.frame.size.height + 20, self.view.frame.size.width, 50)];
     self.privacyLabel.text = @"Display Name";
     self.privacyLabel.font = [UIFont boldSystemFontOfSize:30];
     self.privacyLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
@@ -137,8 +142,8 @@
     [self.scrollView addSubview:self.titleInput];
     [self.scrollView addSubview:self.contentLabel];
     [self.scrollView addSubview:self.contentInput];
-    [self.scrollView addSubview:self.typeLabel];
-    [self.scrollView addSubview:self.typeControl];
+    [self.scrollView addSubview:self.categoryLabel];
+    [self.scrollView addSubview:self.categoryPicker];
     [self.scrollView addSubview:self.privacyLabel];
     [self.scrollView addSubview:self.privacyControl];
     [self.scrollView addSubview:self.uploadImage];
@@ -199,6 +204,19 @@
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scrollView.contentSize.height + self.displayImage.frame.size.height - self.uploadImage.frame.size.height - 20);
     [self.scrollView addSubview:self.displayImage];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return 6;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    NSArray *categoryTitles = @[@"Academics", @"Projects", @"People", @"Finances", @"Misc", @"Grad Students"];
+    return categoryTitles[row];
 }
 
 - (void)hideImage{
