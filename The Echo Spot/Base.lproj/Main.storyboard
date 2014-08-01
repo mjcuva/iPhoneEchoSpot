@@ -137,7 +137,12 @@
                     <navigationItem key="navigationItem" title="Profile" id="x3q-WG-vfc">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="0VM-yU-45J">
                             <connections>
-                                <action selector="closeview:" destination="PJZ-OP-5Uu" id="N0k-Zr-rVC"/>
+                                <action selector="closeview" destination="PJZ-OP-5Uu" id="gkR-KB-sa3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="rZy-Tz-Xx4">
+                            <connections>
+                                <action selector="logoutButton" destination="PJZ-OP-5Uu" id="GWG-3l-bKw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

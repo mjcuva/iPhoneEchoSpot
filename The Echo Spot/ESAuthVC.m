@@ -15,8 +15,14 @@
 @interface ESAuthVC () <UITextFieldDelegate>
 @property (strong, nonatomic) UIView *formView;
 
+
+// Signup
 @property (strong, nonatomic) UIView *signupForm;
+
+// Login
 @property (strong, nonatomic) UIView *loginForm;
+@property (strong, nonatomic) UITextField *usernameField;
+@property (strong, nonatomic) UITextField *passwordField;
 
 @property CGRect formStart;
 @end
@@ -79,28 +85,28 @@
     
     CGRect paddingFrame = CGRectMake(0, 0, 15, 20);
     
-    UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
-    username.placeholder = @"UMN Email";
-    username.backgroundColor = INPUT_BACKGROUND;
+    self.usernameField = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
+    self.usernameField.placeholder = @"UMN Email";
+    self.usernameField.backgroundColor = INPUT_BACKGROUND;
     UIView *userPadding = [[UIView alloc] initWithFrame:paddingFrame];
-    username.leftView = userPadding;
-    username.leftViewMode = UITextFieldViewModeAlways;
-    username.delegate = self;
+    self.usernameField.leftView = userPadding;
+    self.usernameField.leftViewMode = UITextFieldViewModeAlways;
+    self.usernameField.delegate = self;
     
-    currentHeight += username.frame.size.height + VERTICAL_PADDING;
+    currentHeight += self.usernameField.frame.size.height + VERTICAL_PADDING;
     
     UIView *passPadding = [[UIView alloc] initWithFrame:paddingFrame];
     
     
-    UITextField *password = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
-    password.placeholder = @"Password";
-    password.backgroundColor = INPUT_BACKGROUND;
-    password.leftView = passPadding;
-    password.leftViewMode = UITextFieldViewModeAlways;
-    password.delegate = self;
-    password.secureTextEntry = YES;
+    self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
+    self.passwordField.placeholder = @"Password";
+    self.passwordField.backgroundColor = INPUT_BACKGROUND;
+    self.passwordField.leftView = passPadding;
+    self.passwordField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordField.delegate = self;
+    self.passwordField.secureTextEntry = YES;
     
-    currentHeight += password.frame.size.height + (VERTICAL_PADDING * 2);
+    currentHeight += self.passwordField.frame.size.height + (VERTICAL_PADDING * 2);
     
     UIButton *signInButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
     [signInButton setTitle:@"Sign In" forState:UIControlStateNormal];
@@ -109,8 +115,8 @@
     [signInButton addTarget:self action:@selector(logIn) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.loginForm addSubview:username];
-    [self.loginForm addSubview:password];
+    [self.loginForm addSubview:self.usernameField];
+    [self.loginForm addSubview:self.passwordField];
     [self.loginForm addSubview:signInButton];
     
     [self.formView addSubview:self.loginForm];
@@ -205,8 +211,10 @@
 }
 
 - (void)logIn{
-    [[ESAuthenticator sharedAuthenticator] loginWithUsername:@"test" andPassword:@"test"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [[ESAuthenticator sharedAuthenticator] loginWithUsername:self.usernameField.text andPassword:self.passwordField.text];
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.callback();
+    }];
 } 
 
 @end

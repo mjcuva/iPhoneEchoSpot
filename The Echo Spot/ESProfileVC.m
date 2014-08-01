@@ -10,8 +10,9 @@
 #import "ThemeManager.h"
 #import "ESProfileView.h"
 #import "UIImage+StackBlur.h"
+#import "ESAuthenticator.h"
 
-@interface ESProfileVC () <UITableViewDataSource, UITableViewDelegate>
+@interface ESProfileVC () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *partialBackgroundView;
 
@@ -95,8 +96,20 @@
     return [[UITableViewCell alloc] init];
 }
 
-- (IBAction)closeview:(UIBarButtonItem *)sender {
+- (IBAction)closeview {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)logoutButton{
+    UIAlertView *logoutConfirm = [[UIAlertView alloc] initWithTitle:@"Logout" message:@"Are you sure you want to logout?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
+    [logoutConfirm show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        [[ESAuthenticator sharedAuthenticator] logout];
+        [self closeview];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

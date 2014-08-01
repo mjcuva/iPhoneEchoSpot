@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ESAuthVC : UIViewController
+typedef void (^completion)();
 
+@interface ESAuthVC : UIViewController
+@property (nonatomic, copy) completion callback;
 @end

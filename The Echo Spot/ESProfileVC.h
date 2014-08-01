@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ESProfileVC : UIViewController
 
+@interface ESProfileVC : UIViewController
 @end

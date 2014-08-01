@@ -15,6 +15,7 @@
 #import "ESCommentVC.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "ESAuthenticator.h"
+#import "ESAuthVC.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
@@ -253,6 +254,10 @@
     if([segue.destinationViewController isKindOfClass:[ESCommentVC class]]){
         ESCommentVC *destination = (ESCommentVC *)segue.destinationViewController;
         destination.echo = self.openEcho;
+    }else if([segue.identifier isEqualToString:@"showAuth"]){
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        ESAuthVC *root = (ESAuthVC *)nav.viewControllers[0];
+        [root setCallback:sender];
     }
 }
 
@@ -260,7 +265,9 @@
     if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
         [self performSegueWithIdentifier:@"showProfile" sender:self];
     }else{
-        [self performSegueWithIdentifier:@"showAuth" sender:self];
+        [self performSegueWithIdentifier:@"showAuth" sender:^{
+            [self performSegueWithIdentifier:@"showProfile" sender:nil];
+        }];
     }
 }
 
@@ -268,7 +275,9 @@
     if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
         [self performSegueWithIdentifier:@"showNewEcho" sender:self];
     }else{
-        [self performSegueWithIdentifier:@"showAuth" sender:self];
+        [self performSegueWithIdentifier:@"showAuth" sender:^{
+            [self performSegueWithIdentifier:@"showNewEcho" sender:nil];
+        }];
     }
 }
 
