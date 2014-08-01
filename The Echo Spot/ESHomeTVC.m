@@ -54,7 +54,15 @@
     UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.center = CGPointMake(self.view.frame.size.width / 2, 80);
+    [self.tableView addSubview:indicator];
+    [indicator startAnimating];
+    
     [self loadDataWithCompletion:^{
+        
+        [indicator stopAnimating];
+        [indicator removeFromSuperview];
         __weak ESHomeTVC *weakself = self;
         
         [self.tableView addInfiniteScrollingWithActionHandler:^{

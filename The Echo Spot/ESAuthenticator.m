@@ -7,10 +7,9 @@
 //
 
 #import "ESAuthenticator.h"
+#import "KeychainItemWrapper.h"
 
 @implementation ESAuthenticator
-
-static BOOL loggedIn = NO;
 
 + (id)sharedAuthenticator{
     static ESAuthenticator *sharedAuthenticator = nil;
@@ -22,20 +21,31 @@ static BOOL loggedIn = NO;
 }
 
 - (BOOL)isLoggedIn{
-    // Check token
-    return loggedIn;
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"EchoSpot" accessGroup:nil];
+    NSString *userID = [keychainItem objectForKey:(__bridge id)kSecAttrAccount];
+    
+    // Need to check if valid id and access key
+    if([userID isEqualToString:@"1"]){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 - (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password{
     // Login returning success
     // actually log in
-    loggedIn = YES;
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"EchoSpot" accessGroup:nil];
+    
+    // Set to actual id
+    [keychainItem setObject:@"1" forKey:(__bridge id)kSecAttrAccount];
     return YES;
 }
 
 - (BOOL)logout{
     // Logout returning success
-    loggedIn = NO;
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"EchoSpot" accessGroup:nil];
+    [keychainItem resetKeychainItem];
     return YES;
 }
 

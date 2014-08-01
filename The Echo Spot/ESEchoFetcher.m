@@ -23,7 +23,9 @@ typedef enum {
 + (NSArray *)getDataForURL: (NSString *)url{
     NSError *err;
     NSURL *jsonUrl = [NSURL URLWithString:url];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSData *json = [NSData dataWithContentsOfURL: jsonUrl options:NSDataReadingMappedIfSafe error:&err];
+   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if(err) {
         NSLog(@"Error Loading URL: %@", [err description]);
         return nil;

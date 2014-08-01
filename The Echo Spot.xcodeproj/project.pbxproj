@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 491A9B79196095CC00817F22 /* ESNewEchoVC.m */; };
 		495F33C11989C739000F2ED2 /* ESAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F33C01989C739000F2ED2 /* ESAuthVC.m */; };
+		495F33C4198B3F34000F2ED2 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F33C3198B3F34000F2ED2 /* KeychainItemWrapper.m */; };
 		4997351119576FBC0058A714 /* testechos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4997351019576FBC0058A714 /* testechos.json */; };
 		499FB5AB1937DD5E00F4C882 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AA1937DD5E00F4C882 /* Foundation.framework */; };
 		499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499FB5AC1937DD5E00F4C882 /* CoreGraphics.framework */; };
@@ -69,6 +70,8 @@
 		491A9B7B196096ED00817F22 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		495F33BF1989C739000F2ED2 /* ESAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESAuthVC.h; sourceTree = "<group>"; };
 		495F33C01989C739000F2ED2 /* ESAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESAuthVC.m; sourceTree = "<group>"; };
+		495F33C2198B3F34000F2ED2 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		495F33C3198B3F34000F2ED2 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		4997351019576FBC0058A714 /* testechos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testechos.json; path = "The Echo Spot/testechos.json"; sourceTree = "<group>"; };
 		499FB5A71937DD5E00F4C882 /* The Echo Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Echo Spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499FB5AA1937DD5E00F4C882 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,8 +142,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49E582D8194D35DB00BBD075 /* SystemConfiguration.framework in Frameworks */,
 				49E582D6194D35D200BBD075 /* Security.framework in Frameworks */,
+				49E582D8194D35DB00BBD075 /* SystemConfiguration.framework in Frameworks */,
 				49E582D4194D35C900BBD075 /* QuartzCore.framework in Frameworks */,
 				49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */,
 				499FB5AD1937DD5E00F4C882 /* CoreGraphics.framework in Frameworks */,
@@ -283,6 +286,8 @@
 				49EC7216197C4EC90037C4FC /* ESComment.m */,
 				49EC7218197C51B70037C4FC /* ESDiscussion.h */,
 				49EC7219197C51B70037C4FC /* ESDiscussion.m */,
+				495F33C2198B3F34000F2ED2 /* KeychainItemWrapper.h */,
+				495F33C3198B3F34000F2ED2 /* KeychainItemWrapper.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				49C1810E198603DC00DF4173 /* ESAuthenticator.m in Sources */,
 				49EC721A197C51B70037C4FC /* ESDiscussion.m in Sources */,
 				491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */,
+				495F33C4198B3F34000F2ED2 /* KeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
