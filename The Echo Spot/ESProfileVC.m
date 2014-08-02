@@ -12,11 +12,12 @@
 #import "UIImage+StackBlur.h"
 #import "ESAuthenticator.h"
 #import "ESEchoFetcher.h"
+#import "ESTableViewCell.h"
+#import "ESCommentVC.h"
 
 @interface ESProfileVC () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *partialBackgroundView;
-
 
 @property (strong, nonatomic) UIImage *profileImageOrignal;
 @property (strong,nonatomic)  UIImage *profileImageHalfBlurred;
@@ -24,6 +25,11 @@
 @property (strong, nonatomic) UIImageView *profileImageViewOriginal;
 @property (strong, nonatomic) UIImageView *profileImageViewHalfBlurred;
 @property (strong, nonatomic) UIImageView *profileImageViewFullBlurred;
+
+@property (strong, nonatomic) NSArray *echos;
+@property (nonatomic) CGFloat openCellHeight;
+@property (strong, nonatomic) NSIndexPath *openRow;
+@property (strong, nonatomic) ESEcho *openEcho;
 @end
 
 @implementation ESProfileVC
@@ -83,18 +89,100 @@
 
     self.tableView.tableHeaderView = invisibleHeader;
     [self.view addSubview:self.tableView];
+    
+    self.echos = [ESEchoFetcher echosForUser:[ESAuthenticator horribleProgrammingCurrentUser]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.echos.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    if(self.echos[indexPath.row] == self.openEcho){
+        return self.openCellHeight;
+    }else{
+        return 88;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[UITableViewCell alloc] init];
+    static NSString *identifier = @"EchoCell";
+    ESEcho *echo = self.echos[indexPath.item];
+    
+    ESTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if(cell == nil){
+        cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
+        
+        UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openEcho:)];
+        
+        [cell addGestureRecognizer:toggleEcho];
+    }
+    
+    if(indexPath.row % 2 == 0)
+    {
+        cell.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
+    }else{
+        cell.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
+    }
+    
+    
+    cell.echoTitle = echo.title;
+    
+    if(self.echos[indexPath.row] == self.openEcho){
+        cell.echoContent = echo.content;
+    }else{
+        cell.echoContent = @"";
+    }
+    
+    cell.created = echo.created;
+    cell.username = echo.author.username;
+    cell.upvotes = echo.votesUp;
+    cell.downvotes = echo.votesDown;
+    cell.activity = echo.activity;
+    cell.voteStatus = echo.voteStatus;
+    
+    cell.userInteractionEnabled = YES;
+    
+    return cell;
+}
+
+- (void)openEcho:(UITapGestureRecognizer *)sender{
+    CGPoint point = [sender locationInView:self.tableView];
+    
+    NSIndexPath *row = [self.tableView indexPathForRowAtPoint:point];
+    NSIndexPath *startRow = self.openRow;
+    ESTableViewCell *cell = (ESTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
+    
+    if([cell checkOpenEchosTap:[self.view convertPoint:point toView:cell]] && self.echos[row.item] == self.openEcho){
+        [self performSegueWithIdentifier:@"showComments" sender:self];
+    }else{
+        
+        if(self.echos[row.item] == self.openEcho){
+            self.openEcho = nil;
+            cell.echoContent = @"";
+            self.openRow = nil;
+        }else{
+            self.openEcho = self.echos[row.item];
+            cell.echoContent = self.openEcho.content;
+            self.openRow = row;
+            self.openCellHeight = [cell desiredHeight];
+        }
+        
+        if(startRow != nil && row.row != startRow.row){
+            [self.tableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [self.tableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.destinationViewController isKindOfClass:[ESCommentVC class]]){
+        ESCommentVC *destination = (ESCommentVC *)segue.destinationViewController;
+        destination.echo = self.openEcho;
+    }
 }
 
 - (IBAction)closeview {

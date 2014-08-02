@@ -47,9 +47,15 @@ typedef enum {
         return nil;
     }
     
+    NSArray *echos = [self echosForData:jsonObject];
+    
+    return echos;
+}
+
++ (NSArray *)echosForData:(NSArray *)data{
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
-    for( NSDictionary *echo in jsonObject){
+    for( NSDictionary *echo in data){
         ESEcho *newEcho = [[ESEcho alloc] init];
         newEcho.title = echo[@"title"];
         newEcho.echoID = [echo[@"id"] intValue];
@@ -64,7 +70,7 @@ typedef enum {
         if([echo[@"votes_down"] isKindOfClass:[NSNull class]]){
             newEcho.votesDown = 0;
         }else{
-             newEcho.votesDown = [echo[@"votes_down"] intValue];   
+            newEcho.votesDown = [echo[@"votes_down"] intValue];   
         }
         
         newEcho.activity = [echo[@"activity"] intValue];
@@ -84,6 +90,7 @@ typedef enum {
     }
     
     return returnArray;
+
 }
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID{
@@ -141,9 +148,19 @@ typedef enum {
     return returnArray;
 }
 
++ (NSArray *)echosForUser:(int)user{
+    NSArray *jsonData = [self getDataForURL:[self echosForUserURL:user]];
+    NSArray *echos = [self echosForData:jsonData];
+    return echos;
+}
+
 + (NSString *)usernameForCurrentUser{
     NSDictionary *data = (NSDictionary *)[self getDataForURL:[self usernameURL]];
     return data[@"username"];
+}
+
++ (NSString *)echosForUserURL:(int)user{
+    return [NSString stringWithFormat:@"%@echo/%i/%i", BASE_URL, user, user];
 }
 
 + (NSString *)usernameURL{

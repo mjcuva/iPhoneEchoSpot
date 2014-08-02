@@ -17,4 +17,6 @@
 
 + (NSString *)usernameForCurrentUser;
 
++ (NSArray *)echosForUser:(int)user;
+
 @end

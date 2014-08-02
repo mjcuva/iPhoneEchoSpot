@@ -146,6 +146,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="0G5-a7-4OF" kind="push" identifier="showComments" id="keY-9X-zaH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJF-Z6-Ej5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -222,4 +225,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="keY-9X-zaH"/>
+    </inferredMetricsTieBreakers>
 </document>
