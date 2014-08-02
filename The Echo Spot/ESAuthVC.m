@@ -18,6 +18,9 @@
 
 // Signup
 @property (strong, nonatomic) UIView *signupForm;
+@property (strong, nonatomic) UITextField *createEmail;
+@property (strong, nonatomic) UITextField *createPassword;
+@property (strong, nonatomic) UITextField *confirmPassword;
 
 // Login
 @property (strong, nonatomic) UIView *loginForm;
@@ -140,45 +143,46 @@
     
     currentHeight = 0;
     
-    UITextField *createUsername = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
-    createUsername.placeholder = @"UMN Email";
-    createUsername.backgroundColor = INPUT_BACKGROUND;
-    createUsername.leftView = [[UIView alloc] initWithFrame:paddingFrame];
-    createUsername.leftViewMode = UITextFieldViewModeAlways;
-    createUsername.delegate = self;
+    self.createEmail = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
+    self.createEmail.placeholder = @"UMN Email";
+    self.createEmail.backgroundColor = INPUT_BACKGROUND;
+    self.createEmail.leftView = [[UIView alloc] initWithFrame:paddingFrame];
+    self.createEmail.leftViewMode = UITextFieldViewModeAlways;
+    self.createEmail.delegate = self;
     
-    currentHeight += createUsername.frame.size.height + VERTICAL_PADDING;
+    currentHeight += self.createEmail.frame.size.height + VERTICAL_PADDING;
     
-    UITextField *createPassword = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
-    createPassword.placeholder = @"Create a Password";
-    createPassword.backgroundColor = INPUT_BACKGROUND;
-    createPassword.leftView = [[UIView alloc] initWithFrame:paddingFrame];
-    createPassword.leftViewMode = UITextFieldViewModeAlways;
-    createPassword.delegate = self;
-    createPassword.secureTextEntry = YES;
+    self.createPassword = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
+    self.createPassword.placeholder = @"Create a Password";
+    self.createPassword.backgroundColor = INPUT_BACKGROUND;
+    self.createPassword.leftView = [[UIView alloc] initWithFrame:paddingFrame];
+    self.createPassword.leftViewMode = UITextFieldViewModeAlways;
+    self.createPassword.delegate = self;
+    self.createPassword.secureTextEntry = YES;
     
-    currentHeight += createPassword.frame.size.height + VERTICAL_PADDING;
+    currentHeight += self.createPassword.frame.size.height + VERTICAL_PADDING;
     
-    UITextField *confirmPassword = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
-    confirmPassword.placeholder = @"Confirm Password";
-    confirmPassword.backgroundColor = INPUT_BACKGROUND;
-    confirmPassword.leftView = [[UIView alloc] initWithFrame:paddingFrame];
-    confirmPassword.leftViewMode = UITextFieldViewModeAlways;
-    confirmPassword.delegate = self;
-    confirmPassword.secureTextEntry = YES;
+    self.confirmPassword = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
+    self.confirmPassword.placeholder = @"Confirm Password";
+    self.confirmPassword.backgroundColor = INPUT_BACKGROUND;
+    self.confirmPassword.leftView = [[UIView alloc] initWithFrame:paddingFrame];
+    self.confirmPassword.leftViewMode = UITextFieldViewModeAlways;
+    self.confirmPassword.delegate = self;
+    self.confirmPassword.secureTextEntry = YES;
     
-    currentHeight += confirmPassword.frame.size.height + VERTICAL_PADDING + 5;
+    currentHeight += self.confirmPassword.frame.size.height + VERTICAL_PADDING + 5;
     
     UIButton *createAccountButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
     [createAccountButton setTitle:@"Try It" forState:UIControlStateNormal];
     createAccountButton.backgroundColor = [[ThemeManager sharedManager] themeColor];
     createAccountButton.titleLabel.textColor = [UIColor whiteColor];
+    [createAccountButton addTarget:self action:@selector(signup) forControlEvents:UIControlEventTouchUpInside];
     
     self.signupForm.backgroundColor = [UIColor whiteColor];
     
-    [self.signupForm addSubview:createUsername];
-    [self.signupForm addSubview:createPassword];
-    [self.signupForm addSubview:confirmPassword];
+    [self.signupForm addSubview:self.createEmail];
+    [self.signupForm addSubview:self.createPassword];
+    [self.signupForm addSubview:self.confirmPassword];
     [self.signupForm addSubview:createAccountButton];
     
     
@@ -223,6 +227,16 @@
     }
 }
 
+- (void)shakeView: (UIView *)view{
+    CAKeyframeAnimation * anim = [ CAKeyframeAnimation animationWithKeyPath:@"transform" ] ;
+    anim.values = @[ [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-10.0f, 0.0f, 0.0f) ], [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(10.0f, 0.0f, 0.0f) ] ] ;
+    anim.autoreverses = YES ;
+    anim.repeatCount = 2.0f ;
+    anim.duration = 0.07f ;
+    
+    [ view.layer addAnimation:anim forKey:nil ] ;
+}
+
 - (void)logIn{
     BOOL success = [[ESAuthenticator sharedAuthenticator] loginWithUsername:self.emailField.text andPassword:self.passwordField.text];
     if (success) {
@@ -231,16 +245,25 @@
         }];
     }else{
         self.errorLabel.hidden = NO;
-        
-        CAKeyframeAnimation * anim = [ CAKeyframeAnimation animationWithKeyPath:@"transform" ] ;
-        anim.values = @[ [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-10.0f, 0.0f, 0.0f) ], [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(10.0f, 0.0f, 0.0f) ] ] ;
-        anim.autoreverses = YES ;
-        anim.repeatCount = 2.0f ;
-        anim.duration = 0.07f ;
-        
-        [ self.formView.layer addAnimation:anim forKey:nil ] ;
+        [self shakeView:self.loginForm];
+
     }
 } 
+
+- (void)signup{
+    if([self.createPassword.text isEqualToString:self.confirmPassword.text] && [[self.createEmail.text componentsSeparatedByString:@"@"][1] isEqualToString:@"umn.edu"]){
+        BOOL success = [[ESAuthenticator sharedAuthenticator] createAccountWithUsername:self.createEmail.text andPassword:self.createPassword.text];
+        if(success){
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.callback();
+            }];
+        }else{
+            [self shakeView:self.signupForm];
+        }
+    }else{
+        [self shakeView:self.signupForm];
+    }
+}
 
 @end
 

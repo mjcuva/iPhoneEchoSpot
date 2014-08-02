@@ -32,6 +32,8 @@
 */
 - (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password;
 
+- (BOOL)createAccountWithUsername: (NSString *)username andPassword: (NSString *)password;
+
 /**
  Logs out user
  @return YES if logout was successful
