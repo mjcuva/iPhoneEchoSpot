@@ -120,13 +120,13 @@
         self.detailLabel.frame = CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
     }
     
-    if(self.voteStatus == ESVoteStatusUpvoted){
+    if(self.voteStatus == 1){
         self.upvote.image = [UIImage imageNamed:@"upvoted"];
         self.downvote.image = [UIImage imageNamed:@"downvote"];
-    }else if(self.voteStatus == ESVoteStatusDownvoted){
+    }else if(self.voteStatus == -1){
         self.downvote.image = [UIImage imageNamed:@"downvoted"];
         self.upvote.image = [UIImage imageNamed:@"upvote"];
-    }else{
+    }else if(self.voteStatus == 0){
         self.downvote.image = [UIImage imageNamed:@"downvote"];
         self.upvote.image = [UIImage imageNamed:@"upvote"];
     }
@@ -182,20 +182,28 @@
 }
 
 - (void)setUpvotes:(NSInteger)upvotes{
+    _upvotes = upvotes;
     self.upvoteCount.text = [@(upvotes) stringValue];
     [self.upvoteCount sizeToFit];
     [self updateControlFrames];
 }
 
 - (void)setDownvotes:(NSInteger)downvotes{
+    _downvotes = downvotes;
     self.downvoteCount.text = [@(downvotes) stringValue];
     [self.downvoteCount sizeToFit];
     [self updateControlFrames];
 }
 
 - (void)setActivity:(NSInteger)activity{
+    _activity = activity;
     self.commentCount.text = [@(activity) stringValue];
     [self.commentCount sizeToFit];
+    [self updateControlFrames];
+}
+
+- (void)setVoteStatus:(NSInteger)voteStatus{
+    _voteStatus = voteStatus;
     [self updateControlFrames];
 }
 

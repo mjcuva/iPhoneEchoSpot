@@ -11,6 +11,7 @@
 #import "ESComment.h"
 #import "ESDiscussion.h"
 #import "constants.h"
+#import "ESAuthenticator.h"
 
 @implementation ESEchoFetcher
 
@@ -40,7 +41,7 @@ typedef enum {
 
 + (NSArray *)loadEchosOnPage:(int)page{
     
-    NSArray *jsonObject = [self getDataForURL:[self echoURLWithUser:0 index:page sortType:sortTrending]];
+    NSArray *jsonObject = [self getDataForURL:[self echoURLWithUser:[[ESAuthenticator sharedAuthenticator] currentUser] index:page sortType:sortTrending]];
     
     if(jsonObject == nil){
         return nil;
@@ -70,20 +71,8 @@ typedef enum {
         newEcho.content = echo[@"content"];
         newEcho.created = [NSDate dateWithTimeIntervalSince1970:[echo[@"created_at"] doubleValue]];
         newEcho.category = [[ESCategory alloc] initWithName:echo[@"category"][@"name"] andCatID:[echo[@"category"][@"id"] intValue]];
-        
-        switch ([echo[@"voted_on"] intValue]) {
-            case 1:
-                newEcho.voteStatus = ESVoteStatusUpvoted;
-                break;
-            case 0:
-                newEcho.voteStatus = ESVoteStatusNeutral;
-                break;
-            case -1:
-                newEcho.voteStatus = ESVoteStatusDownvoted;
-                break;
-            default:
-                NSLog(@"Should not reach here.");
-        }
+        NSLog(@"%@ %i", newEcho.title, [echo[@"voted_on"] intValue]);
+        newEcho.voteStatus = [echo[@"voted_on"] intValue];
         
         if(echo[@"user"] == [NSNull null]){
             newEcho.author = [ESUser deletedUser];

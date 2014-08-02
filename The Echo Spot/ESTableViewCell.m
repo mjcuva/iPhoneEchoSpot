@@ -79,7 +79,7 @@
     [self.echoView displayComment];
 }
 
-- (void)setVoteStatus:(ESVoteStatus)voteStatus{
+- (void)setVoteStatus:(NSInteger)voteStatus{
     _voteStatus = voteStatus;
     self.echoView.voteStatus = voteStatus;
 }

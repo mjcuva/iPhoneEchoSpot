@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESEcho.h"
 
 @interface ESTableViewCell : UITableViewCell
 @property (strong, nonatomic) NSString *echoTitle;
@@ -19,7 +18,7 @@
 @property (nonatomic) NSInteger downvotes;
 @property (nonatomic) NSInteger activity;
 @property (nonatomic) BOOL isComment;
-@property ESVoteStatus voteStatus;
+@property (nonatomic) NSInteger voteStatus;
 
 - (NSInteger)desiredHeight;
 
