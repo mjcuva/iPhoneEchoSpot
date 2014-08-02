@@ -101,9 +101,10 @@
      dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
          [weakSelf.tableView beginUpdates];
          weakSelf.currentPage = self.currentPage + 1;
-         weakSelf.echos = [weakSelf.echos arrayByAddingObjectsFromArray:[ESEchoFetcher loadEchosOnPage:self.currentPage]];
-         NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:10];
-         for(int i = (int)weakSelf.echos.count - 20; i < weakSelf.echos.count; i++){
+         NSArray *newEchos = [ESEchoFetcher loadEchosOnPage:self.currentPage];
+         weakSelf.echos = [weakSelf.echos arrayByAddingObjectsFromArray:newEchos];
+         NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:20];
+         for(int i = (int)weakSelf.echos.count - (int)newEchos.count; i < weakSelf.echos.count; i++){
              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
          }
          [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
@@ -200,6 +201,7 @@
     cell.upvotes = echo.votesUp;
     cell.downvotes = echo.votesDown;
     cell.activity = echo.activity;
+    cell.voteStatus = echo.voteStatus;
     
     cell.userInteractionEnabled = YES;
     

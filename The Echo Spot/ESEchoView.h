@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESEcho.h"
 
 @interface ESEchoView : UIView
 @property (strong, nonatomic) NSString *echoTitle;
@@ -17,6 +18,8 @@
 @property (nonatomic) NSInteger upvotes;
 @property (nonatomic) NSInteger downvotes;
 @property (nonatomic) NSInteger activity;
+
+@property ESVoteStatus voteStatus;
 
 - (NSInteger)desiredHeight;
 

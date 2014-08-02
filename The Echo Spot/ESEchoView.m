@@ -120,6 +120,17 @@
         self.detailLabel.frame = CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
     }
     
+    if(self.voteStatus == ESVoteStatusUpvoted){
+        self.upvote.image = [UIImage imageNamed:@"upvoted"];
+        self.downvote.image = [UIImage imageNamed:@"downvote"];
+    }else if(self.voteStatus == ESVoteStatusDownvoted){
+        self.downvote.image = [UIImage imageNamed:@"downvoted"];
+        self.upvote.image = [UIImage imageNamed:@"upvote"];
+    }else{
+        self.downvote.image = [UIImage imageNamed:@"downvote"];
+        self.upvote.image = [UIImage imageNamed:@"upvote"];
+    }
+    
     self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
     self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
     self.comment.frame = CGRectMake(self.upvote.frame.size.width + self.downvote.frame.size.width + (BUTTON_LEFT_MARGIN + BUTTON_SEPERATION * 2), [self desiredHeight] - self.comment.frame.size.height - BUTTON_OFFSET, self.comment.frame.size.width, self.comment.frame.size.height);

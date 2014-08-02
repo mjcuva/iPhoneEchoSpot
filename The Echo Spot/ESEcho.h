@@ -13,6 +13,12 @@
 
 @interface ESEcho : NSObject
 
+typedef enum {
+    ESVoteStatusUpvoted,
+    ESVoteStatusDownvoted,
+    ESVoteStatusNeutral
+} ESVoteStatus;
+
 @property (strong, nonatomic) NSString *title;
 @property (nonatomic) NSInteger echoID;
 @property (strong, nonatomic) NSURL *imageURL;
@@ -23,5 +29,6 @@
 @property (strong, nonatomic) NSDate *created;
 @property (strong, nonatomic) ESCategory *category;
 @property (strong, nonatomic) ESUser *author;
+@property ESVoteStatus voteStatus;
 
 @end

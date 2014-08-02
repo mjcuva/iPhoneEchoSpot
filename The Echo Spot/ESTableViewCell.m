@@ -79,4 +79,9 @@
     [self.echoView displayComment];
 }
 
+- (void)setVoteStatus:(ESVoteStatus)voteStatus{
+    _voteStatus = voteStatus;
+    self.echoView.voteStatus = voteStatus;
+}
+
 @end
