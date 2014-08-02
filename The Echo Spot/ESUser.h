@@ -19,4 +19,6 @@
 
 + (ESUser *)anonymousUser;
 
++ (ESUser *)deletedUser;
+
 @end

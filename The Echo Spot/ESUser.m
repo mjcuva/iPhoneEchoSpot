@@ -22,4 +22,8 @@
     return [[ESUser alloc] initWithName:@"Anonymous" andID:0];
 }
 
++ (ESUser *)deletedUser{
+    return [[ESUser alloc] initWithName:@"deleted" andID:0];
+}
+
 @end
