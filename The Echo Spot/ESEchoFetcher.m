@@ -95,7 +95,10 @@ typedef enum {
         ESComment *newComment = [[ESComment alloc] init];
         newComment.comment_text = comment[@"content"];
         newComment.commentID = [comment[@"id"] intValue];
-        if([comment[@"anonymous"] boolValue] == 1){
+        
+        if(comment[@"user"] == [NSNull null]){
+            newComment.author = [ESUser deletedUser];
+        }else if([comment[@"anonymous"] boolValue] == 1){
             newComment.author = [ESUser anonymousUser];
         }else{
             newComment.author = [[ESUser alloc] initWithName:comment[@"user"][@"username"] andID:[comment[@"user"][@"id"] intValue]];    
@@ -119,7 +122,9 @@ typedef enum {
             ESDiscussion *newDiscussion = [[ESDiscussion alloc] init];
             newDiscussion.discussionID = [discussion[@"id"] intValue];
             newDiscussion.discussion_text = discussion[@"content"];
-            if([discussion[@"anonymous"] boolValue] == 1){
+            if(discussion[@"user"] == [NSNull null]){
+                newDiscussion.author = [ESUser deletedUser];
+            }else if([discussion[@"anonymous"] boolValue] == 1){
                 newDiscussion.author = [ESUser anonymousUser];
             }else{
                 newDiscussion.author = [[ESUser alloc] initWithName:discussion[@"user"][@"username"] andID:[discussion[@"user"][@"id"] intValue]];
