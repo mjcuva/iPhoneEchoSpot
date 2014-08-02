@@ -71,7 +71,23 @@ typedef enum {
         newEcho.created = [NSDate dateWithTimeIntervalSince1970:[echo[@"created_at"] doubleValue]];
         newEcho.category = [[ESCategory alloc] initWithName:echo[@"category"][@"name"] andCatID:[echo[@"category"][@"id"] intValue]];
         
-        if([echo[@"anonymous"] boolValue] == 1){
+        switch ([echo[@"voted_on"] intValue]) {
+            case 1:
+                newEcho.voteStatus = ESVoteStatusUpvoted;
+                break;
+            case 0:
+                newEcho.voteStatus = ESVoteStatusNeutral;
+                break;
+            case -1:
+                newEcho.voteStatus = ESVoteStatusDownvoted;
+                break;
+            default:
+                NSLog(@"Should not reach here.");
+        }
+        
+        if(echo[@"user"] == [NSNull null]){
+            newEcho.author = [ESUser deletedUser];
+        }else if([echo[@"anonymous"] boolValue] == 1){
             newEcho.author = [ESUser anonymousUser];
         }else{
             newEcho.author = [[ESUser alloc] initWithName:echo[@"user"][@"username"] andID:[echo[@"user"][@"id"] intValue]];
