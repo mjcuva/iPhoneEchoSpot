@@ -22,3 +22,4 @@
 
 
 #define BASE_URL @"http://evening-chamber-3257.herokuapp.com/api/1/"
+#define LOGIN_URL @"user/login"
