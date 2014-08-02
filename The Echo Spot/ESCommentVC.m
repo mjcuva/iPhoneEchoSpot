@@ -71,7 +71,7 @@
     self.commentReply.font = [UIFont systemFontOfSize:16];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setTextView:)];
     self.commentReply.userInteractionEnabled = YES;
-    self.commentReply.tag = 1;
+    self.commentReply.tag = 0;
     [self.commentReply addGestureRecognizer:tap];
     
     
@@ -82,9 +82,10 @@
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + self.commentReply.frame.size.height +25)];
     
+    [headerView addSubview:separator];
     [headerView addSubview:self.parentEchoView];
     [headerView addSubview:self.commentReply];
-    [headerView addSubview:separator];
+
     
     [self.view addSubview:self.commentsTableView];
     
@@ -122,6 +123,7 @@
         self.addDiscussion.opaque = YES;
         self.addDiscussion.textContainerInset = UIEdgeInsetsMake(10, 10, 5, 10);
         self.addDiscussion.font = [UIFont systemFontOfSize:16];
+        self.addDiscussion.tag = 1;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setTextView:)];
         self.addDiscussion.userInteractionEnabled = YES;
         [self.addDiscussion addGestureRecognizer:tap];
@@ -201,6 +203,7 @@
         self.openRow = nil;
         [self.discussionViews removeFromSuperview];
         self.discussionViews = nil;
+        [self.addDiscussion removeFromSuperview];
     }else{
         if(self.discussionViews){
             [self.discussionViews removeFromSuperview];
@@ -247,23 +250,27 @@
     
     [cancelButton addTarget:self action:@selector(closeReply) forControlEvents:UIControlEventTouchUpInside];
     
-    // TODO: Move textview, don't scroll
-    if(self.activeTextView.tag == 1){
-        self.commentsTableView.contentOffset = CGPointZero;   
-    }else{
-        self.commentsTableView.contentOffset = CGPointMake(0, [self.activeTextView convertPoint:self.activeTextView.bounds.origin toView:self.commentsTableView].y);
-    }
     self.commentsTableView.scrollEnabled = NO;
     
     self.originalReplyFrame = self.activeTextView.frame;
     
+    if(self.activeTextView.tag == 1){
+        [[[UIApplication sharedApplication] keyWindow] insertSubview:self.activeTextView aboveSubview:self.commentsTableView];
+        self.activeTextView.center = [self.activeTextView.superview convertPoint:self.activeTextView.center fromView:self.discussionViews];
+    }
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationBeginsFromCurrentState:NO];
     
     // work
-    self.activeTextView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height - 44);
+    if(self.activeTextView.tag == 0){
+        self.commentsTableView.contentOffset = CGPointZero;
+        self.activeTextView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height - 44);
+    }else{
+        self.activeTextView.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - kbSize.height - 44);
+    }
     self.topReplyView.frame = CGRectMake(self.topReplyView.frame.origin.x, self.view.frame.size.height - kbSize.height - 44, self.topReplyView.frame.size.width, 44);
 
     
@@ -274,10 +281,16 @@
 
 - (void)keyboardWillHide: (NSNotification *)notification{
     
+    if(self.activeTextView.tag == 1){
+        [self.activeTextView removeFromSuperview];
+        [self.discussionViews addSubview:self.activeTextView];
+        self.activeTextView.center = [self.activeTextView.superview convertPoint:self.activeTextView.center fromView:self.commentsTableView.superview];
+    }
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationBeginsFromCurrentState:NO];
     
     // work
     self.activeTextView.frame = self.originalReplyFrame;
