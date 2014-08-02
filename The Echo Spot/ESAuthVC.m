@@ -21,8 +21,9 @@
 
 // Login
 @property (strong, nonatomic) UIView *loginForm;
-@property (strong, nonatomic) UITextField *usernameField;
+@property (strong, nonatomic) UITextField *emailField;
 @property (strong, nonatomic) UITextField *passwordField;
+@property (strong, nonatomic) UILabel *errorLabel;
 
 @property CGRect formStart;
 @end
@@ -85,15 +86,17 @@
     
     CGRect paddingFrame = CGRectMake(0, 0, 15, 20);
     
-    self.usernameField = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
-    self.usernameField.placeholder = @"UMN Email";
-    self.usernameField.backgroundColor = INPUT_BACKGROUND;
+    self.emailField = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
+    self.emailField.placeholder = @"UMN Email";
+    self.emailField.backgroundColor = INPUT_BACKGROUND;
     UIView *userPadding = [[UIView alloc] initWithFrame:paddingFrame];
-    self.usernameField.leftView = userPadding;
-    self.usernameField.leftViewMode = UITextFieldViewModeAlways;
-    self.usernameField.delegate = self;
+    self.emailField.leftView = userPadding;
+    self.emailField.leftViewMode = UITextFieldViewModeAlways;
+    self.emailField.keyboardType = UIKeyboardTypeEmailAddress;
+    self.emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.emailField.delegate = self;
     
-    currentHeight += self.usernameField.frame.size.height + VERTICAL_PADDING;
+    currentHeight += self.emailField.frame.size.height + VERTICAL_PADDING;
     
     UIView *passPadding = [[UIView alloc] initWithFrame:paddingFrame];
     
@@ -106,7 +109,16 @@
     self.passwordField.delegate = self;
     self.passwordField.secureTextEntry = YES;
     
-    currentHeight += self.passwordField.frame.size.height + (VERTICAL_PADDING * 2);
+    currentHeight += self.passwordField.frame.size.height + (VERTICAL_PADDING);
+    
+    self.errorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.errorLabel.text = @"Invalid Login";
+    self.errorLabel.textColor = [UIColor redColor];
+    [self.errorLabel sizeToFit];
+    self.errorLabel.center = CGPointMake(self.formView.frame.size.width / 2, currentHeight + VERTICAL_PADDING);
+    self.errorLabel.hidden = YES;
+    
+    currentHeight += self.errorLabel.frame.size.height + VERTICAL_PADDING / 2;
     
     UIButton *signInButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 50)];
     [signInButton setTitle:@"Sign In" forState:UIControlStateNormal];
@@ -115,8 +127,9 @@
     [signInButton addTarget:self action:@selector(logIn) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.loginForm addSubview:self.usernameField];
+    [self.loginForm addSubview:self.emailField];
     [self.loginForm addSubview:self.passwordField];
+    [self.loginForm addSubview:self.errorLabel];
     [self.loginForm addSubview:signInButton];
     
     [self.formView addSubview:self.loginForm];
@@ -211,10 +224,22 @@
 }
 
 - (void)logIn{
-    [[ESAuthenticator sharedAuthenticator] loginWithUsername:self.usernameField.text andPassword:self.passwordField.text];
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.callback();
-    }];
+    BOOL success = [[ESAuthenticator sharedAuthenticator] loginWithUsername:self.emailField.text andPassword:self.passwordField.text];
+    if (success) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.callback();
+        }];
+    }else{
+        self.errorLabel.hidden = NO;
+        
+        CAKeyframeAnimation * anim = [ CAKeyframeAnimation animationWithKeyPath:@"transform" ] ;
+        anim.values = @[ [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-10.0f, 0.0f, 0.0f) ], [ NSValue valueWithCATransform3D:CATransform3DMakeTranslation(10.0f, 0.0f, 0.0f) ] ] ;
+        anim.autoreverses = YES ;
+        anim.repeatCount = 2.0f ;
+        anim.duration = 0.07f ;
+        
+        [ self.formView.layer addAnimation:anim forKey:nil ] ;
+    }
 } 
 
 @end
