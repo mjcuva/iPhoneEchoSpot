@@ -52,7 +52,6 @@
     self.commentsTableView.dataSource = self;
     self.commentsTableView.delegate = self;
     
-
     
     self.parentEchoView = [[ESEchoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [self.parentEchoView desiredHeight])];
     self.parentEchoView.echoTitle = self.echo.title;
@@ -157,6 +156,7 @@
     if(cell == nil){
         cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.isComment = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
         
         UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openComment:)];
