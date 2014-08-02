@@ -54,11 +54,37 @@ static int currentUser = 0;
     username = [username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     password = [password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
+    NSString *response = [self postRequestWithUsername:username password:password andURL:[self loginURL]];
+        
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    if ([response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
+        [keychainItem setObject:response forKey:(__bridge id)kSecAttrAccount];
+        currentUser = [response intValue];
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (BOOL)createAccountWithUsername: (NSString *)username andPassword: (NSString *)password{
+    
+    username = [username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    password = [password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    NSString *response = [self postRequestWithUsername:username password:password andURL:[self signupURL]];
+    if ([response isEqualToString:[username componentsSeparatedByString:@"@"][0]]) {
+        return [self loginWithUsername:username andPassword:password];
+    }else{
+        return NO;
+    }
+}
+
+- (NSString *)postRequestWithUsername: (NSString *)username password: (NSString *)password andURL: (NSString *)url{
     NSString *post = [NSString stringWithFormat:@"email=%@&password=%@", username, password];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[self loginURL]]];
+    [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -70,19 +96,15 @@ static int currentUser = 0;
         NSLog(@"%@", [error description]);
     }
     NSString *str=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    if ([str rangeOfCharacterFromSet:notDigits].location == NSNotFound){
-        [keychainItem setObject:str forKey:(__bridge id)kSecAttrAccount];
-        currentUser = [str intValue];
-        return YES;
-    }else{
-        return NO;
-    }
+    return str;
 }
 
 - (NSString *)loginURL{
     return [NSString stringWithFormat:@"%@%@", BASE_URL, LOGIN_URL];
+}
+
+- (NSString *)signupURL{
+    return [NSString stringWithFormat:@"%@%@", BASE_URL, SIGNUP_URL];
 }
 
 - (BOOL)logout{
