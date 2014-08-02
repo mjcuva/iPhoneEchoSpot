@@ -12,6 +12,16 @@
 
 @implementation ESAuthenticator
 
+static int currentUser = 0;
+
+- (int)currentUser{
+    if([self isLoggedIn]){
+        return currentUser;
+    }else{
+        return 0;
+    }
+}
+
 + (id)sharedAuthenticator{
     static ESAuthenticator *sharedAuthenticator = nil;
     static dispatch_once_t onceToken;
@@ -21,14 +31,13 @@
     return sharedAuthenticator;
 }
 
-static int currentUser = 0;
-
 - (BOOL)isLoggedIn{
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"EchoSpot" accessGroup:nil];
     NSString *userID = [keychainItem objectForKey:(__bridge id)kSecAttrAccount];
     NSLog(@"%@", userID);
     // Need to check if valid id and access key
     if(![userID isEqualToString:@""]){
+        currentUser = [userID intValue];
         return YES;
     }else{
         return NO;

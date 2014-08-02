@@ -38,4 +38,6 @@
 */
 - (BOOL)logout;
 
+- (int)currentUser;
+
 @end
