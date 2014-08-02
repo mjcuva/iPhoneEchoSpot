@@ -11,6 +11,7 @@
 #import "ESProfileView.h"
 #import "UIImage+StackBlur.h"
 #import "ESAuthenticator.h"
+#import "ESEchoFetcher.h"
 
 @interface ESProfileVC () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -40,7 +41,7 @@
     
     CGRect headerFrame = CGRectMake(0, 0, 320, 176);
     ESProfileView *profile = [[ESProfileView alloc] initWithFrame:headerFrame];
-    profile.username = @"cuvax001";
+    profile.username = [ESEchoFetcher usernameForCurrentUser];
     
     UIGraphicsBeginImageContextWithOptions(profile.bounds.size, profile.opaque, 0.0);
     [profile.layer renderInContext:UIGraphicsGetCurrentContext()];

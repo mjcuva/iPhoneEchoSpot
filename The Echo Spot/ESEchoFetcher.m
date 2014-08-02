@@ -71,7 +71,6 @@ typedef enum {
         newEcho.content = echo[@"content"];
         newEcho.created = [NSDate dateWithTimeIntervalSince1970:[echo[@"created_at"] doubleValue]];
         newEcho.category = [[ESCategory alloc] initWithName:echo[@"category"][@"name"] andCatID:[echo[@"category"][@"id"] intValue]];
-        NSLog(@"%@ %i", newEcho.title, [echo[@"voted_on"] intValue]);
         newEcho.voteStatus = [echo[@"voted_on"] intValue];
         
         if(echo[@"user"] == [NSNull null]){
@@ -135,6 +134,15 @@ typedef enum {
     }
     
     return returnArray;
+}
+
++ (NSString *)usernameForCurrentUser{
+    NSDictionary *data = (NSDictionary *)[self getDataForURL:[self usernameURL]];
+    return data[@"username"];
+}
+
++ (NSString *)usernameURL{
+    return [NSString stringWithFormat:@"%@%@/%i", BASE_URL, @"user", [ESAuthenticator horribleProgrammingCurrentUser]];
 }
 
 + (NSString *)nameForSortType: (sortType)type{

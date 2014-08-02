@@ -15,4 +15,6 @@
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID;
 
++ (NSString *)usernameForCurrentUser;
+
 @end
