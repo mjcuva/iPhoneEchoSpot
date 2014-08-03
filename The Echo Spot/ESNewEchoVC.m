@@ -62,7 +62,7 @@
     // Title
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width, 44)];
     self.titleLabel.text = @"Title";
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:30];
+    self.titleLabel.font = [UIFont systemFontOfSize:25];
     self.titleLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
     
     contentHeight += 10 + self.titleLabel.frame.size.height;
@@ -79,7 +79,7 @@
     // Content
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.titleInput.frame.origin.y + self.titleInput.frame.size.height + 10, self.view.frame.size.width, 50)];
     self.contentLabel.text = @"Echo";
-    self.contentLabel.font = [UIFont boldSystemFontOfSize:30];
+    self.contentLabel.font = [UIFont systemFontOfSize:25];
     self.contentLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
     
     contentHeight += self.contentLabel.frame.size.height + 10;
@@ -96,7 +96,7 @@
     
     self.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.contentInput.frame.origin.y + self.contentInput.frame.size.height + 10, self.view.frame.size.height, 50)];
     self.categoryLabel.text = @"Category";
-    self.categoryLabel.font = [UIFont boldSystemFontOfSize:30];
+    self.categoryLabel.font = [UIFont systemFontOfSize:25];
     self.categoryLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
     
     contentHeight += self.categoryLabel.frame.size.height + 10;
@@ -112,7 +112,7 @@
     
     self.privacyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.categoryPicker.frame.origin.y + self.categoryPicker.frame.size.height + 20, self.view.frame.size.width, 50)];
     self.privacyLabel.text = @"Display Name";
-    self.privacyLabel.font = [UIFont boldSystemFontOfSize:30];
+    self.privacyLabel.font = [UIFont systemFontOfSize:25];
     self.privacyLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
     
     contentHeight += self.privacyLabel.frame.size.height + 20;
