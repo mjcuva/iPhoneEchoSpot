@@ -15,6 +15,7 @@
 #import "ESTableViewCell.h"
 #import "ESDiscussion.h"
 #import "ESAuthenticator.h"
+#import "ESAuthVC.h"
 
 @interface ESCommentVC () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 @property (strong, nonatomic) ESEchoView *parentEchoView;
@@ -85,11 +86,11 @@
     
     UIView *headerView;
     if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
-        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + self.commentReply.frame.size.height +25)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + self.commentReply.frame.size.height + 25)];
         separator.frame = CGRectMake(0, self.commentReply.frame.size.height + self.commentReply.frame.origin.y + 15, self.view.frame.size.width, 1);
 
     }else{
-        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + 25)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + 15)];
         separator.frame = CGRectMake(0, self.parentEchoView.frame.origin.y + self.parentEchoView.frame.size.height + 15, self.view.frame.size.width, 1);
     }
     
@@ -186,7 +187,7 @@
         [cell addGestureRecognizer:toggleEcho];
     }
     
-    if(indexPath.row % 2 == 0){
+    if(indexPath.row % 2 == 1){
         cell.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
     }else{
         cell.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
@@ -479,6 +480,15 @@
         self.echo.voteStatus = voteResult;
         [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:-1];
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showAuth"]){
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        ESAuthVC *root = (ESAuthVC *)nav.viewControllers[0];
+        [root setCallback:sender];
+    }
+
 }
 
 @end
