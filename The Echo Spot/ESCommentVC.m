@@ -14,6 +14,7 @@
 #import "ESComment.h"
 #import "ESTableViewCell.h"
 #import "ESDiscussion.h"
+#import "ESAuthenticator.h"
 
 @interface ESCommentVC () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 @property (strong, nonatomic) ESEchoView *parentEchoView;
@@ -79,12 +80,22 @@
     separator.backgroundColor = [[ThemeManager sharedManager] themeColor];
     separator.alpha = .7;
     
+    UIView *headerView;
+    if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + self.commentReply.frame.size.height +25)];
+        separator.frame = CGRectMake(0, self.commentReply.frame.size.height + self.commentReply.frame.origin.y + 15, self.view.frame.size.width, 1);
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + self.commentReply.frame.size.height +25)];
+    }else{
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.parentEchoView.frame.size.height + 25)];
+        separator.frame = CGRectMake(0, self.parentEchoView.frame.origin.y + self.parentEchoView.frame.size.height + 15, self.view.frame.size.width, 1);
+    }
     
     [headerView addSubview:separator];
     [headerView addSubview:self.parentEchoView];
-    [headerView addSubview:self.commentReply];
+    
+    if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+        [headerView addSubview:self.commentReply];   
+    }
 
     
     [self.view addSubview:self.commentsTableView];
@@ -141,7 +152,9 @@
             [self.discussionViews addSubview:discoView];
             [self.discussionViews addSubview:separator];
         }
-        [self.discussionViews addSubview:self.addDiscussion];
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self.discussionViews addSubview:self.addDiscussion];   
+        }
         self.discussionViews.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         return height + [cell desiredHeight];
     }else{
