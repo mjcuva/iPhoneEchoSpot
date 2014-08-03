@@ -189,7 +189,11 @@
                                 <action selector="cancel:" destination="Imc-KD-sT2" id="Pzs-my-2AJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="2dS-tt-3Ct"/>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="2dS-tt-3Ct">
+                            <connections>
+                                <action selector="post" destination="Imc-KD-sT2" id="rqJ-s3-tKQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GO-3T-axE" userLabel="First Responder" sceneMemberID="firstResponder"/>

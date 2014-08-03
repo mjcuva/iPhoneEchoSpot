@@ -9,6 +9,7 @@
 #import "ESNewEchoVC.h"
 #import "constants.h"
 #import "ThemeManager.h"
+#import "ESEchoFetcher.h"
 
 @interface ESNewEchoVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -227,6 +228,26 @@
 
 - (IBAction)cancel:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+- (IBAction)post {
+    NSString *anon;
+    if(self.privacyControl.selectedSegmentIndex == 0){
+        anon = @"true";
+    }else{
+        anon = @"false";
+    }
+    
+    id image;
+    if(self.displayImage.image){
+        image = self.displayImage.image;
+    }else{
+        image = [NSNull null];
+    }
+    
+    NSDictionary *data = @{@"title": self.titleInput.text, @"content": self.contentInput.text, @"anonymous": anon, @"image": image, @"category": [self pickerView:self.categoryPicker titleForRow:[self.categoryPicker selectedRowInComponent:0] forComponent: 0]};
+    [ESEchoFetcher postEchoWithData:data];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

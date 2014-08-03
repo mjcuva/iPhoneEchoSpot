@@ -25,4 +25,6 @@
 
 + (BOOL)postDiscussion: (NSString *)content onCommentID: (int)commentID anonymously: (BOOL)anon;
 
++ (BOOL)postEchoWithData: (NSDictionary *)data;
+
 @end

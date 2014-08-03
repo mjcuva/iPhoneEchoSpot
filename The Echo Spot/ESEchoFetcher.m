@@ -124,6 +124,8 @@ typedef enum {
             newComment.votesUp = [comment[@"votes_up"] intValue];
         }
         
+        newComment.voteStatus = [comment[@"voted_on"] intValue];
+        
         newComment.created = [NSDate dateWithTimeIntervalSince1970:[comment[@"created_at"] intValue]];
         NSMutableArray *discussions = [[NSMutableArray alloc] init];
         for(NSDictionary *discussion in comment[@"discussions"]){
@@ -184,6 +186,11 @@ typedef enum {
     return success;
 }
 
++ (BOOL)postEchoWithData:(NSDictionary *)data{
+    BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"user_id=%i&content=%@&title=%@&anonymous=%@&category=%@&image=null", [[ESAuthenticator sharedAuthenticator] currentUser], data[@"content"], data[@"title"], data[@"anonymous"], data[@"category"]] toURL:[self postEchoURL]];
+    return success;
+}
+
 + (BOOL)postRequestWithData: (NSString *)post toURL: (NSString *)url{
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
@@ -201,6 +208,7 @@ typedef enum {
         NSLog(@"%@", [error description]);
     }
     NSString *str=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", str);
     if([str isEqualToString:@"success"]){
         return YES;
     }else{
@@ -223,6 +231,10 @@ typedef enum {
 
 + (NSString *)postDiscussionURL{
     return [NSString stringWithFormat:@"%@discussion", BASE_URL];
+}
+
++ (NSString *)postEchoURL{
+    return [NSString stringWithFormat:@"%@echo", BASE_URL];
 }
 
 + (NSString *)echosForUserURL:(int)user{
