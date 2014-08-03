@@ -17,4 +17,6 @@
 @property (nonatomic) NSArray *discussions;
 @property (nonatomic, strong) NSDate *created;
 @property (nonatomic, strong) ESUser *author;
+
+@property (nonatomic) int voteStatus;
 @end

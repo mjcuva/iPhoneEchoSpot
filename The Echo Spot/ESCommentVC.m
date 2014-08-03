@@ -65,6 +65,9 @@
     
     self.parentEchoView.frame = CGRectMake(0, 0, self.view.frame.size.width, [self.parentEchoView desiredHeight]);
     
+    UITapGestureRecognizer *voteGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(vote:)];
+    [self.parentEchoView addGestureRecognizer:voteGesture];
+    
     
     self.commentReply = [[UITextView alloc] initWithFrame:CGRectMake(25, self.parentEchoView.frame.origin.x + self.parentEchoView.frame.size.height + 10, self.view.frame.size.width - 25, 50)];
     self.commentReply.backgroundColor = INPUT_BACKGROUND;
@@ -196,6 +199,7 @@
     cell.upvotes = comment.votesUp;
     cell.downvotes = comment.votesDown;
     cell.activity = [comment.discussions count];
+    cell.voteStatus = comment.voteStatus;
     
     if(self.openComment == self.comments[indexPath.item]){
         self.discussionViews.frame = CGRectMake(self.discussionViews.frame.origin.x, [cell desiredHeight], self.discussionViews.frame.size.width, self.discussionViews.frame.size.height);
@@ -215,27 +219,87 @@
     
     ESTableViewCell *cell = (ESTableViewCell *)[self.commentsTableView cellForRowAtIndexPath:row];
     
-    if(self.comments[row.item] == self.openComment){
-        [self closeComment];
-    }else{
-        if(self.discussionViews){
-            [self.discussionViews removeFromSuperview];
-            self.discussionViews = nil;
+    ESComment *tappedComment = self.comments[row.item];
+    
+    
+    if([cell checkUpvoteTap:[self.commentsTableView convertPoint:point toView:cell]]){
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self voteOnCell:cell comment:tappedComment withValue:1];
+        }else{
+            [self performSegueWithIdentifier:@"showAuth" sender:^{
+                [self voteOnCell:cell comment:tappedComment withValue:1];                
+            }];
         }
-        self.openComment = self.comments[row.item];
-        self.openRow = row;
-    }
-    
-    if(startRow != nil && row.row != startRow.row){
-        [self.commentsTableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else if([cell checkDownvoteTap:[self.commentsTableView convertPoint:point toView:cell]]){
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self voteOnCell:cell comment:tappedComment withValue:-1];
+        }else{
+            [self performSegueWithIdentifier:@"showAuth" sender:^{
+                [self voteOnCell:cell comment:tappedComment withValue:-1];                
+            }];
+        }
     }else{
-        [self.commentsTableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
     
-    if(self.openComment != nil){
-        [self scrollToIndexPath:row withCell: cell];
+        if(self.comments[row.item] == self.openComment){
+            [self closeComment];
+        }else{
+            if(self.discussionViews){
+                [self.discussionViews removeFromSuperview];
+                self.discussionViews = nil;
+            }
+            self.openComment = self.comments[row.item];
+            self.openRow = row;
+        }
+        
+        if(startRow != nil && row.row != startRow.row){
+            [self.commentsTableView reloadRowsAtIndexPaths:@[row, startRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [self.commentsTableView reloadRowsAtIndexPaths:@[row] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        if(self.openComment != nil){
+//            [self scrollToIndexPath:row withCell: cell];
+        }
     }
 }
+
+- (void)voteOnCell: (ESTableViewCell *)cell comment: (ESComment *)comment withValue: (int)vote{
+    if(vote == 1){
+        int voteResult = 1;
+        if(cell.voteStatus == 1){
+            voteResult = 0;
+            cell.upvotes -= 1;
+        }else if(cell.voteStatus == -1){
+            cell.downvotes -= 1;
+            cell.upvotes += 1;
+        }else{
+            cell.upvotes += 1;
+        }
+        
+        cell.voteStatus = voteResult;
+        comment.voteStatus = voteResult;
+        
+        [ESEchoFetcher voteOnPostType:@"Comment" withID:(int)comment.commentID withValue:1];
+    }else{
+        
+        int voteResult = -1;
+        if(cell.voteStatus == -1){
+            voteResult = 0;
+            cell.downvotes -= 1;
+        }else if(cell.voteStatus == 1){
+            cell.upvotes -= 1;
+            cell.downvotes += 1;
+        }else{
+            cell.downvotes += 1;
+        }
+        
+        cell.voteStatus = voteResult;
+        comment.voteStatus = voteResult;
+        [ESEchoFetcher voteOnPostType:@"Comment" withID:(int)comment.commentID withValue:-1];
+    }
+}
+
+
 
 - (void)closeComment{
     self.openComment = nil;
@@ -355,6 +419,66 @@
 
 - (void)closeReply{
     [self.activeTextView endEditing:YES];
+}
+
+- (void)vote: (UITapGestureRecognizer *)sender{
+    
+    CGPoint point = [sender locationInView:self.parentEchoView];
+    
+    if([self.parentEchoView checkUpvoteTap:point]){
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self voteWithValue:1];
+        }else{
+            [self performSegueWithIdentifier:@"showAuth" sender:^{
+                [self voteWithValue:1];
+            }];
+        }
+    }else if([self.parentEchoView checkDownvoteTap:point]){
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self voteWithValue:-1];
+        }else{
+            [self performSegueWithIdentifier:@"showAuth" sender:^{
+                [self voteWithValue:-1];
+            }];
+        }
+    
+    }
+}
+
+- (void)voteWithValue: (int)vote{
+    if(vote == 1){
+        int voteResult = 1;
+        if(self.parentEchoView.voteStatus == 1){
+            voteResult = 0;
+            self.parentEchoView.upvotes -= 1;
+        }else if(self.parentEchoView.voteStatus == -1){
+            self.parentEchoView.downvotes -= 1;
+            self.parentEchoView.upvotes += 1;
+        }else{
+            self.parentEchoView.upvotes += 1;
+        }
+        
+        self.parentEchoView.voteStatus = voteResult;
+        self.echo.voteStatus = voteResult;
+        
+        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:1];
+    }else{
+        
+        int voteResult = -1;
+        if(self.parentEchoView.voteStatus == -1){
+            voteResult = 0;
+            self.parentEchoView.downvotes -= 1;
+        }else if(self.parentEchoView.voteStatus == 1){
+            self.parentEchoView.upvotes -= 1;
+            self.parentEchoView.downvotes += 1;
+        }else{
+            self.parentEchoView.downvotes += 1;
+        }
+        
+        self.parentEchoView.voteStatus = voteResult;
+        self.echo.voteStatus = voteResult;
+        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:-1];
+    }
 }
 
 @end
