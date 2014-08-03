@@ -221,38 +221,21 @@
     if([cell checkOpenEchosTap:[self.view convertPoint:point toView:cell]] && self.echos[row.item] == self.openEcho){
         [self performSegueWithIdentifier:@"showComments" sender:self];
     }else if([cell checkUpvoteTap:[self.view convertPoint:point toView:cell]]){
-        
-        int voteResult = 1;
-        if(cell.voteStatus == 1){
-            voteResult = 0;
-            cell.upvotes -= 1;
-        }else if(cell.voteStatus == -1){
-            cell.downvotes -= 1;
-            cell.upvotes += 1;
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self voteOnCell:cell echo:tappedEcho withValue:1];
         }else{
-            cell.upvotes += 1;
+            [self performSegueWithIdentifier:@"showAuth" sender:^{
+                [self voteOnCell:cell echo:tappedEcho withValue:1];
+            }];
         }
-        
-        cell.voteStatus = voteResult;
-        ((ESEcho *)self.echos[row.row]).voteStatus = voteResult;
-        
-        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)tappedEcho.echoID withValue:1];
     }else if([cell checkDownvoteTap:[self.view convertPoint:point toView:cell]]){
-        
-        int voteResult = -1;
-        if(cell.voteStatus == -1){
-            voteResult = 0;
-            cell.downvotes -= 1;
-        }else if(cell.voteStatus == 1){
-            cell.upvotes -= 1;
-            cell.downvotes += 1;
+        if([[ESAuthenticator sharedAuthenticator] isLoggedIn]){
+            [self voteOnCell:cell echo:tappedEcho withValue:-1];
         }else{
-            cell.downvotes += 1;
+            [self performSegueWithIdentifier:@"showAuth" sender:^{
+                [self voteOnCell:cell echo:tappedEcho withValue:-1];
+            }];
         }
-        
-        cell.voteStatus = voteResult;
-        ((ESEcho *)self.echos[row.row]).voteStatus = voteResult;
-        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)tappedEcho.echoID withValue:-1];
     }else{
     
         if(self.echos[row.item] == self.openEcho){
@@ -273,6 +256,42 @@
         }
         
             [self scrollToIndexPath:row withCell: cell];
+    }
+}
+
+- (void)voteOnCell: (ESTableViewCell *)cell echo: (ESEcho *)echo withValue: (int)vote{
+    if(vote == 1){
+        int voteResult = 1;
+        if(cell.voteStatus == 1){
+            voteResult = 0;
+            cell.upvotes -= 1;
+        }else if(cell.voteStatus == -1){
+            cell.downvotes -= 1;
+            cell.upvotes += 1;
+        }else{
+            cell.upvotes += 1;
+        }
+        
+        cell.voteStatus = voteResult;
+        echo.voteStatus = voteResult;
+        
+        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)echo.echoID withValue:1];
+    }else{
+        
+        int voteResult = -1;
+        if(cell.voteStatus == -1){
+            voteResult = 0;
+            cell.downvotes -= 1;
+        }else if(cell.voteStatus == 1){
+            cell.upvotes -= 1;
+            cell.downvotes += 1;
+        }else{
+            cell.downvotes += 1;
+        }
+        
+        cell.voteStatus = voteResult;
+        echo.voteStatus = voteResult;
+        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)echo.echoID withValue:-1];
     }
 }
 
