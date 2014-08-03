@@ -158,11 +158,38 @@ typedef enum {
 + (BOOL)voteOnPostType: (NSString *)type withID: (int)echoID withValue: (int)voteType{
     
     NSString *post = [NSString stringWithFormat:@"user_id=%i&target_type=%@&target_id=%i&value=%i", [[ESAuthenticator sharedAuthenticator] currentUser], type, echoID, voteType];
+    BOOL success = [self postRequestWithData:post toURL:[self voteURL]];
+    return success;
+}
+
++ (BOOL)postComment:(NSString *)content onEchoID:(int)echoID anonymously:(BOOL)anon{
+    NSString *anonymous;
+    if(anon){
+        anonymous = @"true";
+    }else{
+        anonymous = @"false";
+    }
+    BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"echo_id=%i&user_id=%i&comment_text=%@&anonymous=%@", echoID, [[ESAuthenticator sharedAuthenticator] currentUser], content, anonymous] toURL:[self postCommentURL]];
+    return success;
+}
+
++ (BOOL)postDiscussion:(NSString *)content onCommentID:(int)commentID anonymously:(BOOL)anon{
+    NSString *anonymous;
+    if(anon){
+        anonymous = @"true";
+    }else{
+        anonymous = @"false";
+    }
+    BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"comment_id=%i&user_id=%i&discussion_text=%@&anonymous=%@", commentID, [[ESAuthenticator sharedAuthenticator] currentUser], content, anonymous] toURL:[self postDiscussionURL]];
+    return success;
+}
+
++ (BOOL)postRequestWithData: (NSString *)post toURL: (NSString *)url{
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[self voteURL]]];
+    [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -174,7 +201,7 @@ typedef enum {
         NSLog(@"%@", [error description]);
     }
     NSString *str=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    if([str isEqualToString:@"voted"]){
+    if([str isEqualToString:@"success"]){
         return YES;
     }else{
         return NO;
@@ -189,6 +216,15 @@ typedef enum {
 + (NSString *)voteURL{
     return [NSString stringWithFormat:@"%@vote", BASE_URL];
 }
+
++ (NSString *)postCommentURL{
+    return [NSString stringWithFormat:@"%@comment", BASE_URL];
+}
+
++ (NSString *)postDiscussionURL{
+    return [NSString stringWithFormat:@"%@discussion", BASE_URL];
+}
+
 + (NSString *)echosForUserURL:(int)user{
     return [NSString stringWithFormat:@"%@echo/%i/%i", BASE_URL, user, user];
 }

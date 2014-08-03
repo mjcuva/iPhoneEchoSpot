@@ -30,7 +30,7 @@
 @property (strong, nonatomic) NSArray *comments;
 
 @property (strong, nonatomic) NSIndexPath *openRow;
-@property (strong, nonatomic) ESEcho *openComment;
+@property (strong, nonatomic) ESComment *openComment;
 
 @property (strong, nonatomic) UIView *discussionViews;
 
@@ -103,6 +103,14 @@
     self.commentsTableView.tableHeaderView = headerView;
     self.commentsTableView.separatorColor = [[ThemeManager sharedManager] themeColor];
     
+    [self loadData];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)loadData{
     dispatch_queue_t loadCommentsQueue = dispatch_queue_create("load comments", NULL);
     dispatch_async(loadCommentsQueue, ^{
         self.comments = [ESEchoFetcher loadCommentsForEcho:self.echo.echoID];
@@ -110,10 +118,6 @@
             [self.commentsTableView reloadData];
         });
     });
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -212,11 +216,7 @@
     ESTableViewCell *cell = (ESTableViewCell *)[self.commentsTableView cellForRowAtIndexPath:row];
     
     if(self.comments[row.item] == self.openComment){
-        self.openComment = nil;
-        self.openRow = nil;
-        [self.discussionViews removeFromSuperview];
-        self.discussionViews = nil;
-        [self.addDiscussion removeFromSuperview];
+        [self closeComment];
     }else{
         if(self.discussionViews){
             [self.discussionViews removeFromSuperview];
@@ -237,6 +237,14 @@
     }
 }
 
+- (void)closeComment{
+    self.openComment = nil;
+    self.openRow = nil;
+    [self.discussionViews removeFromSuperview];
+    self.discussionViews = nil;
+    [self.addDiscussion removeFromSuperview];
+}
+
 - (void)scrollToIndexPath: (NSIndexPath *)indexPath withCell: (ESTableViewCell *)cell{
     if(self.commentsTableView.contentSize.height - cell.frame.origin.y + self.commentsTableView.tableHeaderView.frame.size.height > self.commentsTableView.frame.size.height + self.commentsTableView.tableHeaderView.frame.size.height){
         [self.commentsTableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height + self.commentsTableView.tableHeaderView.frame.size.height) animated:YES];
@@ -255,6 +263,7 @@
     
     self.postButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 75, 0, 75, 44)];
     [self.postButton setTitle:@"Post" forState:UIControlStateNormal];
+    [self.postButton addTarget:self action:@selector(postReply) forControlEvents:UIControlEventTouchUpInside];
     [self.topReplyView addSubview:self.postButton];
     
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - self.postButton.frame.size.width - 75, 0, 75, 44)];
@@ -318,6 +327,27 @@
     
 }
 
+- (void)postReply{
+    if(self.activeTextView.tag == 0){
+        BOOL success = [ESEchoFetcher postComment:self.activeTextView.text onEchoID:(int)self.echo.echoID anonymously:NO];
+        if(!success){
+            NSLog(@"OOPS");
+        }
+        self.activeTextView.text = @"";
+        [self closeReply];
+        [self loadData];
+    }else if(self.activeTextView.tag == 1){
+        [self closeReply];
+        BOOL success = [ESEchoFetcher postDiscussion:self.activeTextView.text onCommentID:(int)self.openComment.commentID anonymously:NO];
+        if(!success){
+            NSLog(@"OOPS");
+        }
+        [self closeComment];
+        self.activeTextView.text = @"";
+        [self loadData];
+    }
+}
+
 - (void)setTextView: (UITapGestureRecognizer *)sender{
     self.activeTextView = (UITextView *)sender.view;
     [self.activeTextView becomeFirstResponder];
@@ -325,12 +355,6 @@
 
 - (void)closeReply{
     [self.activeTextView endEditing:YES];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -21,4 +21,8 @@
 
 + (BOOL)voteOnPostType: (NSString *)type withID: (int)echoID withValue: (int)voteType;
 
++ (BOOL)postComment: (NSString *)content onEchoID: (int)echoID anonymously: (BOOL)anon;
+
++ (BOOL)postDiscussion: (NSString *)content onCommentID: (int)commentID anonymously: (BOOL)anon;
+
 @end
