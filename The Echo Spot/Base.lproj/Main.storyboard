@@ -101,10 +101,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Comments" id="Ws1-kc-9Mg"/>
+                    <connections>
+                        <segue destination="NGQ-3o-2HH" kind="modal" identifier="showAuth" id="mCB-ST-0LZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khB-DY-kzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2500" y="-992"/>
+            <point key="canvasLocation" x="2628" y="-1006"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ONq-42-h1l">
@@ -231,5 +234,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="keY-9X-zaH"/>
+        <segue reference="mCB-ST-0LZ"/>
     </inferredMetricsTieBreakers>
 </document>
