@@ -251,7 +251,7 @@
 } 
 
 - (void)signup{
-    if([self.createPassword.text isEqualToString:self.confirmPassword.text] && [[self.createEmail.text componentsSeparatedByString:@"@"][1] isEqualToString:@"umn.edu"]){
+    if([self.createPassword.text isEqualToString:self.confirmPassword.text]){
         BOOL success = [[ESAuthenticator sharedAuthenticator] createAccountWithUsername:self.createEmail.text andPassword:self.createPassword.text];
         if(success){
             [self dismissViewControllerAnimated:YES completion:^{
