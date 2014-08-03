@@ -49,6 +49,7 @@ typedef enum {
     
     NSArray *echos = [self echosForData:jsonObject];
     
+    
     return echos;
 }
 
@@ -94,7 +95,7 @@ typedef enum {
 }
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID{
-    NSArray *jsonObject = [self getDataForURL:[self commentURLWithUser:0 echoID:(int)echoID sortType:sortTrending]];
+    NSArray *jsonObject = [self getDataForURL:[self commentURLWithUser:0 echoID:(int)echoID sortType:sortVotes]];
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     
@@ -197,7 +198,20 @@ typedef enum {
 }
 
 + (NSString *)nameForSortType: (sortType)type{
-    return @"votes_up";
+    switch (type) {
+        case sortTrending:
+            return @"trending";
+            break;
+        case sortVotes:
+            return @"votes";
+            break;
+        case sortRecent:
+            return @"recent";
+            break;
+        default:
+            NSLog(@"YOU DONE FUCKED UP");
+            break;
+    }
 }
 
 + (NSString *)echoURLWithUser: (int)userID index: (int)index sortType: (sortType)sortType{
