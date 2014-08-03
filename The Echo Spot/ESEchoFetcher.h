@@ -11,7 +11,13 @@
 
 @interface ESEchoFetcher : NSObject
 
-+ (NSArray *)loadEchosOnPage:(int)page;
+typedef enum {
+    sortTrending,
+    sortVotes,
+    sortRecent
+} sortType;
+
++ (NSArray *)loadEchosOnPage:(int)page withSorting: (sortType) sorting;
 
 + (NSArray *)loadCommentsForEcho: (NSInteger)echoID;
 

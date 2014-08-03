@@ -75,11 +75,11 @@
     
     self.navigationController.navigationBar.translucent = NO;
     
-    // Kind of a gross hack
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
     self.segmentedControl.selectedSegmentIndex = 0;
     self.segmentedControl.layer.cornerRadius = 5;
     self.segmentedControl.frame = CGRectMake((self.view.frame.size.width - CONTROL_WIDTH) / 2, CONTROL_PADDING, CONTROL_WIDTH, CONTROL_HEIGHT);
+    [self.segmentedControl addTarget:self action:@selector(sort) forControlEvents:UIControlEventValueChanged];
 
 
     UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, CONTROL_HEIGHT + CONTROL_PADDING * 2)];
@@ -101,7 +101,7 @@
      dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
          [weakSelf.tableView beginUpdates];
          weakSelf.currentPage = self.currentPage + 1;
-         NSArray *newEchos = [ESEchoFetcher loadEchosOnPage:self.currentPage];
+         NSArray *newEchos = [ESEchoFetcher loadEchosOnPage:self.currentPage withSorting:[self getSortType]];
          weakSelf.echos = [weakSelf.echos arrayByAddingObjectsFromArray:newEchos];
          NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:20];
          for(int i = (int)weakSelf.echos.count - (int)newEchos.count; i < weakSelf.echos.count; i++){
@@ -111,6 +111,16 @@
          [weakSelf.tableView endUpdates];
          [weakSelf.tableView.infiniteScrollingView stopAnimating];
      });
+}
+
+- (sortType)getSortType{
+    if(self.segmentedControl.selectedSegmentIndex == 0){
+        return sortTrending;
+    }else if(self.segmentedControl.selectedSegmentIndex == 1){
+        return sortRecent;
+    }else{
+        return sortVotes;
+    }
 }
 
 - (void)updateLayout{
@@ -259,6 +269,10 @@
     }
 }
 
+- (void)sort{
+    [self loadDataWithCompletion:nil];
+}
+
 - (void)voteOnCell: (ESTableViewCell *)cell echo: (ESEcho *)echo withValue: (int)vote{
     if(vote == 1){
         int voteResult = 1;
@@ -354,7 +368,8 @@
 - (void)loadDataWithCompletion: (void (^)(void))completion{
     dispatch_queue_t loadEchosQueue = dispatch_queue_create("load echos", NULL);
     dispatch_async(loadEchosQueue, ^{
-        self.echos = [ESEchoFetcher loadEchosOnPage:0];
+        sortType sorting = [self getSortType];
+        self.echos = [ESEchoFetcher loadEchosOnPage:0 withSorting:sorting];
         self.currentPage = 0;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];

@@ -15,12 +15,6 @@
 
 @implementation ESEchoFetcher
 
-typedef enum {
-    sortTrending,
-    sortVotes,
-    sortRecent
-} sortType;
-
 + (NSArray *)getDataForURL: (NSString *)url{
     NSError *err;
     NSURL *jsonUrl = [NSURL URLWithString:url];
@@ -39,9 +33,9 @@ typedef enum {
     return jsonObject;
 }
 
-+ (NSArray *)loadEchosOnPage:(int)page{
++ (NSArray *)loadEchosOnPage:(int)page withSorting:(sortType)sorting{
     
-    NSArray *jsonObject = [self getDataForURL:[self echoURLWithUser:[[ESAuthenticator sharedAuthenticator] currentUser] index:page sortType:sortTrending]];
+    NSArray *jsonObject = [self getDataForURL:[self echoURLWithUser:[[ESAuthenticator sharedAuthenticator] currentUser] index:page sortType:sorting]];
     
     if(jsonObject == nil){
         return nil;
