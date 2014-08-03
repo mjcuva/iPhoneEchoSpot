@@ -24,6 +24,10 @@
 
 - (BOOL)checkOpenEchosTap:(CGPoint)point;
 
+- (BOOL)checkUpvoteTap: (CGPoint)point;
+
+- (BOOL)checkDownvoteTap: (CGPoint)point;
+
 - (void)displayDiscussion;
 - (void)displayComment;
 @end

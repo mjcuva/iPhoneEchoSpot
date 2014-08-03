@@ -216,9 +216,43 @@
     NSIndexPath *row = [self.tableView indexPathForRowAtPoint:point];
     NSIndexPath *startRow = self.openRow;
     ESTableViewCell *cell = (ESTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
+    ESEcho *tappedEcho = self.echos[row.item];
     
     if([cell checkOpenEchosTap:[self.view convertPoint:point toView:cell]] && self.echos[row.item] == self.openEcho){
         [self performSegueWithIdentifier:@"showComments" sender:self];
+    }else if([cell checkUpvoteTap:[self.view convertPoint:point toView:cell]]){
+        
+        int voteResult = 1;
+        if(cell.voteStatus == 1){
+            voteResult = 0;
+            cell.upvotes -= 1;
+        }else if(cell.voteStatus == -1){
+            cell.downvotes -= 1;
+            cell.upvotes += 1;
+        }else{
+            cell.upvotes += 1;
+        }
+        
+        cell.voteStatus = voteResult;
+        ((ESEcho *)self.echos[row.row]).voteStatus = voteResult;
+        
+        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)tappedEcho.echoID withValue:1];
+    }else if([cell checkDownvoteTap:[self.view convertPoint:point toView:cell]]){
+        
+        int voteResult = -1;
+        if(cell.voteStatus == -1){
+            voteResult = 0;
+            cell.downvotes -= 1;
+        }else if(cell.voteStatus == 1){
+            cell.upvotes -= 1;
+            cell.downvotes += 1;
+        }else{
+            cell.downvotes += 1;
+        }
+        
+        cell.voteStatus = voteResult;
+        ((ESEcho *)self.echos[row.row]).voteStatus = voteResult;
+        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)tappedEcho.echoID withValue:-1];
     }else{
     
         if(self.echos[row.item] == self.openEcho){

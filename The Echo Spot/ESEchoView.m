@@ -222,6 +222,14 @@
         return CGRectContainsPoint(CGRectMake(self.comment.frame.origin.x - 15, self.comment.frame.origin.y - 15, self.comment.frame.size.width + self.commentCount.frame.size.width + 30, self.comment.frame.size.height + self.commentCount.frame.size.height + 30), point);
 }
 
+- (BOOL)checkUpvoteTap:(CGPoint)point{
+    return CGRectContainsPoint(CGRectMake(self.upvote.frame.origin.x - 15, self.upvote.frame.origin.y - 15, self.upvote.frame.size.width + self.upvoteCount.frame.size.width + 30, self.upvote.frame.size.height + self.upvoteCount.frame.size.height + 30), point);
+}
+
+- (BOOL)checkDownvoteTap:(CGPoint)point{
+    return CGRectContainsPoint(CGRectMake(self.downvote.frame.origin.x - 15, self.downvote.frame.origin.y - 15, self.downvote.frame.size.width + self.downvoteCount.frame.size.width + 30, self.downvote.frame.size.height + self.downvoteCount.frame.size.height + 30), point);
+}
+
 - (void)displayDiscussion{
     self.upvoteCount.hidden = YES;
     self.downvoteCount.hidden = YES;

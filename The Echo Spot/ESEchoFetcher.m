@@ -154,11 +154,40 @@ typedef enum {
     return echos;
 }
 
++ (BOOL)voteOnPostType: (NSString *)type withID: (int)echoID withValue: (int)voteType{
+    
+    NSString *post = [NSString stringWithFormat:@"user_id=%i&target_type=%@&target_id=%i&value=%i", [[ESAuthenticator sharedAuthenticator] currentUser], type, echoID, voteType];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:[self voteURL]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    NSError *error;
+    NSURLResponse *response;
+    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if(error){
+        NSLog(@"%@", [error description]);
+    }
+    NSString *str=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+    if([str isEqualToString:@"voted"]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 + (NSString *)usernameForCurrentUser{
     NSDictionary *data = (NSDictionary *)[self getDataForURL:[self usernameURL]];
     return data[@"username"];
 }
 
++ (NSString *)voteURL{
+    return [NSString stringWithFormat:@"%@vote", BASE_URL];
+}
 + (NSString *)echosForUserURL:(int)user{
     return [NSString stringWithFormat:@"%@echo/%i/%i", BASE_URL, user, user];
 }

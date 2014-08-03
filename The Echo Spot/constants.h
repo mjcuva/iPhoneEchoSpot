@@ -21,6 +21,6 @@
 #define INPUT_BACKGROUND [UIColor colorWithRed:244/255.0f green:238/255.0f blue:240/255.0f alpha:1.0f]
 
 
-#define BASE_URL @"http://evening-chamber-3257.herokuapp.com/api/1/"
+#define BASE_URL @"https://evening-chamber-3257.herokuapp.com/api/1/"
 #define LOGIN_URL @"user/login"
 #define SIGNUP_URL @"user/create"

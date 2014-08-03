@@ -19,4 +19,6 @@
 
 + (NSArray *)echosForUser:(int)user;
 
++ (BOOL)voteOnPostType: (NSString *)type withID: (int)echoID withValue: (int)voteType;
+
 @end

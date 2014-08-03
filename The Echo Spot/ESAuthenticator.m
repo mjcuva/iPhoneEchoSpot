@@ -39,11 +39,24 @@ static int currentUser = 0;
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"EchoSpot" accessGroup:nil];
     NSString *userID = [keychainItem objectForKey:(__bridge id)kSecAttrAccount];
     // Need to check if valid id and access key
-    if(![userID isEqualToString:@""]){
+    if(![userID isEqualToString:@""] && [self isValidUser:[userID intValue]]){
         currentUser = [userID intValue];
         return YES;
     }else{
+        [self logout];
         return NO;
+    }
+}
+
+- (BOOL)isValidUser: (int)userID{
+    NSString *urlString = [NSString stringWithFormat:@"%@user/%i", BASE_URL, userID];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *json = [NSData dataWithContentsOfURL: url options:NSDataReadingMappedIfSafe error:NULL];
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:NULL];
+    if([jsonObject isKindOfClass:[NSNull class]]){
+        return NO;
+    }else{
+        return YES;
     }
 }
 

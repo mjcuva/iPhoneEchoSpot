@@ -74,6 +74,14 @@
     return [self.echoView checkOpenEchosTap:point];
 }
 
+- (BOOL)checkUpvoteTap:(CGPoint)point{
+    return [self.echoView checkUpvoteTap:point];
+}
+
+- (BOOL)checkDownvoteTap:(CGPoint)point{
+    return [self.echoView checkDownvoteTap:point];
+}
+
 - (void)setIsComment:(BOOL)isComment{
     _isComment = YES;
     [self.echoView displayComment];
