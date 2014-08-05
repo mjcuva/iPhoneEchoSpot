@@ -169,7 +169,12 @@
     if(self.echos[indexPath.row] == self.openEcho){
         return self.openCellHeight;
     }else{
-        return 88;
+        ESEcho *openEcho = self.echos[indexPath.row];
+        if(!(openEcho.imageThumbURL == nil)){
+            return 218;
+        }else{
+            return 88;
+        }
     }
 }
 
@@ -212,6 +217,7 @@
     cell.downvotes = echo.votesDown;
     cell.activity = echo.activity;
     cell.voteStatus = echo.voteStatus;
+    cell.image = echo.image;
     
     cell.userInteractionEnabled = YES;
     
@@ -311,7 +317,7 @@
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
     if(self.tableView.contentSize.height - VIEW_ZERO - cell.frame.origin.y > self.tableView.frame.size.height){
-        [self.tableView setContentOffset:CGPointMake(0, indexPath.row * 88 + VIEW_ZERO) animated:YES];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
 

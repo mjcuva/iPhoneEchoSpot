@@ -19,6 +19,9 @@
 @property (nonatomic) NSInteger activity;
 @property (nonatomic) BOOL isComment;
 @property (nonatomic) NSInteger voteStatus;
+@property (nonatomic, strong) NSURL *imageThumbURL;
+@property (nonatomic, strong) NSURL *imageFullURL;
+@property (nonatomic, strong) UIImage *image;
 
 - (NSInteger)desiredHeight;
 

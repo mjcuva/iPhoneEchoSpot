@@ -92,4 +92,19 @@
     self.echoView.voteStatus = voteStatus;
 }
 
+- (void)setImageThumbURL:(NSURL *)imageThumbURL{
+    _imageThumbURL = imageThumbURL;
+    self.echoView.imageThumbURL = _imageThumbURL;
+}
+
+- (void)setImageFullURL:(NSURL *)imageFullURL{
+    _imageFullURL = imageFullURL;
+    self.echoView.imageFullURL = _imageFullURL;
+}
+
+- (void)setImage:(UIImage *)image{
+    _image = image;
+    self.echoView.image = image;
+}
+
 @end

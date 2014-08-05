@@ -15,7 +15,9 @@
 
 @property (strong, nonatomic) NSString *title;
 @property (nonatomic) NSInteger echoID;
-@property (strong, nonatomic) NSURL *imageURL;
+@property (strong, nonatomic) NSURL *imageThumbURL;
+@property (strong, nonatomic) NSURL *imageFullURL;
+@property (strong, nonatomic) UIImage *image;
 @property (nonatomic) NSInteger votesUp;
 @property (nonatomic) NSInteger votesDown;
 @property (nonatomic) NSInteger activity;
@@ -24,5 +26,4 @@
 @property (strong, nonatomic) ESCategory *category;
 @property (strong, nonatomic) ESUser *author;
 @property (nonatomic) NSInteger voteStatus;
-
 @end

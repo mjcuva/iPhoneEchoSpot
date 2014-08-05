@@ -54,7 +54,19 @@
         ESEcho *newEcho = [[ESEcho alloc] init];
         newEcho.title = echo[@"title"];
         newEcho.echoID = [echo[@"id"] intValue];
-        newEcho.imageURL = [NSURL URLWithString:echo[@"imageURL"]];
+        
+        if([echo[@"thumbnail_url"] isEqualToString:@""]){
+            newEcho.imageThumbURL = nil;
+            newEcho.imageFullURL = nil;
+        }else{
+
+            newEcho.imageThumbURL = [NSURL URLWithString:echo[@"thumbnail_url"]];
+            newEcho.imageFullURL = [NSURL URLWithString:echo[@"original_url"]];
+            NSData *data = [NSData dataWithContentsOfURL:newEcho.imageFullURL];
+            UIImage *image = [UIImage imageWithData:data];
+            newEcho.image = image;
+        }
+
         
         if([echo[@"votes_up"] isKindOfClass:[NSNull class]]){
             newEcho.votesUp = 0;

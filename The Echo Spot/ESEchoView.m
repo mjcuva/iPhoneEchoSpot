@@ -23,6 +23,7 @@
 @property (strong, nonatomic) UILabel *commentCount;
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UILabel *userLabel;
+@property (strong, nonatomic) UIImageView *imageView;
 
 @property (strong, nonatomic) UIButton *openComments;
 
@@ -34,10 +35,10 @@
 
 #define TOP_PADDING 10
 #define DETAIL_PADDING 10
-#define END_PADDING 40
+#define END_PADDING 45
 
 #define BUTTON_LEFT_MARGIN 20
-#define BUTTON_OFFSET 10
+#define BUTTON_OFFSET 5
 #define BUTTON_SEPERATION 35
 
 #define TIME_LABEL_OFFSET 35
@@ -57,6 +58,10 @@
         self.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         self.detailLabel.lineBreakMode = NSLineBreakByCharWrapping;
         self.detailLabel.textColor = [[ThemeManager sharedManager] fontColor];
+        
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.detailLabel.frame.origin.y + self.detailLabel.frame.size.height + 10, self.frame.size.width, 0)];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill; 
+        self.imageView.clipsToBounds = YES;
         
         UIImage *upvoteImage = [[UIImage imageNamed:@"upvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage *downvoteImage = [[UIImage imageNamed:@"downvote.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -95,6 +100,7 @@
         
         [self addSubview:self.titleLabel];
         [self addSubview:self.detailLabel];
+        [self addSubview:self.imageView];
         [self addSubview:self.upvote];
         [self addSubview:self.downvote];
         [self addSubview:self.comment];
@@ -111,13 +117,22 @@
     
     self.frame = CGRectMake(0, 0, self.frame.size.width, [self desiredHeight]);
     
+//    if([self.echoContent isEqualToString:@""]){
+//        self.imageView.frame = CGRectMake(0, self.detailLabel.frame.origin.y + self.detailLabel.frame.size.height - DETAIL_PADDING, self.frame.size.width, self.imageView.frame.size.height);
+//    }else{
+//        self.imageView.frame = CGRectMake(0, self.detailLabel.frame.origin.y + self.detailLabel.frame.size.height + 10, self.frame.size.width, self.imageView.frame.size.height);
+//    }
+    
+    self.imageView.frame = CGRectMake(0, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 10, self.frame.size.width, self.imageView.frame.size.height);
+
+    
     if(self.discussion){
         self.detailLabel.frame = CGRectMake(15, TOP_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
     }else if(self.isComment){
 //        self.detailLabel.backgroundColor = [UIColor blackColor];
         self.detailLabel.frame = CGRectMake(15, TOP_PADDING, self.frame.size.width - 45, self.detailLabel.frame.size.height);
     }else{
-        self.detailLabel.frame = CGRectMake(15, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
+        self.detailLabel.frame = CGRectMake(15, self.imageView.frame.origin.y + self.imageView.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
     }
     
     if(self.voteStatus == 1){
@@ -130,6 +145,7 @@
         self.downvote.image = [UIImage imageNamed:@"downvote"];
         self.upvote.image = [UIImage imageNamed:@"upvote"];
     }
+
     
     self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
     self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
@@ -207,14 +223,54 @@
     [self updateControlFrames];
 }
 
+//- (void)setImageThumbURL:(NSURL *)imageThumbURL{
+//    _imageThumbURL = imageThumbURL;
+//    if(imageThumbURL != nil){
+//        NSData *data = [NSData dataWithContentsOfURL:_imageThumbURL];
+//        UIImage *image = [UIImage imageWithData:data];
+//        self.imageView.image = image;
+//        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, 100);
+//        [self updateControlFrames];
+//    }
+//}
+//
+//- (void)setImageFullURL:(NSURL *)imageFullURL{
+//    _imageFullURL = imageFullURL;
+//    if(imageFullURL != nil){
+//        NSData *data = [NSData dataWithContentsOfURL:_imageFullURL];
+//        UIImage *image = [UIImage imageWithData:data];
+//        self.imageView.image = image;
+//        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, 100);
+//        [self updateControlFrames];
+//    }
+//}
+
+- (void)setImage:(UIImage *)image{
+    _image = image;
+    if(image != nil){
+        self.imageView.image = image;
+        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, 100);
+        [self updateControlFrames];
+    }else{
+        self.imageView.image = nil;
+        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, 0);
+        [self updateControlFrames];
+    }
+}
+
 - (NSInteger)desiredHeight{
     if([self.echoContent isEqualToString:@""]){
-        return 88;
+        int padding = 0;
+        if(self.imageView.frame.size.height > 0){
+            padding = 30;
+        }
+        return 88 + self.imageView.frame.size.height + padding;
     }
     if(self.discussion || self.isComment){
-        return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING;
+        return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING + self.imageView.frame.size.height;
     }else{
-        return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING;
+
+        return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING + self.imageView.frame.size.height;
     }
 }
 

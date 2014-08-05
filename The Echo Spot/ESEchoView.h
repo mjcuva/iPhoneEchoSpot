@@ -18,6 +18,10 @@
 @property (nonatomic) NSInteger downvotes;
 @property (nonatomic) NSInteger activity;
 
+@property (strong, nonatomic) NSURL *imageThumbURL;
+@property (strong, nonatomic) NSURL *imageFullURL;
+@property (strong, nonatomic) UIImage *image;
+
 @property (nonatomic) NSInteger voteStatus;
  
 - (NSInteger)desiredHeight;
