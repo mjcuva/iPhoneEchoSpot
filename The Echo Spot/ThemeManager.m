@@ -29,8 +29,8 @@
 }
 
 - (void)configureTheme{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *theme = [defaults stringForKey:@"theme"];
+
+    NSString *theme = @"redwhite";
     
     if([theme isEqualToString:@"greenwhite"]){
         self.themeColor = GREEN_COLOR;

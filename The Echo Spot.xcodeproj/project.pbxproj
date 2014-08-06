@@ -42,7 +42,6 @@
 		49E582D6194D35D200BBD075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D5194D35D200BBD075 /* Security.framework */; };
 		49E582D8194D35DB00BBD075 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D7194D35DB00BBD075 /* SystemConfiguration.framework */; };
 		49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */; };
-		49EC303A1969E37600D8C702 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49EC30391969E37600D8C702 /* Settings.bundle */; };
 		49EC303D1969EBD900D8C702 /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC303C1969EBD900D8C702 /* ThemeManager.m */; };
 		49EC7211197AF7DA0037C4FC /* ESCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7210197AF7DA0037C4FC /* ESCommentVC.m */; };
 		49EC7214197B0ACE0037C4FC /* ESEchoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7213197B0ACE0037C4FC /* ESEchoView.m */; };
@@ -120,7 +119,6 @@
 		49E582E2194D38D000BBD075 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		49E582E4194D38D000BBD075 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		49E582E5194D38D000BBD075 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
-		49EC30391969E37600D8C702 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		49EC303B1969EBD900D8C702 /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
 		49EC303C1969EBD900D8C702 /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
 		49EC720F197AF7DA0037C4FC /* ESCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCommentVC.h; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 		499FB5B11937DD5E00F4C882 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				49EC30391969E37600D8C702 /* Settings.bundle */,
 				499FB5B21937DD5E00F4C882 /* The Echo Spot-Info.plist */,
 				499FB5B31937DD5E00F4C882 /* InfoPlist.strings */,
 				499FB5B61937DD5E00F4C882 /* main.m */,
@@ -427,7 +424,6 @@
 				499FB5B51937DD5E00F4C882 /* InfoPlist.strings in Resources */,
 				4997351119576FBC0058A714 /* testechos.json in Resources */,
 				49E582E8194D38D000BBD075 /* HockeySDKResources.bundle in Resources */,
-				49EC303A1969E37600D8C702 /* Settings.bundle in Resources */,
 				49B8BE54197750E6003D6AA8 /* Podfile in Resources */,
 				499FB5BE1937DD5E00F4C882 /* Main.storyboard in Resources */,
 				49EC721C197C543C0037C4FC /* testcomments.json in Resources */,

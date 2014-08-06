@@ -20,15 +20,6 @@
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
-    
-    // Override point for customization after application launch.
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *appDefaults = [NSDictionary dictionaryWithObject:@"redwhite"
-                                                            forKey:@"theme"];
-    [defaults registerDefaults:appDefaults];
-    [defaults synchronize];
-        
     return YES;
 }
 							
