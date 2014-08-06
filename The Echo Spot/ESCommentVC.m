@@ -25,6 +25,7 @@
 @property (strong, nonatomic) UIView *topReplyView;
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIButton *cancelButton;
+@property (strong, nonatomic) UISwitch *anonSwitch;
 
 @property (strong, nonatomic) UITableView *commentsTableView;
 
@@ -63,6 +64,7 @@
     self.parentEchoView.upvotes = self.echo.votesUp;
     self.parentEchoView.downvotes = self.echo.votesDown;
     self.parentEchoView.activity = self.echo.activity;
+    self.parentEchoView.image = self.echo.image;
     
     self.parentEchoView.frame = CGRectMake(0, 0, self.view.frame.size.width, [self.parentEchoView desiredHeight]);
     
@@ -326,6 +328,17 @@
     self.topReplyView.backgroundColor = [[ThemeManager sharedManager] themeColor];
     [self.view addSubview:self.topReplyView];
     
+    
+    UILabel *anonLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 100, 44)];
+    anonLabel.text = @"Anonymous";
+    anonLabel.textColor = [UIColor whiteColor];
+    
+    self.anonSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(anonLabel.frame.size.width + 5, 0, 75, 44)];
+    self.anonSwitch.center = CGPointMake(self.anonSwitch.center.x, self.topReplyView.frame.size.height / 2);
+    
+    [self.topReplyView addSubview:anonLabel];
+    [self.topReplyView addSubview:self.anonSwitch];
+    
     self.postButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 75, 0, 75, 44)];
     [self.postButton setTitle:@"Post" forState:UIControlStateNormal];
     [self.postButton addTarget:self action:@selector(postReply) forControlEvents:UIControlEventTouchUpInside];
@@ -394,7 +407,7 @@
 
 - (void)postReply{
     if(self.activeTextView.tag == 0){
-        BOOL success = [ESEchoFetcher postComment:self.activeTextView.text onEchoID:(int)self.echo.echoID anonymously:NO];
+        BOOL success = [ESEchoFetcher postComment:self.activeTextView.text onEchoID:(int)self.echo.echoID anonymously:self.anonSwitch.selected];
         if(!success){
             NSLog(@"OOPS");
         }
@@ -403,7 +416,7 @@
         [self loadData];
     }else if(self.activeTextView.tag == 1){
         [self closeReply];
-        BOOL success = [ESEchoFetcher postDiscussion:self.activeTextView.text onCommentID:(int)self.openComment.commentID anonymously:NO];
+        BOOL success = [ESEchoFetcher postDiscussion:self.activeTextView.text onCommentID:(int)self.openComment.commentID anonymously:self.anonSwitch.selected];
         if(!success){
             NSLog(@"OOPS");
         }
@@ -420,6 +433,14 @@
 
 - (void)closeReply{
     [self.activeTextView endEditing:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.view.window endEditing:YES];
+    }
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)vote: (UITapGestureRecognizer *)sender{
