@@ -62,7 +62,9 @@
 
             newEcho.imageThumbURL = [NSURL URLWithString:echo[@"thumbnail_url"]];
             newEcho.imageFullURL = [NSURL URLWithString:echo[@"original_url"]];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             NSData *data = [NSData dataWithContentsOfURL:newEcho.imageFullURL];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             UIImage *image = [UIImage imageWithData:data];
             newEcho.image = image;
         }
