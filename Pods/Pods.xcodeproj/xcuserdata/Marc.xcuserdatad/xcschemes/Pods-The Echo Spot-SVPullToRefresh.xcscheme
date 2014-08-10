@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FCE426C1247345B7B544E78F"
+               BlueprintIdentifier = "387E33899BF8437987052C85"
                BuildableName = "libPods-The Echo Spot-SVPullToRefresh.a"
                BlueprintName = "Pods-The Echo Spot-SVPullToRefresh"
                ReferencedContainer = "container:Pods.xcodeproj">

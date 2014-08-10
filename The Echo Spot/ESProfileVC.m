@@ -12,7 +12,7 @@
 #import "UIImage+StackBlur.h"
 #import "ESAuthenticator.h"
 #import "ESEchoFetcher.h"
-#import "ESTableViewCell.h"
+#import "ESEchoTableViewCell.h"
 #import "ESCommentVC.h"
 
 @interface ESProfileVC () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
@@ -90,7 +90,7 @@
     self.tableView.tableHeaderView = invisibleHeader;
     [self.view addSubview:self.tableView];
     
-    self.echos = [ESEchoFetcher echosForUser:[ESAuthenticator horribleProgrammingCurrentUser]];
+    self.echos = [ESEchoFetcher echosForUser:[[ESAuthenticator sharedAuthenticator] currentUser]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -106,13 +106,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"EchoCell";
+    static NSString *identifier = @"Echo";
     ESEcho *echo = self.echos[indexPath.item];
     
-    ESTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ESEchoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if(cell == nil){
-        cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[ESEchoTableViewCell alloc] initWithEcho:echo];
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
         
         UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openEcho:)];
@@ -128,20 +128,11 @@
     }
     
     
-    cell.echoTitle = echo.title;
-    
     if(self.echos[indexPath.row] == self.openEcho){
-        cell.echoContent = echo.content;
+        cell.isOpen = YES;
     }else{
-        cell.echoContent = @"";
+        cell.isOpen = NO;
     }
-    
-    cell.created = echo.created;
-    cell.username = echo.author.username;
-    cell.upvotes = echo.votesUp;
-    cell.downvotes = echo.votesDown;
-    cell.activity = echo.activity;
-    cell.voteStatus = echo.voteStatus;
     
     cell.userInteractionEnabled = YES;
     
@@ -153,7 +144,7 @@
     
     NSIndexPath *row = [self.tableView indexPathForRowAtPoint:point];
     NSIndexPath *startRow = self.openRow;
-    ESTableViewCell *cell = (ESTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
+    ESEchoTableViewCell *cell = (ESEchoTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
     
     if([cell checkOpenEchosTap:[self.view convertPoint:point toView:cell]] && self.echos[row.item] == self.openEcho){
         [self performSegueWithIdentifier:@"showComments" sender:self];
@@ -161,11 +152,11 @@
         
         if(self.echos[row.item] == self.openEcho){
             self.openEcho = nil;
-            cell.echoContent = @"";
+            cell.isOpen = NO;
             self.openRow = nil;
         }else{
             self.openEcho = self.echos[row.item];
-            cell.echoContent = self.openEcho.content;
+            cell.isOpen = YES;
             self.openRow = row;
             self.openCellHeight = [cell desiredHeight];
         }

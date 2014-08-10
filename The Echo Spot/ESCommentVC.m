@@ -12,7 +12,7 @@
 #import "constants.h"
 #import "ESEchoFetcher.h"
 #import "ESComment.h"
-#import "ESTableViewCell.h"
+#import "ESCommentTableViewCell.h"
 #import "ESDiscussion.h"
 #import "ESAuthenticator.h"
 #import "ESAuthVC.h"
@@ -131,9 +131,10 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ESTableViewCell *cell = [[ESTableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
-    cell.echoContent = ((ESComment *)self.comments[indexPath.item]).comment_text;
-    cell.isComment = YES;
+    
+    ESComment *comment = self.comments[indexPath.item];
+    
+    ESCommentTableViewCell *cell = [[ESCommentTableViewCell alloc] initWithComment:comment];
     if(self.openComment == self.comments[indexPath.row]){
         ESComment *comment = self.comments[indexPath.row];
         self.discussionViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
@@ -176,11 +177,10 @@
     static NSString *identifier = @"CommentCell";
     ESComment *comment = self.comments[indexPath.item];
     
-    ESTableViewCell *cell = [self.commentsTableView dequeueReusableCellWithIdentifier:identifier];
+    ESCommentTableViewCell *cell = [self.commentsTableView dequeueReusableCellWithIdentifier:identifier];
     
     if(cell == nil){
-        cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.isComment = YES;
+        cell = [[ESCommentTableViewCell alloc] initWithComment:comment];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
         
@@ -194,15 +194,6 @@
     }else{
         cell.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
     }
-    
-    cell.echoContent = comment.comment_text;
-    
-    cell.created = comment.created;
-    cell.username = comment.author.username;
-    cell.upvotes = comment.votesUp;
-    cell.downvotes = comment.votesDown;
-    cell.activity = [comment.discussions count];
-    cell.voteStatus = comment.voteStatus;
     
     if(self.openComment == self.comments[indexPath.item]){
         self.discussionViews.frame = CGRectMake(self.discussionViews.frame.origin.x, [cell desiredHeight], self.discussionViews.frame.size.width, self.discussionViews.frame.size.height);
@@ -220,7 +211,7 @@
     NSIndexPath *row = [self.commentsTableView indexPathForRowAtPoint:point];
     NSIndexPath *startRow = self.openRow;
     
-    ESTableViewCell *cell = (ESTableViewCell *)[self.commentsTableView cellForRowAtIndexPath:row];
+    ESCommentTableViewCell *cell = (ESCommentTableViewCell *)[self.commentsTableView cellForRowAtIndexPath:row];
     
     ESComment *tappedComment = self.comments[row.item];
     
@@ -266,39 +257,47 @@
     }
 }
 
-- (void)voteOnCell: (ESTableViewCell *)cell comment: (ESComment *)comment withValue: (int)vote{
+- (void)voteOnCell: (ESCommentTableViewCell *)cell comment: (ESComment *)comment withValue: (int)vote{
     if(vote == 1){
         int voteResult = 1;
-        if(cell.voteStatus == 1){
+        if(comment.voteStatus == 1){
             voteResult = 0;
-            cell.upvotes -= 1;
-        }else if(cell.voteStatus == -1){
-            cell.downvotes -= 1;
-            cell.upvotes += 1;
+            comment.votesUp -= 1;
+        }else if(comment.voteStatus == -1){
+            comment.votesDown -= 1;
+            comment.votesUp += 1;
         }else{
-            cell.upvotes += 1;
+            comment.votesUp += 1;
         }
         
-        cell.voteStatus = voteResult;
         comment.voteStatus = voteResult;
+
+        cell.comment = comment;
         
-        [ESEchoFetcher voteOnPostType:@"Comment" withID:(int)comment.commentID withValue:1];
+        dispatch_queue_t vote = dispatch_queue_create("vote", nil);
+        dispatch_async(vote, ^{
+           [ESEchoFetcher voteOnPostType:@"Comment" withID:(int)comment.commentID withValue:1]; 
+        });
     }else{
         
         int voteResult = -1;
-        if(cell.voteStatus == -1){
+        if(comment.voteStatus == -1){
             voteResult = 0;
-            cell.downvotes -= 1;
-        }else if(cell.voteStatus == 1){
-            cell.upvotes -= 1;
-            cell.downvotes += 1;
+            comment.votesDown -= 1;
+        }else if(comment.voteStatus == 1){
+            comment.votesUp -= 1;
+            comment.votesDown += 1;
         }else{
-            cell.downvotes += 1;
+            comment.votesDown += 1;
         }
         
-        cell.voteStatus = voteResult;
         comment.voteStatus = voteResult;
-        [ESEchoFetcher voteOnPostType:@"Comment" withID:(int)comment.commentID withValue:-1];
+        cell.comment = comment;
+        
+        dispatch_queue_t vote = dispatch_queue_create("vote", nil);
+        dispatch_async(vote, ^{
+           [ESEchoFetcher voteOnPostType:@"Comment" withID:(int)comment.commentID withValue:-1]; 
+        });
     }
 }
 
@@ -312,7 +311,7 @@
     [self.addDiscussion removeFromSuperview];
 }
 
-- (void)scrollToIndexPath: (NSIndexPath *)indexPath withCell: (ESTableViewCell *)cell{
+- (void)scrollToIndexPath: (NSIndexPath *)indexPath withCell: (ESCommentTableViewCell *)cell{
     if(self.commentsTableView.contentSize.height - cell.frame.origin.y + self.commentsTableView.tableHeaderView.frame.size.height > self.commentsTableView.frame.size.height + self.commentsTableView.tableHeaderView.frame.size.height){
         [self.commentsTableView setContentOffset:CGPointMake(0, indexPath.row * cell.frame.size.height + self.commentsTableView.tableHeaderView.frame.size.height) animated:YES];
     }
@@ -483,7 +482,10 @@
         self.parentEchoView.voteStatus = voteResult;
         self.echo.voteStatus = voteResult;
         
-        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:1];
+        dispatch_queue_t vote = dispatch_queue_create("vote", nil);
+        dispatch_async(vote, ^{
+            [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:1];
+        });
     }else{
         
         int voteResult = -1;
@@ -499,7 +501,11 @@
         
         self.parentEchoView.voteStatus = voteResult;
         self.echo.voteStatus = voteResult;
-        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:-1];
+        
+        dispatch_queue_t vote = dispatch_queue_create("vote", nil);
+        dispatch_async(vote, ^{
+            [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)self.echo.echoID withValue:-1];
+        });
     }
 }
 

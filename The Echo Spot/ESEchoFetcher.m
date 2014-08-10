@@ -151,6 +151,7 @@
             [discussions addObject:newDiscussion];
         }
         newComment.discussions = discussions;
+        newComment.activity = [discussions count];
         
         [returnArray addObject:newComment];
         
@@ -250,7 +251,7 @@
 }
 
 + (NSString *)usernameURL{
-    return [NSString stringWithFormat:@"%@%@/%i", BASE_URL, @"user", [ESAuthenticator horribleProgrammingCurrentUser]];
+    return [NSString stringWithFormat:@"%@%@/%i", BASE_URL, @"user", [[ESAuthenticator sharedAuthenticator] currentUser]];
 }
 
 + (NSString *)nameForSortType: (sortType)type{

@@ -9,7 +9,7 @@
 #import "ESHomeTVC.h"
 #import "ESEcho.h"
 #import "ESEchoFetcher.h"
-#import "ESTableViewCell.h"
+#import "ESEchoTableViewCell.h"
 #import "constants.h"
 #import "ThemeManager.h"
 #import "ESCommentVC.h"
@@ -184,10 +184,10 @@
     static NSString *identifier = @"EchoCell";
     ESEcho *echo = self.echos[indexPath.item];
     
-    ESTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ESEchoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if(cell == nil){
-        cell = [[ESTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[ESEchoTableViewCell alloc] initWithEcho:echo];
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
         
         UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openEcho:)];
@@ -203,21 +203,12 @@
     }
     
     
-    cell.echoTitle = echo.title;
     
     if(self.echos[indexPath.row] == self.openEcho){
-        cell.echoContent = echo.content;
+        cell.isOpen = YES;
     }else{
-        cell.echoContent = @"";
+        cell.isOpen = NO;
     }
-    
-    cell.created = echo.created;
-    cell.username = echo.author.username;
-    cell.upvotes = echo.votesUp;
-    cell.downvotes = echo.votesDown;
-    cell.activity = echo.activity;
-    cell.voteStatus = echo.voteStatus;
-    cell.image = echo.image;
     
     cell.userInteractionEnabled = YES;
     
@@ -231,7 +222,7 @@
     
     NSIndexPath *row = [self.tableView indexPathForRowAtPoint:point];
     NSIndexPath *startRow = self.openRow;
-    ESTableViewCell *cell = (ESTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
+    ESEchoTableViewCell *cell = (ESEchoTableViewCell *)[self.tableView cellForRowAtIndexPath:row];
     ESEcho *tappedEcho = self.echos[row.item];
     
     if([cell checkOpenEchosTap:[self.view convertPoint:point toView:cell]] && self.echos[row.item] == self.openEcho){
@@ -256,11 +247,11 @@
     
         if(self.echos[row.item] == self.openEcho){
             self.openEcho = nil;
-            cell.echoContent = @"";
+            cell.isOpen = NO;
             self.openRow = nil;
         }else{
             self.openEcho = self.echos[row.item];
-            cell.echoContent = self.openEcho.content;
+            cell.isOpen = YES;
             self.openRow = row;
             self.openCellHeight = [cell desiredHeight];
         }
@@ -279,43 +270,50 @@
     [self loadDataWithCompletion:nil];
 }
 
-- (void)voteOnCell: (ESTableViewCell *)cell echo: (ESEcho *)echo withValue: (int)vote{
+- (void)voteOnCell: (ESEchoTableViewCell *)cell echo: (ESEcho *)echo withValue: (int)vote{
     if(vote == 1){
         int voteResult = 1;
-        if(cell.voteStatus == 1){
+        if(echo.voteStatus == 1){
             voteResult = 0;
-            cell.upvotes -= 1;
-        }else if(cell.voteStatus == -1){
-            cell.downvotes -= 1;
-            cell.upvotes += 1;
+            echo.votesUp -= 1;
+        }else if(echo.voteStatus == -1){
+            echo.votesDown -= 1;
+            echo.votesUp += 1;
         }else{
-            cell.upvotes += 1;
+            echo.votesUp += 1;
         }
         
-        cell.voteStatus = voteResult;
         echo.voteStatus = voteResult;
+        cell.echo = echo;
         
-        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)echo.echoID withValue:1];
+        dispatch_queue_t vote = dispatch_queue_create("vote", nil);
+        dispatch_async(vote, ^{
+           [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)echo.echoID withValue:1]; 
+        });
     }else{
         
         int voteResult = -1;
-        if(cell.voteStatus == -1){
+        if(echo.voteStatus == -1){
             voteResult = 0;
-            cell.downvotes -= 1;
-        }else if(cell.voteStatus == 1){
-            cell.upvotes -= 1;
-            cell.downvotes += 1;
+            echo.votesDown -= 1;
+        }else if(echo.voteStatus == 1){
+            echo.votesUp -= 1;
+            echo.votesDown += 1;
         }else{
-            cell.downvotes += 1;
+            echo.votesDown += 1;
         }
         
-        cell.voteStatus = voteResult;
         echo.voteStatus = voteResult;
-        [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)echo.echoID withValue:-1];
+        cell.echo = echo;
+        
+        dispatch_queue_t vote = dispatch_queue_create("vote", nil);
+        dispatch_async(vote, ^{
+           [ESEchoFetcher voteOnPostType:@"Echo" withID:(int)echo.echoID withValue:-1]; 
+        });
     }
 }
 
-- (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESTableViewCell *)cell{
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath withCell:(ESEchoTableViewCell *)cell{
     if(self.tableView.contentSize.height - VIEW_ZERO - cell.frame.origin.y > self.tableView.frame.size.height){
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }

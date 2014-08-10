@@ -22,10 +22,6 @@ static int currentUser = 0;
     }
 }
 
-+ (int)horribleProgrammingCurrentUser{
-    return currentUser;
-}
-
 + (id)sharedAuthenticator{
     static ESAuthenticator *sharedAuthenticator = nil;
     static dispatch_once_t onceToken;

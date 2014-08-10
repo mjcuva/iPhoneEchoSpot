@@ -4,4 +4,5 @@
 target "The Echo Spot" do
     pod 'NSDate+TimeAgo'
     pod 'SVPullToRefresh'
+    pod 'AFNetworking', '~> 2.2'
 end

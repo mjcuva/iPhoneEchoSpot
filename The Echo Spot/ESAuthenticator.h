@@ -42,6 +42,4 @@
 
 - (int)currentUser;
 
-+ (int)horribleProgrammingCurrentUser;
-
 @end

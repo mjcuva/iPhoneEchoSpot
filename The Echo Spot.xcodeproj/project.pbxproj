@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 491A9B79196095CC00817F22 /* ESNewEchoVC.m */; };
+		491BA0C31997F8AC005082F2 /* ESCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 491BA0C21997F8AC005082F2 /* ESCommentTableViewCell.m */; };
 		495F33C11989C739000F2ED2 /* ESAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F33C01989C739000F2ED2 /* ESAuthVC.m */; };
 		495F33C4198B3F34000F2ED2 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F33C3198B3F34000F2ED2 /* KeychainItemWrapper.m */; };
 		4997351119576FBC0058A714 /* testechos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4997351019576FBC0058A714 /* testechos.json */; };
@@ -36,7 +37,7 @@
 		49C1810B1985957400DF4173 /* ESEchoFetcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */; };
 		49C1810E198603DC00DF4173 /* ESAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C1810D198603DC00DF4173 /* ESAuthenticator.m */; };
 		49C6B10019511D97009C5B77 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582E2194D38D000BBD075 /* HockeySDK.framework */; };
-		49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C895BB194394AF00880796 /* ESTableViewCell.m */; };
+		49C895BC194394AF00880796 /* ESEchoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C895BB194394AF00880796 /* ESEchoTableViewCell.m */; };
 		49E582D2194D35C000BBD075 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D1194D35C000BBD075 /* CoreText.framework */; };
 		49E582D4194D35C900BBD075 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D3194D35C900BBD075 /* QuartzCore.framework */; };
 		49E582D6194D35D200BBD075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E582D5194D35D200BBD075 /* Security.framework */; };
@@ -67,6 +68,8 @@
 		491A9B78196095CC00817F22 /* ESNewEchoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESNewEchoVC.h; sourceTree = "<group>"; };
 		491A9B79196095CC00817F22 /* ESNewEchoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESNewEchoVC.m; sourceTree = "<group>"; };
 		491A9B7B196096ED00817F22 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		491BA0C11997F8AC005082F2 /* ESCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCommentTableViewCell.h; sourceTree = "<group>"; };
+		491BA0C21997F8AC005082F2 /* ESCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCommentTableViewCell.m; sourceTree = "<group>"; };
 		495F33BF1989C739000F2ED2 /* ESAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESAuthVC.h; sourceTree = "<group>"; };
 		495F33C01989C739000F2ED2 /* ESAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESAuthVC.m; sourceTree = "<group>"; };
 		495F33C2198B3F34000F2ED2 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -86,7 +89,7 @@
 		499FB5C21937DD5E00F4C882 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		49B8BE5019735497003D6AA8 /* ESCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCategory.h; sourceTree = "<group>"; };
 		49B8BE5119735497003D6AA8 /* ESCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCategory.m; sourceTree = "<group>"; };
-		49B8BE53197750E6003D6AA8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		49B8BE53197750E6003D6AA8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		49B9241E1939F21B00FB812A /* ESHomeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESHomeTVC.h; sourceTree = "<group>"; };
 		49B9241F1939F21B00FB812A /* ESHomeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESHomeTVC.m; sourceTree = "<group>"; };
 		49BCB9BC193F9DC80062D404 /* ESEcho.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEcho.h; sourceTree = "<group>"; };
@@ -110,8 +113,8 @@
 		49C1810A1985957400DF4173 /* ESEchoFetcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEchoFetcherTests.m; sourceTree = "<group>"; };
 		49C1810C198603DC00DF4173 /* ESAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESAuthenticator.h; sourceTree = "<group>"; };
 		49C1810D198603DC00DF4173 /* ESAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESAuthenticator.m; sourceTree = "<group>"; };
-		49C895BA194394AF00880796 /* ESTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTableViewCell.h; sourceTree = "<group>"; };
-		49C895BB194394AF00880796 /* ESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTableViewCell.m; sourceTree = "<group>"; };
+		49C895BA194394AF00880796 /* ESEchoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEchoTableViewCell.h; sourceTree = "<group>"; };
+		49C895BB194394AF00880796 /* ESEchoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEchoTableViewCell.m; sourceTree = "<group>"; };
 		49E582D1194D35C000BBD075 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		49E582D3194D35C900BBD075 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		49E582D5194D35D200BBD075 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -252,8 +255,10 @@
 		49C180E71982FE2800DF4173 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				49C895BA194394AF00880796 /* ESTableViewCell.h */,
-				49C895BB194394AF00880796 /* ESTableViewCell.m */,
+				49C895BA194394AF00880796 /* ESEchoTableViewCell.h */,
+				49C895BB194394AF00880796 /* ESEchoTableViewCell.m */,
+				491BA0C11997F8AC005082F2 /* ESCommentTableViewCell.h */,
+				491BA0C21997F8AC005082F2 /* ESCommentTableViewCell.m */,
 				49F10D6D195F632000F5F8D0 /* AutosizingLabel.h */,
 				49F10D6E195F632000F5F8D0 /* AutosizingLabel.m */,
 				49EC7212197B0ACE0037C4FC /* ESEchoView.h */,
@@ -494,7 +499,7 @@
 			files = (
 				49EC7214197B0ACE0037C4FC /* ESEchoView.m in Sources */,
 				49EC7211197AF7DA0037C4FC /* ESCommentVC.m in Sources */,
-				49C895BC194394AF00880796 /* ESTableViewCell.m in Sources */,
+				49C895BC194394AF00880796 /* ESEchoTableViewCell.m in Sources */,
 				49EC7217197C4EC90037C4FC /* ESComment.m in Sources */,
 				49F10D6F195F632000F5F8D0 /* AutosizingLabel.m in Sources */,
 				49BCB9C4193FA6A50062D404 /* ESEchoFetcher.m in Sources */,
@@ -513,6 +518,7 @@
 				49EC721A197C51B70037C4FC /* ESDiscussion.m in Sources */,
 				491A9B7A196095CC00817F22 /* ESNewEchoVC.m in Sources */,
 				495F33C4198B3F34000F2ED2 /* KeychainItemWrapper.m in Sources */,
+				491BA0C31997F8AC005082F2 /* ESCommentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
