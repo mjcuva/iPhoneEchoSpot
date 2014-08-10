@@ -1,0 +1,1 @@
+PODS_THE_ECHO_SPOT_AFNETWORKING_OTHER_LDFLAGS = -framework CoreGraphics -framework MobileCoreServices -framework Security -framework SystemConfiguration
