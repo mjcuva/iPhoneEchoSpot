@@ -12,10 +12,13 @@
 #import "ESDiscussion.h"
 #import "constants.h"
 #import "ESAuthenticator.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "AFURLSessionManager.h"
 
 @implementation ESEchoFetcher
 
 + (NSArray *)getDataForURL: (NSString *)url{
+    
     NSError *err;
     NSURL *jsonUrl = [NSURL URLWithString:url];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -151,7 +154,7 @@
             [discussions addObject:newDiscussion];
         }
         newComment.discussions = discussions;
-        newComment.activity = [discussions count];
+        newComment.activity = (int) [discussions count];
         
         [returnArray addObject:newComment];
         
@@ -197,6 +200,25 @@
 
 + (BOOL)postEchoWithData:(NSDictionary *)data{
     BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"user_id=%i&content=%@&title=%@&anonymous=%@&category=%@&image=null", [[ESAuthenticator sharedAuthenticator] currentUser], data[@"content"], data[@"title"], data[@"anonymous"], data[@"category"]] toURL:[self postEchoURL]];
+    if(data[@"image"]){
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[self postImageURLForEchoID: 1] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            NSData *imgData = UIImageJPEGRepresentation(data[@"image"], 1);
+            [formData appendPartWithFileData:imgData name:@"image"  fileName:[NSString stringWithFormat:@"%@-img", data[@"title"]] mimeType:@"image/jpeg"];
+        } error:nil];
+        
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSProgress *progress = nil;
+        
+        NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            if (error) {
+                NSLog(@"Error: %@", error);
+            } else {
+                NSLog(@"%@ %@", response, responseObject);
+            }
+        }];
+        
+        [uploadTask resume];
+    }
     return success;
 }
 
@@ -231,6 +253,10 @@
 
 + (NSString *)voteURL{
     return [NSString stringWithFormat:@"%@vote", BASE_URL];
+}
+
++ (NSString *)postImageURLForEchoID: (int)echoID{
+    return [NSString stringWithFormat:@"%@photo/%i", BASE_URL, echoID];
 }
 
 + (NSString *)postCommentURL{
