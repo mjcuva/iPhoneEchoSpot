@@ -174,7 +174,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"CommentCell";
+    static NSString *identifier = @"Comment";
     ESComment *comment = self.comments[indexPath.item];
     
     ESCommentTableViewCell *cell = [self.commentsTableView dequeueReusableCellWithIdentifier:identifier];

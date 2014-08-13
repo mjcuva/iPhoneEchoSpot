@@ -19,6 +19,7 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Comment"];
     if (self) {
         self.commentView = [[ESEchoView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        self.comment = comment;
         [self configureView];
         [self.contentView addSubview:self.commentView];
         
