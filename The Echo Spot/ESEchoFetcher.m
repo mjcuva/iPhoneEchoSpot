@@ -217,7 +217,6 @@
         NSLog(@"%@", [error description]);
     }
     NSString *str=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", str);
     if([str isEqualToString:@"success"]){
         return YES;
     }else{

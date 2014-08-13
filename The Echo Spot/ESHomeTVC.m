@@ -181,7 +181,7 @@
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"EchoCell";
+    static NSString *identifier = @"Echo";
     ESEcho *echo = self.echos[indexPath.item];
     
     ESEchoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -193,6 +193,8 @@
         UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openEcho:)];
         
         [cell addGestureRecognizer:toggleEcho];
+    }else{
+        cell.echo = echo;
     }
     
     if(indexPath.row % 2 == 0)

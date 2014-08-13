@@ -21,8 +21,9 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Echo"];
     if(self){
         self.echoView = [[ESEchoView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        [self configureView];
         [self.contentView addSubview:self.echoView];
+        self.echo = echo;
+        [self configureView];
     }
     return self;
 }
@@ -49,6 +50,7 @@
 }
 
 - (void)setIsOpen:(BOOL)isOpen{
+    _isOpen = isOpen;
     [self configureView];
 }
 
