@@ -129,7 +129,7 @@
     self.tableView.backgroundColor = [[ThemeManager sharedManager] darkBackgroundColor];
     self.segmentedControl.backgroundColor = [UIColor whiteColor];
     if([[ThemeManager sharedManager] navBarColor] == [UIColor whiteColor]){
-        self.tableView.separatorColor = [UIColor clearColor];
+        self.tableView.separatorColor = [[ThemeManager sharedManager] themeColor];
         self.navigationController.navigationBar.tintColor = [[ThemeManager sharedManager] themeColor];
         UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
@@ -142,7 +142,7 @@
         UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
         self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        self.tableView.separatorColor = [UIColor colorWithWhite:.93 alpha:1];
+        self.tableView.separatorColor = [[ThemeManager sharedManager] themeColor];
         self.tableView.tintColor = [[ThemeManager sharedManager] themeColor];
         self.segmentedControl.tintColor = [[ThemeManager sharedManager] themeColor];
         [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]], NSForegroundColorAttributeName:[[ThemeManager sharedManager] themeColor] } forState:UIControlStateNormal];

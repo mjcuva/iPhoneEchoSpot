@@ -117,6 +117,8 @@
     
     self.frame = CGRectMake(0, 0, self.frame.size.width, [self desiredHeight]);
     
+    CGFloat buttonOFF = BUTTON_OFFSET;
+    
 //    if([self.echoContent isEqualToString:@""]){
 //        self.imageView.frame = CGRectMake(0, self.detailLabel.frame.origin.y + self.detailLabel.frame.size.height - DETAIL_PADDING, self.frame.size.width, self.imageView.frame.size.height);
 //    }else{
@@ -131,6 +133,7 @@
     }else if(self.isComment){
 //        self.detailLabel.backgroundColor = [UIColor blackColor];
         self.detailLabel.frame = CGRectMake(15, TOP_PADDING, self.frame.size.width - 45, self.detailLabel.frame.size.height);
+        buttonOFF += 20;
     }else{
         self.detailLabel.frame = CGRectMake(15, self.imageView.frame.origin.y + self.imageView.frame.size.height + DETAIL_PADDING, self.frame.size.width - 25, self.detailLabel.frame.size.height);
     }
@@ -147,9 +150,9 @@
     }
 
     
-    self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - BUTTON_OFFSET, self.upvote.frame.size.width, self.upvote.frame.size.height);
-    self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - BUTTON_OFFSET, self.downvote.frame.size.width, self.downvote.frame.size.height);
-    self.comment.frame = CGRectMake(self.upvote.frame.size.width + self.downvote.frame.size.width + (BUTTON_LEFT_MARGIN + BUTTON_SEPERATION * 2), [self desiredHeight] - self.comment.frame.size.height - BUTTON_OFFSET, self.comment.frame.size.width, self.comment.frame.size.height);
+    self.upvote.frame = CGRectMake(BUTTON_LEFT_MARGIN, [self desiredHeight] - self.upvote.frame.size.height - buttonOFF, self.upvote.frame.size.width, self.upvote.frame.size.height);
+    self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - buttonOFF, self.downvote.frame.size.width, self.downvote.frame.size.height);
+    self.comment.frame = CGRectMake(self.upvote.frame.size.width + self.downvote.frame.size.width + (BUTTON_LEFT_MARGIN + BUTTON_SEPERATION * 2), [self desiredHeight] - self.comment.frame.size.height - buttonOFF, self.comment.frame.size.width, self.comment.frame.size.height);
     
     self.upvoteCount.frame = CGRectMake(self.upvote.frame.origin.x + self.upvote.frame.size.width + 5, self.upvote.frame.origin.y, self.upvoteCount.frame.size.width, self.upvoteCount.frame.size.height);
     self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 5, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
@@ -157,6 +160,7 @@
     
     if(self.discussion){
         self.timeLabel.frame = CGRectMake(15, self.commentCount.frame.origin.y, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
+        buttonOFF += 10;
     }else{
         self.timeLabel.frame = CGRectMake(self.frame.size.width - self.timeLabel.frame.size.width - 10, TOP_PADDING + 3, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
     }
@@ -266,8 +270,10 @@
         }
         return 88 + self.imageView.frame.size.height + padding;
     }
-    if(self.discussion || self.isComment){
-        return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING + self.imageView.frame.size.height;
+    if(self.discussion){
+        return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING + self.imageView.frame.size.height + 10;
+    }else if(self.isComment){
+        return self.detailLabel.frame.size.height + TOP_PADDING + END_PADDING + self.imageView.frame.size.height + 20;
     }else{
 
         return self.titleLabel.frame.size.height + self.detailLabel.frame.size.height + TOP_PADDING + DETAIL_PADDING + END_PADDING + self.imageView.frame.size.height;

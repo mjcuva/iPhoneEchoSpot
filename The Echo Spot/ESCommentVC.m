@@ -174,20 +174,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"Comment";
     ESComment *comment = self.comments[indexPath.item];
     
-    ESCommentTableViewCell *cell = [self.commentsTableView dequeueReusableCellWithIdentifier:identifier];
+
     
-    if(cell == nil){
-        cell = [[ESCommentTableViewCell alloc] initWithComment:comment];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, tableView.rowHeight);
-        
-        UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openComment:)];
-        
-        [cell addGestureRecognizer:toggleEcho];
-    }
+
+    ESCommentTableViewCell *cell = [[ESCommentTableViewCell alloc] initWithComment:comment];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, [self tableView:tableView heightForRowAtIndexPath:indexPath]);
+    
+    UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openComment:)];
+    
+    [cell addGestureRecognizer:toggleEcho];
     
     if(indexPath.row % 2 == 1){
         cell.backgroundColor = [[ThemeManager sharedManager] lightBackgroundColor];
