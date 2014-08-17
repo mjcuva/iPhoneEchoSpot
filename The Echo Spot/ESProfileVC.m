@@ -14,6 +14,7 @@
 #import "ESEchoFetcher.h"
 #import "ESEchoTableViewCell.h"
 #import "ESCommentVC.h"
+#import "MBProgressHud.h"
 
 @interface ESProfileVC () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -90,7 +91,23 @@
     self.tableView.tableHeaderView = invisibleHeader;
     [self.view addSubview:self.tableView];
     
-    self.echos = [ESEchoFetcher echosForUser:[[ESAuthenticator sharedAuthenticator] currentUser]];
+    [self loadDataWithCompletion:nil];
+}
+
+- (void)loadDataWithCompletion: (void (^)(void))completion{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = @"Loading";
+    dispatch_queue_t loadEchosQueue = dispatch_queue_create("load echos", NULL);
+    dispatch_async(loadEchosQueue, ^{
+        self.echos = [ESEchoFetcher echosForUser:[[ESAuthenticator sharedAuthenticator] currentUser]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [hud hide:YES];
+            if(completion){
+                completion();
+            }
+        });
+    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
