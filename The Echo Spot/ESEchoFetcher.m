@@ -213,7 +213,7 @@
 + (BOOL)postEchoWithData:(NSDictionary *)data{
     NSString *response = [self postRequestWithData:[NSString stringWithFormat:@"user_id=%i&content=%@&title=%@&anonymous=%@&category=%@&image=null", [[ESAuthenticator sharedAuthenticator] currentUser], data[@"content"], data[@"title"], data[@"anonymous"], data[@"category"]] toURL:[self postEchoURL]];
     NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    if(data[@"image"] && [response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
+    if(data[@"image"] != [NSNull null] && [response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
         NSData *imageData = UIImageJPEGRepresentation(data[@"image"], 1);
         AFHTTPRequestOperation *op = [manager POST:[NSString stringWithFormat:@"photo/%i", [response intValue]] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
@@ -230,6 +230,8 @@
         
         [op start];
             
+        return YES;
+    }else if([response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
         return YES;
     }else{
         return NO;

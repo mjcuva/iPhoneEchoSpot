@@ -10,8 +10,9 @@
 #import "constants.h"
 #import "ThemeManager.h"
 #import "ESEchoFetcher.h"
+#import "MBProgressHud.h"
 
-@interface ESNewEchoVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ESNewEchoVC () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate>
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 // Title
@@ -247,7 +248,25 @@
     }
     
     NSDictionary *data = @{@"title": self.titleInput.text, @"content": self.contentInput.text, @"anonymous": anon, @"image": image, @"category": [self pickerView:self.categoryPicker titleForRow:[self.categoryPicker selectedRowInComponent:0] forComponent: 0]};
-    [ESEchoFetcher postEchoWithData:data];
+    BOOL success = [ESEchoFetcher postEchoWithData:data];
+    if(success){
+        [self showInfoAlert];
+    }
+}
+
+- (void)showInfoAlert {
+    [self.view endEditing:YES];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    hud.mode = MBProgressHUDModeText;
+    [self.view addSubview:hud];
+    hud.delegate = self;
+    hud.labelText = @"Posted!";
+    [hud showWhileExecuting:@selector(waitForTwoSeconds) 
+                   onTarget:self withObject:nil animated:YES];
+}
+
+- (void)waitForTwoSeconds {
+    sleep(2);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

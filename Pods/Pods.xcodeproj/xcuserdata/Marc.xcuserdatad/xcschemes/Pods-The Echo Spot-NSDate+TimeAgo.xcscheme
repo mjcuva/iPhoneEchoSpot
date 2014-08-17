@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F14D98C5F7D04BFB8893D011"
+               BlueprintIdentifier = "0C29F6F8673B4452A5874003"
                BuildableName = "libPods-The Echo Spot-NSDate+TimeAgo.a"
                BlueprintName = "Pods-The Echo Spot-NSDate+TimeAgo"
                ReferencedContainer = "container:Pods.xcodeproj">

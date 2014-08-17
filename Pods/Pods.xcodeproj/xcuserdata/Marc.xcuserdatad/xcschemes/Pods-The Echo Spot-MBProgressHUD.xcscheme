@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "120FE04D9B6B42EFAC35EBFA"
-               BuildableName = "libPods-The Echo Spot-AFNetworking.a"
-               BlueprintName = "Pods-The Echo Spot-AFNetworking"
+               BlueprintIdentifier = "88F9F8556BD945D3896FA935"
+               BuildableName = "libPods-The Echo Spot-MBProgressHUD.a"
+               BlueprintName = "Pods-The Echo Spot-MBProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

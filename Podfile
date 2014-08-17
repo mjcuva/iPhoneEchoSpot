@@ -5,4 +5,5 @@ target "The Echo Spot" do
     pod 'NSDate+TimeAgo'
     pod 'SVPullToRefresh'
     pod 'AFNetworking', '~> 2.2'
+    pod 'MBProgressHUD', '~> 0.8'
 end

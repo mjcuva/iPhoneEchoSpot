@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-The Echo Spot-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-The Echo Spot-NSDate+TimeAgo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>387E33899BF8437987052C85</key>
+		<key>0C29F6F8673B4452A5874003</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6ED18B95AA4A44B483CABA9C</key>
+		<key>120FE04D9B6B42EFAC35EBFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC7C98C8803A49D08CBF6B00</key>
+		<key>7A2C2C8BEFCB4595894ACCCA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F14D98C5F7D04BFB8893D011</key>
+		<key>88F9F8556BD945D3896FA935</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC270DFAAA854FCCBAB30D60</key>
 		<dict>
 			<key>primary</key>
 			<true/>

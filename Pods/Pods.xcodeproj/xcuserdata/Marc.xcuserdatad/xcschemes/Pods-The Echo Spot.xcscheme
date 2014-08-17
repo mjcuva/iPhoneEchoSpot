@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6ED18B95AA4A44B483CABA9C"
+               BlueprintIdentifier = "DC270DFAAA854FCCBAB30D60"
                BuildableName = "libPods-The Echo Spot.a"
                BlueprintName = "Pods-The Echo Spot"
                ReferencedContainer = "container:Pods.xcodeproj">

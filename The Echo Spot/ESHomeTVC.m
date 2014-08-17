@@ -16,6 +16,7 @@
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "ESAuthenticator.h"
 #import "ESAuthVC.h"
+#import "MBProgressHud.h"
 
 @interface ESHomeTVC()
 @property (strong, nonatomic) NSArray *echos;
@@ -55,24 +56,6 @@
     UIImage *image = [[UIImage imageNamed:@"Logo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
     
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.center = CGPointMake(self.view.frame.size.width / 2, 80);
-    [self.tableView addSubview:indicator];
-    [indicator startAnimating];
-    
-    [self loadDataWithCompletion:^{
-        
-        [indicator stopAnimating];
-        [indicator removeFromSuperview];
-        __weak ESHomeTVC *weakself = self;
-        
-        [self.tableView addInfiniteScrollingWithActionHandler:^{
-            // append data to data source, insert new cells at the end of table view
-            [weakself loadNextPage];
-            // call [tableView.infiniteScrollingView stopAnimating] when done
-        }];
-    }];
-    
     self.navigationController.navigationBar.translucent = NO;
     
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Trending", @"Recent", @"Votes"]];
@@ -91,6 +74,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLayout) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     self.currentPage = 0;
+    
+    
+    [self loadDataWithCompletion:^{
+        
+        __weak ESHomeTVC *weakself = self;
+        
+        [self.tableView addInfiniteScrollingWithActionHandler:^{
+            // append data to data source, insert new cells at the end of table view
+            [weakself loadNextPage];
+            // call [tableView.infiniteScrollingView stopAnimating] when done
+        }];
+    }];
 }
 
 - (void)loadNextPage{
@@ -372,6 +367,8 @@
 }
 
 - (void)loadDataWithCompletion: (void (^)(void))completion{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = @"Loading";
     dispatch_queue_t loadEchosQueue = dispatch_queue_create("load echos", NULL);
     dispatch_async(loadEchosQueue, ^{
         sortType sorting = [self getSortType];
@@ -379,8 +376,10 @@
         self.currentPage = 0;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            if(completion)
+           [hud hide:YES];
+            if(completion){
                 completion();
+            }
         });
     });
 }
