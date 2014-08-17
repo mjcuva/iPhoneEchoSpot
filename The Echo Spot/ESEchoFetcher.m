@@ -58,11 +58,10 @@
         newEcho.title = echo[@"title"];
         newEcho.echoID = [echo[@"id"] intValue];
         
-        if([echo[@"thumbnail_url"] isEqualToString:@""]){
+        if([echo[@"original_url"] isEqualToString:@""]){
             newEcho.imageThumbURL = nil;
             newEcho.imageFullURL = nil;
         }else{
-
             newEcho.imageThumbURL = [NSURL URLWithString:echo[@"thumbnail_url"]];
             newEcho.imageFullURL = [NSURL URLWithString:echo[@"original_url"]];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
