@@ -120,6 +120,7 @@
     self.privacyControl = [[UISegmentedControl alloc] initWithItems:@[@"Anonymous", @"Username"]];
     self.privacyControl.frame = CGRectMake(10, self.privacyLabel.frame.origin.y + self.privacyLabel.frame.size.height + 10, self.view.frame.size.width - 20, 50);
     self.privacyControl.tintColor = [[ThemeManager sharedManager] themeColor];
+    self.privacyControl.selectedSegmentIndex = 1;
     
     contentHeight += self.privacyControl.frame.size.height + 10;
     
