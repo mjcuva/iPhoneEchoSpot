@@ -101,7 +101,12 @@
     if(self.echos[indexPath.row] == self.openEcho){
         return self.openCellHeight;
     }else{
-        return 88;
+        ESEcho *openEcho = self.echos[indexPath.row];
+        if(!(openEcho.imageThumbURL == nil)){
+            return 218;
+        }else{
+            return 88;
+        }
     }
 }
 
@@ -118,6 +123,8 @@
         UITapGestureRecognizer *toggleEcho = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openEcho:)];
         
         [cell addGestureRecognizer:toggleEcho];
+    }else{
+        cell.echo = echo;
     }
     
     if(indexPath.row % 2 == 0)
