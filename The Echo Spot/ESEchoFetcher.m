@@ -172,8 +172,12 @@
 + (BOOL)voteOnPostType: (NSString *)type withID: (int)echoID withValue: (int)voteType{
     
     NSString *post = [NSString stringWithFormat:@"user_id=%i&target_type=%@&target_id=%i&value=%i", [[ESAuthenticator sharedAuthenticator] currentUser], type, echoID, voteType];
-    BOOL success = [self postRequestWithData:post toURL:[self voteURL]];
-    return success;
+    NSString *success = [self postRequestWithData:post toURL:[self voteURL]];
+    if([success isEqualToString: @"success"]){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 + (BOOL)postComment:(NSString *)content onEchoID:(int)echoID anonymously:(BOOL)anon{
@@ -183,8 +187,12 @@
     }else{
         anonymous = @"false";
     }
-    BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"echo_id=%i&user_id=%i&comment_text=%@&anonymous=%@", echoID, [[ESAuthenticator sharedAuthenticator] currentUser], content, anonymous] toURL:[self postCommentURL]];
-    return success;
+    NSString *success = [self postRequestWithData:[NSString stringWithFormat:@"echo_id=%i&user_id=%i&comment_text=%@&anonymous=%@", echoID, [[ESAuthenticator sharedAuthenticator] currentUser], content, anonymous] toURL:[self postCommentURL]];
+    if([success isEqualToString:@"success"]){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 + (BOOL)postDiscussion:(NSString *)content onCommentID:(int)commentID anonymously:(BOOL)anon{
@@ -194,35 +202,42 @@
     }else{
         anonymous = @"false";
     }
-    BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"comment_id=%i&user_id=%i&discussion_text=%@&anonymous=%@", commentID, [[ESAuthenticator sharedAuthenticator] currentUser], content, anonymous] toURL:[self postDiscussionURL]];
-    return success;
+    NSString *success = [self postRequestWithData:[NSString stringWithFormat:@"comment_id=%i&user_id=%i&discussion_text=%@&anonymous=%@", commentID, [[ESAuthenticator sharedAuthenticator] currentUser], content, anonymous] toURL:[self postDiscussionURL]];
+    
+    if([success isEqualToString:@"success"]){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 + (BOOL)postEchoWithData:(NSDictionary *)data{
-    BOOL success = [self postRequestWithData:[NSString stringWithFormat:@"user_id=%i&content=%@&title=%@&anonymous=%@&category=%@&image=null", [[ESAuthenticator sharedAuthenticator] currentUser], data[@"content"], data[@"title"], data[@"anonymous"], data[@"category"]] toURL:[self postEchoURL]];
-    if(data[@"image"]){
-        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[self postImageURLForEchoID: 1] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            NSData *imgData = UIImageJPEGRepresentation(data[@"image"], 1);
-            [formData appendPartWithFileData:imgData name:@"image"  fileName:[NSString stringWithFormat:@"%@-img", data[@"title"]] mimeType:@"image/jpeg"];
-        } error:nil];
-        
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-        NSProgress *progress = nil;
-        
-        NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-            if (error) {
-                NSLog(@"Error: %@", error);
-            } else {
-                NSLog(@"%@ %@", response, responseObject);
-            }
+    NSString *response = [self postRequestWithData:[NSString stringWithFormat:@"user_id=%i&content=%@&title=%@&anonymous=%@&category=%@&image=null", [[ESAuthenticator sharedAuthenticator] currentUser], data[@"content"], data[@"title"], data[@"anonymous"], data[@"category"]] toURL:[self postEchoURL]];
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    if(data[@"image"] && [response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
+        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+        NSData *imageData = UIImageJPEGRepresentation(data[@"image"], 1);
+        AFHTTPRequestOperation *op = [manager POST:[NSString stringWithFormat:@"photo/%i", [response intValue]] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
+            [formData appendPartWithFileData:imageData name:@"upload" fileName:[NSString stringWithFormat: @"%@-img.jpg", data[@"title"]] mimeType:@"image/jpeg"];
+        }success:^(AFHTTPRequestOperation *operation, id responseObject){
+            NSLog(@"YES");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+            NSLog(@"Error: %@ ***** %@", operation.responseString, error);
         }];
         
-        [uploadTask resume];
+        op.responseSerializer = [AFHTTPResponseSerializer serializer];
+        op.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+
+        
+        [op start];
+            
+        return YES;
+    }else{
+        return NO;
     }
-    return success;
 }
 
-+ (BOOL)postRequestWithData: (NSString *)post toURL: (NSString *)url{
++ (NSString *)postRequestWithData: (NSString *)post toURL: (NSString *)url{
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     
@@ -239,11 +254,7 @@
         NSLog(@"%@", [error description]);
     }
     NSString *str=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    if([str isEqualToString:@"success"]){
-        return YES;
-    }else{
-        return NO;
-    }
+    return str;
 }
 
 + (NSString *)usernameForCurrentUser{
