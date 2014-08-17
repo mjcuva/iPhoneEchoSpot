@@ -30,9 +30,9 @@
         Password string entered by user
  @return YES if login was successful
 */
-- (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password;
+- (NSString *)loginWithUsername: (NSString *)username andPassword: (NSString *)password;
 
-- (BOOL)createAccountWithUsername: (NSString *)username andPassword: (NSString *)password;
+- (NSString *)createAccountWithUsername: (NSString *)username andPassword: (NSString *)password;
 
 /**
  Logs out user

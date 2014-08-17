@@ -56,7 +56,7 @@ static int currentUser = 0;
     }
 }
 
-- (BOOL)loginWithUsername: (NSString *)username andPassword: (NSString *)password{
+- (NSString *)loginWithUsername: (NSString *)username andPassword: (NSString *)password{
 
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"EchoSpot" accessGroup:nil];
     
@@ -64,27 +64,29 @@ static int currentUser = 0;
     password = [password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     NSString *response = [self postRequestWithUsername:username password:password andURL:[self loginURL]];
+    
+    NSLog(@"%@", response);
         
     NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     if ([response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
         [keychainItem setObject:response forKey:(__bridge id)kSecAttrAccount];
         currentUser = [response intValue];
-        return YES;
+        return response;
     }else{
-        return NO;
+        return response;
     }
 }
 
-- (BOOL)createAccountWithUsername: (NSString *)username andPassword: (NSString *)password{
+- (NSString *)createAccountWithUsername: (NSString *)username andPassword: (NSString *)password{
     
     username = [username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     password = [password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     NSString *response = [self postRequestWithUsername:username password:password andURL:[self signupURL]];
     if ([response isEqualToString:[username componentsSeparatedByString:@"@"][0]]) {
-        return [self loginWithUsername:username andPassword:password];
+        return response;
     }else{
-        return NO;
+        return response;
     }
 }
 

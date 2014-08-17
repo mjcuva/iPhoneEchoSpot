@@ -11,8 +11,9 @@
 #import "UIImage+StackBlur.h"
 #import "constants.h"
 #import "ESAuthenticator.h"
+#import "MBProgressHud.h"
 
-@interface ESAuthVC () <UITextFieldDelegate>
+@interface ESAuthVC () <UITextFieldDelegate, MBProgressHUDDelegate>
 @property (strong, nonatomic) UIView *formView;
 
 
@@ -27,6 +28,8 @@
 @property (strong, nonatomic) UITextField *emailField;
 @property (strong, nonatomic) UITextField *passwordField;
 @property (strong, nonatomic) UILabel *errorLabel;
+
+@property (strong, nonatomic) UISegmentedControl *typeChooser;
 
 @property CGRect formStart;
 @end
@@ -71,14 +74,14 @@
     self.formView = [[UIView alloc] initWithFrame:self.formStart];
     self.formView.backgroundColor = [UIColor whiteColor];
     
-    UISegmentedControl *typeChooser = [[UISegmentedControl alloc] initWithItems:@[@"Log In", @"Try It"]];
-    typeChooser.frame = CGRectMake(WIDTH_PADDING, TOP_PADDING, self.view.frame.size.width - WIDTH_PADDING * 2, SEG_CONTROL_HEIGHT);
-    typeChooser.tintColor = [[ThemeManager sharedManager] themeColor];
-    typeChooser.selectedSegmentIndex = 0;
-    [typeChooser addTarget:self action:@selector(changeForm:) forControlEvents:UIControlEventValueChanged];
-    [self.formView addSubview:typeChooser];
+    self.typeChooser = [[UISegmentedControl alloc] initWithItems:@[@"Log In", @"Try It"]];
+    self.typeChooser.frame = CGRectMake(WIDTH_PADDING, TOP_PADDING, self.view.frame.size.width - WIDTH_PADDING * 2, SEG_CONTROL_HEIGHT);
+    self.typeChooser.tintColor = [[ThemeManager sharedManager] themeColor];
+    self.typeChooser.selectedSegmentIndex = 0;
+    [self.typeChooser addTarget:self action:@selector(changeForm:) forControlEvents:UIControlEventValueChanged];
+    [self.formView addSubview:self.typeChooser];
     
-    CGFloat currentHeight = typeChooser.frame.origin.y + typeChooser.frame.size.height;
+    CGFloat currentHeight = self.typeChooser.frame.origin.y + self.typeChooser.frame.size.height;
     
     CGRect formRect = CGRectMake(0, currentHeight + VERTICAL_PADDING, self.view.frame.size.width, self.formView.frame.size.height - currentHeight - VERTICAL_PADDING);
     
@@ -114,10 +117,10 @@
     
     currentHeight += self.passwordField.frame.size.height + (VERTICAL_PADDING);
     
-    self.errorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.errorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.formView.frame.size.width, 25)];
     self.errorLabel.text = @"Invalid Login";
     self.errorLabel.textColor = [UIColor redColor];
-    [self.errorLabel sizeToFit];
+    self.errorLabel.textAlignment = NSTextAlignmentCenter;
     self.errorLabel.center = CGPointMake(self.formView.frame.size.width / 2, currentHeight + VERTICAL_PADDING);
     self.errorLabel.hidden = YES;
     
@@ -146,8 +149,10 @@
     self.createEmail = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH_PADDING, currentHeight, self.view.frame.size.width - WIDTH_PADDING * 2, 40)];
     self.createEmail.placeholder = @"UMN Email";
     self.createEmail.backgroundColor = INPUT_BACKGROUND;
+    self.createEmail.keyboardType = UIKeyboardTypeEmailAddress;
     self.createEmail.leftView = [[UIView alloc] initWithFrame:paddingFrame];
     self.createEmail.leftViewMode = UITextFieldViewModeAlways;
+    self.createEmail.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.createEmail.delegate = self;
     
     currentHeight += self.createEmail.frame.size.height + VERTICAL_PADDING;
@@ -238,30 +243,53 @@
 }
 
 - (void)logIn{
-    BOOL success = [[ESAuthenticator sharedAuthenticator] loginWithUsername:self.emailField.text andPassword:self.passwordField.text];
-    if (success) {
+    NSString *response = [[ESAuthenticator sharedAuthenticator] loginWithUsername:self.emailField.text andPassword:self.passwordField.text];
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    if ([response rangeOfCharacterFromSet:notDigits].location == NSNotFound){
         [self dismissViewControllerAnimated:YES completion:^{
             self.callback();
         }];
+    }else if([response isEqualToString:@"User must be confirmed"]){
+        self.errorLabel.text = @"Please Confirm Email";
+        self.errorLabel.hidden = NO;
+        [self shakeView:self.loginForm];
     }else{
+        self.errorLabel.text = @"Invalid Login";
         self.errorLabel.hidden = NO;
         [self shakeView:self.loginForm];
 
     }
 } 
 
+- (void)showInfoAlertWithText: (NSString *)text {
+    [self.view endEditing:YES];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    hud.mode = MBProgressHUDModeText;
+    [self.view addSubview:hud];
+    hud.delegate = self;
+    hud.labelText = text;
+    [hud showWhileExecuting:@selector(waitForTwoSeconds) 
+                   onTarget:self withObject:nil animated:YES];
+}
+
+- (void)waitForTwoSeconds {
+    sleep(2);
+}
+
 - (void)signup{
     if([self.createPassword.text isEqualToString:self.confirmPassword.text]){
-        BOOL success = [[ESAuthenticator sharedAuthenticator] createAccountWithUsername:self.createEmail.text andPassword:self.createPassword.text];
-        if(success){
-            [self dismissViewControllerAnimated:YES completion:^{
-                self.callback();
-            }];
-        }else{
+        NSString *response = [[ESAuthenticator sharedAuthenticator] createAccountWithUsername:self.createEmail.text andPassword:self.createPassword.text];
+        NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        if ([response rangeOfCharacterFromSet:notDigits].location != NSNotFound)
+        {
+            // Display Error
+            [self showInfoAlertWithText:response];
             [self shakeView:self.signupForm];
+        }else{
+            [self showInfoAlertWithText:@"Please Check Your Email"];
+            self.typeChooser.selectedSegmentIndex = 0;
+            [self changeForm:self.typeChooser];
         }
-    }else{
-        [self shakeView:self.signupForm];
     }
 }
 
