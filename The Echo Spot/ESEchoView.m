@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIImageView *upvote;
 @property (strong, nonatomic) UIImageView *downvote;
 @property (strong, nonatomic) UIImageView *comment;
+@property (strong, nonatomic) UILabel *openCommentsLabel;
 @property (strong, nonatomic) UILabel *upvoteCount;
 @property (strong, nonatomic) UILabel *downvoteCount;
 @property (strong, nonatomic) UILabel *commentCount;
@@ -70,6 +71,15 @@
         self.downvote = [[UIImageView alloc] initWithImage:downvoteImage];
         self.comment = [[UIImageView alloc] initWithImage:commentImage];
         
+        self.openCommentsLabel = [[UILabel alloc] init];
+        [self.openCommentsLabel setText:@"Show Comments"];
+        self.openCommentsLabel.font = [UIFont systemFontOfSize:12];
+        self.openCommentsLabel.textColor = [[ThemeManager sharedManager] detailFontColor];
+        self.openCommentsLabel.layer.borderColor = [[ThemeManager sharedManager] detailFontColor].CGColor;
+        self.openCommentsLabel.layer.borderWidth = 1.0;
+        self.openCommentsLabel.layer.cornerRadius = 8;
+        self.openCommentsLabel.textAlignment = NSTextAlignmentCenter;
+        
         self.upvoteCount = [[UILabel alloc] init];
         self.upvoteCount.text = [NSString stringWithFormat:@"%d", (int)self.upvotes];
         self.upvoteCount.textColor = GREEN_COLOR;
@@ -104,6 +114,7 @@
         [self addSubview:self.upvote];
         [self addSubview:self.downvote];
         [self addSubview:self.comment];
+        [self addSubview:self.openCommentsLabel];
         [self addSubview:self.upvoteCount];
         [self addSubview:self.downvoteCount];
         [self addSubview:self.commentCount];
@@ -154,9 +165,25 @@
     self.downvote.frame = CGRectMake(self.upvote.frame.size.width + BUTTON_LEFT_MARGIN + BUTTON_SEPERATION, [self desiredHeight] - self.downvote.frame.size.height - buttonOFF, self.downvote.frame.size.width, self.downvote.frame.size.height);
     self.comment.frame = CGRectMake(self.upvote.frame.size.width + self.downvote.frame.size.width + (BUTTON_LEFT_MARGIN + BUTTON_SEPERATION * 2), [self desiredHeight] - self.comment.frame.size.height - buttonOFF, self.comment.frame.size.width, self.comment.frame.size.height);
     
+    self.openCommentsLabel.frame = CGRectMake(self.comment.frame.origin.x, self.comment.frame.origin.y, 105, self.comment.frame.size.height);
+    
+    int commentLabelOffset = 0;
+    
+    if(!self.isOpen && !self.discussion){
+        self.openCommentsLabel.hidden = YES;
+        self.comment.hidden = NO;
+        self.commentCount.hidden = NO;
+        commentLabelOffset = self.comment.frame.origin.x + self.comment.frame.size.width + 5;
+    }else if(self.isOpen){
+        self.comment.hidden = YES;
+        self.openCommentsLabel.hidden = NO;
+        self.commentCount.hidden = YES;
+        commentLabelOffset = self.openCommentsLabel.frame.origin.x + self.openCommentsLabel.frame.size.width + 5;
+    }
+    
     self.upvoteCount.frame = CGRectMake(self.upvote.frame.origin.x + self.upvote.frame.size.width + 5, self.upvote.frame.origin.y, self.upvoteCount.frame.size.width, self.upvoteCount.frame.size.height);
     self.downvoteCount.frame = CGRectMake(self.downvote.frame.origin.x + self.downvote.frame.size.width + 5, self.downvote.frame.origin.y, self.downvoteCount.frame.size.width, self.downvoteCount.frame.size.height);
-    self.commentCount.frame = CGRectMake(self.comment.frame.origin.x + self.comment.frame.size.width + 5, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
+    self.commentCount.frame = CGRectMake(commentLabelOffset, self.comment.frame.origin.y, self.commentCount.frame.size.width, self.commentCount.frame.size.height);
     
     if(self.discussion){
         self.timeLabel.frame = CGRectMake(15, self.commentCount.frame.origin.y, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
@@ -227,28 +254,6 @@
     [self updateControlFrames];
 }
 
-//- (void)setImageThumbURL:(NSURL *)imageThumbURL{
-//    _imageThumbURL = imageThumbURL;
-//    if(imageThumbURL != nil){
-//        NSData *data = [NSData dataWithContentsOfURL:_imageThumbURL];
-//        UIImage *image = [UIImage imageWithData:data];
-//        self.imageView.image = image;
-//        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, 100);
-//        [self updateControlFrames];
-//    }
-//}
-//
-//- (void)setImageFullURL:(NSURL *)imageFullURL{
-//    _imageFullURL = imageFullURL;
-//    if(imageFullURL != nil){
-//        NSData *data = [NSData dataWithContentsOfURL:_imageFullURL];
-//        UIImage *image = [UIImage imageWithData:data];
-//        self.imageView.image = image;
-//        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, 100);
-//        [self updateControlFrames];
-//    }
-//}
-
 - (void)setImage:(UIImage *)image{
     _image = image;
     if(image != nil){
@@ -281,7 +286,7 @@
 }
 
 - (BOOL)checkOpenEchosTap:(CGPoint)point{
-        return CGRectContainsPoint(CGRectMake(self.comment.frame.origin.x - 15, self.comment.frame.origin.y - 15, self.comment.frame.size.width + self.commentCount.frame.size.width + 30, self.comment.frame.size.height + self.commentCount.frame.size.height + 30), point);
+        return CGRectContainsPoint(CGRectMake(self.openCommentsLabel.frame.origin.x - 15, self.openCommentsLabel.frame.origin.y - 15, self.openCommentsLabel.frame.size.width + self.commentCount.frame.size.width + 30, self.comment.frame.size.height + self.commentCount.frame.size.height + 30), point);
 }
 
 - (BOOL)checkUpvoteTap:(CGPoint)point{

@@ -51,6 +51,7 @@
 
 - (void)setIsOpen:(BOOL)isOpen{
     _isOpen = isOpen;
+    self.echoView.isOpen = _isOpen;
     [self configureView];
 }
 

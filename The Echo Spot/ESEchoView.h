@@ -34,4 +34,6 @@
 
 - (void)displayDiscussion;
 - (void)displayComment;
+
+@property (nonatomic) BOOL isOpen;
 @end
