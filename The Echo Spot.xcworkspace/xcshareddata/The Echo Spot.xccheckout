@@ -10,6 +10,8 @@
 	<string>The Echo Spot</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>3E4BFCBC159FA9D79F3FCDBAE122A1E1DD07FFA7</key>
+		<string>https://github.com/mjcuva/iPhoneEchoSpot.git</string>
 		<key>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</key>
 		<string>https://github.com/mjcuva/iPhoneEchoSpot.git</string>
 	</dict>
@@ -17,15 +19,17 @@
 	<string>The Echo Spot.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</key>
+		<key>3E4BFCBC159FA9D79F3FCDBAE122A1E1DD07FFA7</key>
 		<string>..</string>
+		<key>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</key>
+		<string>../../The Echo Spot</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/mjcuva/iPhoneEchoSpot.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</string>
+	<string>3E4BFCBC159FA9D79F3FCDBAE122A1E1DD07FFA7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>EFD752CC-2F6D-48EB-920C-55B043A2D9F9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>The Echo Spot</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3E4BFCBC159FA9D79F3FCDBAE122A1E1DD07FFA7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>The%20Echo%20Spot</string>
 		</dict>
 	</array>
 </dict>
